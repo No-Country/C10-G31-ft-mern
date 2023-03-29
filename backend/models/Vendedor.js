@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 
-const vendedorSchema = mongoose.Schema({
-    nombre: {
+const sellerSchema = mongoose.Schema({
+    name: {
         type: String,
         required: true,
         trim: true
@@ -18,16 +18,16 @@ const vendedorSchema = mongoose.Schema({
         trim: true,
         unique: true
     },
-    productos: [
+    products: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Producto'
+            ref: 'Product'
         }
     ],
     token: {
         type: String
     },
-    confirmado: {
+    is_active: {
         type: Boolean,
         default: false
     }
@@ -35,7 +35,7 @@ const vendedorSchema = mongoose.Schema({
     timestamps: true
 })
 
-vendedorSchema.pre('save', async function(next) {
+sellerSchema.pre('save', async function(next) {
     if(!this.isModified('password')) {
         next()
     }
@@ -43,9 +43,9 @@ vendedorSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, salt);
 })
 
-vendedorSchema.methods.comprobarPassword = async function(passwordFormulario) {
+sellerSchema.methods.comprobarPassword = async function(passwordFormulario) {
     return await bcrypt.compare(passwordFormulario, this.password)
 }
 
-const Vendedor = mongoose.model('Vendedor', vendedorSchema)
-export default Vendedor
+const Seller = mongoose.model('Seller', sellerSchema)
+export default Seller
