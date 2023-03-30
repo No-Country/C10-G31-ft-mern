@@ -14,6 +14,9 @@ module.exports = {
         '1/10':'10%',
         '1/90': '90%',
       },
+      fontFamily: {
+        'sans': ['Poppins'],
+      }
     },
   },
   plugins: [],

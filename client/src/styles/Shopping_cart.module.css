@@ -3,11 +3,11 @@
 }
 
 .container_1 {
-    @apply w-full flex justify-between items-end mb-4;
+    @apply w-full flex justify-between items-end mb-3;
 }
 
 .logo {
-    @apply text-3xl text-white font-bold;
+    @apply text-2xl text-white font-bold;
 }
 
 .container_2 {
@@ -15,7 +15,7 @@
 }
 
 .head_cart {
-    @apply w-full bg-[#333] p-3;
+    @apply w-full bg-[#CECECE] p-3;
 }
 
 .iconMenu {
@@ -31,7 +31,7 @@
 }
 
 .icon_head_cart {
-    @apply text-3xl text-white;
+    @apply text-2xl text-white;
 }
 
 .back_cart {
@@ -59,7 +59,7 @@
 }
 
 .product_image {
-    @apply bg-[#444] h-24 w-24 rounded-lg;
+    @apply bg-[#888] h-24 w-24 rounded-lg;
 }
 
 .descripcion_product {
@@ -67,7 +67,7 @@
 }
 
 .descripcion_product p {
-    @apply font-bold text-base text-gray-900;
+    @apply font-bold text-base mb-2;
 }
 
 .container_buttons {
@@ -75,9 +75,9 @@
 }
 
 .button_pay {
-    @apply px-4 py-1 text-lg text-white rounded flex items-center gap-2 bg-[#333];
+    @apply px-4 py-3 text-sm text-white rounded flex items-center gap-2 bg-[#5F5F5F];
 }
 
 .button_trash {
-    @apply text-xl py-1 px-3 border-2 border-gray-500 rounded;
+    @apply text-lg py-1 px-3 border-2 border-gray-500 rounded;
 }
