@@ -1,0 +1,83 @@
+.container_cart {
+    @apply w-full;
+}
+
+.container_1 {
+    @apply w-full flex justify-between items-end mb-4;
+}
+
+.logo {
+    @apply text-3xl text-white font-bold;
+}
+
+.container_2 {
+    @apply w-full flex gap-3 items-center;
+}
+
+.head_cart {
+    @apply w-full bg-[#333] p-3;
+}
+
+.iconMenu {
+    @apply w-1/10 h-8 text-3xl bg-white py-1 rounded-lg;
+}
+
+.seeker {
+    @apply w-full p-1 pl-2 block rounded-lg;
+}
+
+.container_icons {
+    @apply flex gap-3 items-center;
+}
+
+.icon_head_cart {
+    @apply text-3xl text-white;
+}
+
+.back_cart {
+    @apply w-full pl-3 my-3 gap-2 flex items-center;
+}
+
+.back_cart p {
+    @apply font-bold text-lg;
+}
+
+.icon_back {
+    @apply text-sm;
+}
+
+.products_added {
+    @apply w-full mb-10 p-3;
+}
+
+.product {
+    @apply w-full my-3 flex pb-4 gap-2 border-0 border-gray-500 border-b-2;
+}
+
+.flex_icon_image {
+    @apply flex items-center gap-4;
+}
+
+.product_image {
+    @apply bg-[#444] h-24 w-24 rounded-lg;
+}
+
+.descripcion_product {
+    @apply text-left;
+}
+
+.descripcion_product p {
+    @apply font-bold text-base text-gray-900;
+}
+
+.container_buttons {
+    @apply w-44 m-auto mb-10 gap-4 flex; 
+}
+
+.button_pay {
+    @apply px-4 py-1 text-lg text-white rounded flex items-center gap-2 bg-[#333];
+}
+
+.button_trash {
+    @apply text-xl py-1 px-3 border-2 border-gray-500 rounded;
+}

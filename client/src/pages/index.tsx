@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <p className='font-extrabold'>Spotech</p>
+          <p className='font-bold'>Spotech</p>
         </div>
       </main>
     </>
