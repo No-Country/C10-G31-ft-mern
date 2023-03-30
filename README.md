@@ -80,4 +80,4 @@ $ npm start
 
 - [React](https://reactjs.org/)
 
-- [Webpack](https://webpack.js.org/)
+- [NextJS](https://nextjs.org/)
