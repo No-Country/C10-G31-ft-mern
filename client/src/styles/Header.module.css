@@ -1,0 +1,31 @@
+.container_1 {
+    @apply w-full flex justify-between items-end mb-3;
+}
+
+.logo {
+    @apply text-2xl text-white font-bold;
+}
+
+.container_2 {
+    @apply w-full flex gap-3 items-center;
+}
+
+.head_cart {
+    @apply w-full bg-[#CECECE] p-3;
+}
+
+.iconMenu {
+    @apply w-1/10 h-8 text-3xl bg-white py-1 rounded-lg;
+}
+
+.seeker {
+    @apply w-full p-1 pl-2 block rounded-lg;
+}
+
+.container_icons {
+    @apply flex gap-3 items-center;
+}
+
+.icon_head_cart {
+    @apply text-2xl text-white;
+}
