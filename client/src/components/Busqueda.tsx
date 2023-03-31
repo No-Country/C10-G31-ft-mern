@@ -6,7 +6,7 @@ const Busqueda = () => {
       <div className='flex justify-between items-center border-b-2'>
         <div className='flex gap-3 items-center ml-3'>
             <FaArrowLeft />
-            <input className='placeholder:text-gray-800' placeholder='Motora G6 Plus' type="text" />
+            <input className='placeholder:text-gray-800' placeholder='Motora G6 Plus' type='text' />
         </div>
         <FaTimes className='mr-3' />
       </div>
@@ -14,21 +14,21 @@ const Busqueda = () => {
         <div className='flex justify-between items-center mx-3'>
             <div className='flex gap-3 items-center'>
                 <FaHistory />
-                <p>NoteBook Lenovo 14"</p>
+                <p>NoteBook Lenovo 14&quot;</p>
             </div>
             <FaArrowUp className='-rotate-45' />
         </div>
         <div className='flex justify-between items-center mx-3'>
             <div className='flex gap-3 items-center'>
                 <FaHistory />
-                <p>NoteBook Lenovo 14"</p>
+                <p>NoteBook Lenovo 14&quot;</p>
             </div>
             <FaArrowUp className='-rotate-45' />
         </div>
         <div className='flex justify-between items-center mx-3'>
             <div className='flex gap-3 items-center'>
                 <FaHistory />
-                <p>NoteBook Lenovo 14"</p>
+                <p>NoteBook Lenovo 14&quot;</p>
             </div>
             <FaArrowUp className='-rotate-45' />
         </div>

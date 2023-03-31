@@ -1,4 +1,4 @@
-import Header from './Header'
+import Header from './shared/Header';
 import { FaArrowRight } from 'react-icons/fa'
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
