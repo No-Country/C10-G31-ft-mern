@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import HomeSpotech from '@/components/HomeSpotechspotech'
+import Busqueda from '@/components/Busquedaspotech'
 
 export default function Home() {
+  
   return (
     <>
       <Head>
@@ -10,9 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <p className='font-bold'>Spotech</p>
-        </div>
+        <HomeSpotech />
       </main>
     </>
   )
