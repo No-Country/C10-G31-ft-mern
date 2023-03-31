@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const sellerSchema = mongoose.Schema({
+const clientSchema = mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
@@ -13,31 +13,39 @@ const sellerSchema = mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
-		unique: true
+		unique: true,
 	},
 	password: {
 		type: String,
 		required: true,
 		minlength: 8
 	},
-	token: {
-		type: String
-	},
+	token: { 
+    type: String 
+  },
 	isActive: {
 		type: Boolean,
 		default: false
 	},
-	product: [
+	address: {
+		type: String,
+		required: true
+	},
+	phone: {
+		type: String,
+		required: true
+	},
+	order: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Product'
+			type: mongoose.Schema.Types.OjectId,
+			ref: 'Order'
 		}
 	]
 }, {
 	timestamps: true
-})
+});
 
-sellerSchema.pre('save', async function(next) {
+clientSchema.pre('save', async function(next) {
 	try {
 		if (!this.isModified('password')) {
 			return next();
@@ -45,21 +53,20 @@ sellerSchema.pre('save', async function(next) {
 		const hashedPassword = await bcrypt.hash(this.password, 10);
 		this.password = hashedPassword;
 		return next();
-	} catch(err) {
+	} catch (err) {
 		return next(err);
 	}
-	
 });
 
-sellerSchema.methods.comparePassword = async function(candidatePassword) {
+clientSchema.methods.comparePassword = async function(candidatePassword) {
 	try {
 		const isMatch = await bcrypt.compare(candidatePassword, this.password);
-    return isMatch;
-	} catch(err) {
+		return isMatch;
+	} catch (err) {
 		return false;
 	}
 };
 
-const Seller = mongoose.model('Seller', sellerSchema);
+const Client = mongoose.model('Client', clientSchema);
 
-module.exports = Seller;
+module.exports = Client; 
