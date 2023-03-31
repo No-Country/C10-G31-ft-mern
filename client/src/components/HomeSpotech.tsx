@@ -16,16 +16,17 @@ const HomeSpotech = () => {
         <Swiper
           pagination={{ clickable: true }}
           loop={true}
+          spaceBetween={0}
           autoplay={{ delay: 5000 }}
         >
           <SwiperSlide>
-            <div className='bg-gray-800 rounded-md w-80 h-28 mx-auto'></div>
+            <div className='bg-gray-800 rounded-md w-96 h-36 mx-auto'></div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className='bg-gray-600 rounded-md w-80 h-28 mx-auto'></div>
+            <div className='bg-gray-600 rounded-md w-96 h-36 mx-auto'></div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className='bg-gray-400 rounded-md w-80 h-28 mx-auto'></div>
+            <div className='bg-gray-400 rounded-md w-96 h-36 mx-auto'></div>
           </SwiperSlide>
         </Swiper>
       </div>
@@ -40,34 +41,34 @@ const HomeSpotech = () => {
         <div>
           <Swiper
             centeredSlides={false}
-            slidesPerView={2.8}
+            slidesPerView={2.7}
             spaceBetween={0}
             pagination={{ clickable: true }}
           >
             <SwiperSlide>
-              <div className='bg-gray-800 rounded-md w-28 h-12 mx-auto'></div>
+              <div className='bg-gray-800 rounded-md w-40 h-16 mx-auto'></div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-600 rounded-md w-28 h-12 mx-auto'></div>
+              <div className='bg-gray-600 rounded-md w-40 h-16 mx-auto'></div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-400 rounded-md w-28 h-12 mx-auto'></div>
+              <div className='bg-gray-400 rounded-md w-40 h-16 mx-auto'></div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-800 rounded-md w-28 h-12 mx-auto'></div>
+              <div className='bg-gray-800 rounded-md w-40 h-16 mx-auto'></div>
             </SwiperSlide>
           </Swiper>
         </div>
       </div>
       <div className='p-2 mb-6'>
         <h2>Popular</h2>
-        <div className='grid grid-cols-2 gap-x-2 gap-y-2'>
-          <div className='bg-gray-800 rounded-md w-40 h-28 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-40 h-28 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-40 h-28 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-40 h-28 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-40 h-28 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-40 h-28 mx-auto'></div>
+        <div className='grid grid-cols-2 gap-x-2 gap-y-1'>
+          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
+          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
+          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
+          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
+          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
+          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
         </div>
       </div>
     </>
