@@ -1,0 +1,35 @@
+.containerResults {
+    @apply w-full mb-4;
+}
+
+.cantResult {
+    @apply p-3 flex items-center border-b-2 border-gray-300 justify-between;
+}
+
+.cantResult span {
+    @apply w-16 h-8 rounded bg-[#CECECE];
+}
+
+.results {
+    @apply w-full px-3;
+}
+
+.result {
+    @apply w-full border-b-2 border-gray-300 py-4 flex gap-3;
+}
+
+.priceResult {
+    @apply text-lg font-bold;
+}
+
+.imageResult {
+    @apply w-28 h-28 rounded-xl bg-[#CECECE];
+}
+
+.infoResult {
+    @apply pb-1 flex flex-col justify-between;
+}
+
+.icons {
+    @apply flex px-2 text-2xl gap-4;
+}
