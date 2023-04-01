@@ -1,4 +1,4 @@
-import Header from './shared/Header';
+import Header from "@/components/shared/Headerspotech"
 import Link from 'next/link'
 import Image from 'next/image';
 import { FaPlusSquare, FaMinusSquare, FaRegHeart } from 'react-icons/fa'
@@ -8,8 +8,7 @@ import { MdAccountBalanceWallet, MdShare } from 'react-icons/md';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
-
-const ArticuloDetallado = () => {
+const ProductDetail = () => {
   return (
     <>
       <Header />
@@ -95,4 +94,4 @@ const ArticuloDetallado = () => {
   )
 }
 
-export default ArticuloDetallado
+export default ProductDetail
