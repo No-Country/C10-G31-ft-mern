@@ -1,0 +1,23 @@
+.Container_payment {
+    @apply w-full h-screen;
+}
+
+.Methods_pay {
+    @apply w-full p-3;
+}
+
+.back_payment {
+    @apply w-full flex items-center gap-3;
+}
+
+.Container_methods {
+    @apply mt-12 border-gray-300 border-2 rounded;
+}
+
+.Method_pay {
+    @apply w-full border p-4 pl-8 flex gap-4 items-center;
+}
+
+.buttonContinue {
+    @apply mt-16 m-auto p-2 block text-white rounded bg-[#444]
+}
