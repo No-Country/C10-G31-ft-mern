@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Link from "next/link"
 
 const LogIn = () => {
 
@@ -15,41 +16,44 @@ const LogIn = () => {
     }
 
   return (
-    <div className="p-4">
-        <div className="text-center mt-20">
+    <div className="px-4">
+        <div className="text-center mt-28">
             <div className="bg-gray-300 inline-block w-auto p-16 rounded-full">Logo</div>
         </div>
-      <h2 className="text-center mt-24 mb-12">¡Inicia Sesión en Spotech!</h2>
       <form 
-        className="flex flex-col gap-2"
+        className="flex flex-col mt-36"
         onSubmit={handleSubmit}
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-x-4 gap-y-2">
             <label className="font-bold text-xs" htmlFor="email">E-mail</label>
             <input 
                 type="email" 
                 id='email'
-                className="border-2 rounded-md p-1"
+                className="border-2 rounded-md p-2"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
             />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-3">
             <label className="font-bold text-xs" htmlFor="password">Contraseña</label>
             <input 
                 type="password" 
                 id='password'
-                className="border-2 rounded-md p-1"
+                className="border-2 rounded-md p-2"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
         </div>
 
-        <div className="flex">
+        <Link className="mt-4" href='/'>
+          <p className="text-blue-700">Recuperar contraseña</p>
+        </Link>
+
+        <div className="flex mt-8">
             <input 
                 type="submit" 
                 value='Iniciar Sesión'
-                className="bg-gray-600 p-3 rounded-md mt-6 w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer"
+                className="bg-gray-600 px-4 py-5 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer"
             />
         </div>
       </form>

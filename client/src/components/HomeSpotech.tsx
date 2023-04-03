@@ -14,7 +14,7 @@ const HomeSpotech = () => {
   return (
     <>
       <Header />
-      <div className='my-3 px-3'>
+      <div className='mt-6 px-4'>
         <Swiper
           pagination={{ clickable: true }}
           loop={true}
@@ -22,25 +22,25 @@ const HomeSpotech = () => {
           autoplay={{ delay: 5000 }}
         >
           <SwiperSlide>
-            <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+            <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
           </SwiperSlide>
           <SwiperSlide>
-            <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+            <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={434} height={186} alt='Ofertas' />
           </SwiperSlide>
           <SwiperSlide>
-            <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+            <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className='mt-3 p-2'>
+      <div className='mt-4 px-4'>
         <div className='flex items-center justify-between'>
           <h2>Ofertas del Día</h2>
-          <div className='flex gap-2 text-sky-400'>
+          <div className='flex items-center gap-2 text-sky-400'>
             <p className='text-xs'>Ver todo</p>
-            <FaArrowRight />
+            <FaArrowRight className='w-3' />
           </div>
         </div>
-        <div>
+        <div className='mt-2'>
           <Swiper
             centeredSlides={false}
             slidesPerView={2.78}
@@ -48,29 +48,29 @@ const HomeSpotech = () => {
             pagination={{ clickable: true }}
           >
             <SwiperSlide>
-              <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
           </Swiper>
         </div>
       </div>
-      <div className='p-2 mb-6'>
-        <h2>Popular</h2>
-        <div className='grid grid-cols-2 gap-x-2 gap-y-1'>
-          <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
-          <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
-          <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
-          <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
-          <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
-          <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+      <div className='px-4 mt-5 mb-10'>
+        <h2 className='mb-1'>Popular</h2>
+        <div className='grid grid-cols-2 gap-x-2 gap-y-2'>
+          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
         </div>
       </div>
     </>

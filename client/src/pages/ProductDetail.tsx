@@ -12,8 +12,8 @@ const ProductDetail = () => {
   return (
     <>
       <Header />
-      <div className='p-2 space-y-2'>
-        <div className='flex items-center gap-1 text-xs'>
+      <div className='px-5 my-4'>
+        <div className='flex items-center gap-1 text-xs font-bold'>
           <Link href='/' >HOME</Link>
           <FiChevronRight />
           <Link href=''>Categoría</Link>
@@ -22,33 +22,33 @@ const ProductDetail = () => {
           <FiChevronRight />
           <Link href=''>Sub 2</Link>
         </div>
-        <p className='text-xs'>Producto Específico con sus características intrínsecas a su línea y modelo</p>
+        <p className='text-md mt-2 font-bold'>Producto Específico con sus características intrínsecas a su línea y modelo</p>
       </div>
       <div>
-        <Image className="mx-auto" src='/prueba3.jpg' width={448} height={448} alt='producto' />
+        <Image className="mx-auto" src='/prueba3.jpg' width={480} height={480} alt='producto' />
       </div>
-      <div className='mt-2 p-4'>
-        <p className='font-bold'>$28505,28</p>
-        <div className='flex justify-between text-xs my-2'>
+      <div className='mt-4 px-5'>
+        <p className='font-bold text-3xl'>$28505,28</p>
+        <div className='flex justify-between text-xs mt-3'>
           <div>
             <p><span>12</span> cuotas de <span>$3034,23</span></p>
-            <Link href=''>Ver medios de pago</Link>
+            <Link className="mt-1" href=''>Ver medios de pago</Link>
           </div>
-          <div className='space-y-1'>
+          <div>
             <p className='font-bold'>Cantidad</p>
-            <div className='flex justify-between'>
+            <div className='flex justify-between mt-1'>
               <FaMinusSquare className='text-white bg-black rounded-xs' />
               <p>1</p>
               <FaPlusSquare className='text-white bg-black rounded-xs' />
             </div>
           </div>
         </div>
-        <div className='mb-6 space-y-1'>
+        <div className='mt-4'>
           <p className='font-bold'>Capacidad:</p>
-          <input type='number' value='' className='border rounded' />
+          <input type='number' value='' className='border rounded mt-2 py-2 px-24' />
         </div>
-        <div className='flex items-center justify-between text-xs mb-4'>
-          <div className='flex bg-black p-2 px-6 items-center text-white gap-2 rounded'>
+        <div className='flex items-center justify-between text-xs mt-8'>
+          <div className='flex bg-black p-2 px-6 items-center text-white gap-2 rounded-lg'>
             <HiOutlineShoppingCart className='w-5 h-5' />
             <p>Añadir al carrito</p>
           </div>
@@ -62,16 +62,16 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <div className='p-4 border-t mb-4'>
-        <h2 className='font-bold text-xs mb-3'>Descripción</h2>
-        <p className='text-xs'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sed voluptatum praesentium ipsum quidem aspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque.</p>
+      <div className='mx-4 border-t mt-9'>
+        <h2 className='font-extrabold text-md mt-4 mb-3'>Descripción</h2>
+        <p className='text-xs'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sed voluptatum praesentium ipsum quidem aspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque. Laspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sed voluptatum praesentium ipsum quidem aspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque. Laspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque.</p>
       </div>
-      <div className='p-4 border-t mb-6'>
-        <h2 className='font-bold text-xs mb-3'>Productos relacionados</h2>
-        <div>
+      <div className='border-t mx-4 mt-10 mb-20'>
+        <h2 className='font-extrabold text-md mt-4'>Productos relacionados</h2>
+        <div className="mt-4">
           <Swiper
             centeredSlides={false}
-            slidesPerView={2.8}
+            slidesPerView={2.7}
             spaceBetween={10}
             pagination={{ clickable: true }}
           >

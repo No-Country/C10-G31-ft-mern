@@ -23,10 +23,10 @@ const SignIn = () => {
     }
 
   return (
-    <div className="p-4">
-      <h2 className="text-center mt-20 mb-12">¡Bienvenido a Spotech!</h2>
+    <div className="px-4 mt-40">
+      <h2 className="text-center">¡Bienvenido a Spotech!</h2>
       <form 
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-3 mt-16"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col gap-2">
@@ -94,7 +94,7 @@ const SignIn = () => {
             <input 
                 type="submit" 
                 value='Continuar' 
-                className="bg-gray-600 p-3 rounded-md mt-6 w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer"
+                className="bg-gray-600 px-3 py-5 rounded-md mt-7 w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer"
             />
         </div>
       </form>
