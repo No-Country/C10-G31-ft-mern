@@ -24,8 +24,8 @@ const ProductDetail = () => {
         </div>
         <p className='text-xs'>Producto Específico con sus características intrínsecas a su línea y modelo</p>
       </div>
-      <div className='bg-gray-400'>
-        <Image src='/' width={380} height={380} alt='producto' />
+      <div>
+        <Image className="mx-auto" src='/prueba3.jpg' width={448} height={448} alt='producto' />
       </div>
       <div className='mt-2 p-4'>
         <p className='font-bold'>$28505,28</p>
@@ -72,20 +72,20 @@ const ProductDetail = () => {
           <Swiper
             centeredSlides={false}
             slidesPerView={2.8}
-            spaceBetween={0}
+            spaceBetween={10}
             pagination={{ clickable: true }}
           >
             <SwiperSlide>
-              <div className='bg-gray-800 rounded-md w-36 h-48 mx-auto'></div>
+              <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-600 rounded-md w-36 h-48 mx-auto'></div>
+            <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-400 rounded-md w-36 h-48 mx-auto'></div>
+            <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-800 rounded-md w-36 h-48 mx-auto'></div>
+            <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
             </SwiperSlide>
           </Swiper>
         </div>

@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import Header from './shared/Header';
 import { FaArrowRight } from 'react-icons/fa'
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+
 
 
 const HomeSpotech = () => {
@@ -12,21 +14,21 @@ const HomeSpotech = () => {
   return (
     <>
       <Header />
-      <div className='my-3'>
+      <div className='my-3 px-3'>
         <Swiper
           pagination={{ clickable: true }}
           loop={true}
-          spaceBetween={0}
+          spaceBetween={10}
           autoplay={{ delay: 5000 }}
         >
           <SwiperSlide>
-            <div className='bg-gray-800 rounded-md w-96 h-36 mx-auto'></div>
+            <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
           </SwiperSlide>
           <SwiperSlide>
-            <div className='bg-gray-600 rounded-md w-96 h-36 mx-auto'></div>
+            <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
           </SwiperSlide>
           <SwiperSlide>
-            <div className='bg-gray-400 rounded-md w-96 h-36 mx-auto'></div>
+            <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -41,21 +43,21 @@ const HomeSpotech = () => {
         <div>
           <Swiper
             centeredSlides={false}
-            slidesPerView={2.7}
-            spaceBetween={0}
+            slidesPerView={2.78}
+            spaceBetween={15}
             pagination={{ clickable: true }}
           >
             <SwiperSlide>
-              <div className='bg-gray-800 rounded-md w-40 h-16 mx-auto'></div>
+              <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-600 rounded-md w-40 h-16 mx-auto'></div>
+              <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-400 rounded-md w-40 h-16 mx-auto'></div>
+              <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='bg-gray-800 rounded-md w-40 h-16 mx-auto'></div>
+              <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
           </Swiper>
         </div>
@@ -63,12 +65,12 @@ const HomeSpotech = () => {
       <div className='p-2 mb-6'>
         <h2>Popular</h2>
         <div className='grid grid-cols-2 gap-x-2 gap-y-1'>
-          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
-          <div className='bg-gray-800 rounded-md w-56 h-32 mx-auto'></div>
+          <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+          <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+          <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+          <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+          <Image className='mx-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+          <Image className='mx-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
         </div>
       </div>
     </>
