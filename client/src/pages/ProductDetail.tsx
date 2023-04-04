@@ -52,10 +52,12 @@ const ProductDetail = () => {
             <HiOutlineShoppingCart className='w-5 h-5' />
             <p>Añadir al carrito</p>
           </div>
-          <div className='flex bg-gray-500 p-2 px-6 items-center text-white gap-2 rounded'>
-            <MdAccountBalanceWallet className='w-5 h-5 bg-white rounded text-gray-500' />
-            <p>Comprar Ahora</p>
-          </div>
+          <Link href={'/PaymentMethod'}>
+            <div className='flex bg-gray-500 p-2 px-6 items-center text-white gap-2 rounded'>
+              <MdAccountBalanceWallet className='w-5 h-5 bg-white rounded text-gray-500' />
+              <p>Comprar Ahora</p>
+            </div>
+          </Link>
           <div className='flex gap-2'>
             <FaRegHeart className='w-5 h-5' />
             <MdShare className='w-5 h-5' />

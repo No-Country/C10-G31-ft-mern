@@ -19,5 +19,5 @@
 }
 
 .buttonContinue {
-    @apply mt-16 m-auto p-2 block text-white rounded bg-[#444]
+    @apply w-48 mt-8 m-auto p-2 block text-white text-center rounded bg-[#444]
 }

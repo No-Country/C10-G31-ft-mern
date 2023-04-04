@@ -17,7 +17,7 @@ const Header = () => {
                     <Link href=''>
                         <FaRegHeart className={Style.icon_head_cart} />
                     </Link>
-                    <Link href=''>
+                    <Link href='/ShoppingCart'>
                         <HiOutlineShoppingCart className={Style.icon_head_cart} />
                     </Link>
                 </div>

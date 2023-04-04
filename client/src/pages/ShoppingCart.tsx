@@ -4,7 +4,7 @@ import Style from '../styles/Shopping_cart.module.css'
 import { FaArrowLeft, FaRegDotCircle, FaCreditCard, FaRegTrashAlt} from 'react-icons/fa'
 import Header from '../components/shared/Header'
 
-const Carrito = () => {
+const ShoppingCart = () => {
     return(
         <div className={Style.container_cart}>
             <Header />
@@ -23,7 +23,9 @@ const Carrito = () => {
                         </div>
                     </div>
                     <div className={Style.descripcion_product}>
-                        <p>Nombre producto</p>
+                        <Link href={'/ProductDetail'}>
+                            <p>Nombre producto</p>
+                        </Link>
                         <p>$70788,9</p>
                     </div>
                 </div>
@@ -77,4 +79,4 @@ const Carrito = () => {
     )
 }
 
-export default Carrito
+export default ShoppingCart
