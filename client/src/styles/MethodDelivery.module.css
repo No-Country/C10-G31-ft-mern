@@ -39,9 +39,25 @@
 }
 
 .OptionReceive {
-    @apply mt-2 p-4 py-5 shadow-sm rounded flex items-center justify-between  bg-[#F3F3F3];
+    @apply mt-2 p-4 py-5 shadow-sm rounded border flex items-center justify-between  bg-[#F3F3F3];
 }
 
 .WarningReceive {
     @apply text-left;
+}
+
+.SectionWithdraw {
+    @apply mt-5;
+}
+
+.OptionsWithdraw {
+    @apply mt-2 w-full border rounded;
+}
+
+.OptionWithdraw {
+    @apply w-full p-4 py-5 flex border  items-center justify-between bg-[#F3F3F3];
+}
+
+.ButtonContinue {
+    @apply w-44 p-2 m-auto mt-7 block rounded text-center text-white bg-[#5F5F5F];
 }

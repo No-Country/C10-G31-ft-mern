@@ -1,0 +1,35 @@
+.ContainerSplash {
+    @apply w-full h-screen p-3;
+}
+
+.ContainerLogo {
+    @apply w-full flex items-center justify-center h-1/2;
+}
+
+.Logo {
+    @apply w-40 h-40 flex items-center rounded-full justify-center text-black text-4xl font-bold bg-[#333];
+}
+
+.ContainerButtons {
+    @apply w-full mt-10;
+}
+
+.ButtonInit {
+    @apply w-full mb-3 p-3 block rounded border-2 border-gray-300 text-lg bg-[#444] text-white;
+}
+
+.ButtonRegistrer {
+    @apply w-full mb-3 p-3 block rounded text-lg border-2 border-gray-400 text-black;
+}
+
+.ContainerbuttonGogle {
+    @apply w-full mt-10;
+}
+
+.ButtonGoogle {
+    @apply w-full p-3 rounded block text-center text-lg border-2 border-gray-400; 
+}
+
+.LogoGoogle {
+    @apply text-2xl absolute;
+}

@@ -28,11 +28,27 @@ const MethodDelivery = () => {
                 <div className={Style.SectionReceive}>
                         <p>Recibir</p>
                         <div className={Style.OptionReceive}>
-                            <input type="radio" />
+                            <input type="radio" defaultChecked />
                             <p className={Style.WarningReceive}>Llega a tu domicilio el martes</p>
                             <p>1889,08</p>
                         </div>
                 </div>
+                <div className={Style.SectionWithdraw}>
+                    <p>Retirar</p>
+                    <div className={Style.OptionsWithdraw}>
+                        <div className={Style.OptionWithdraw}>
+                            <input type="radio" />
+                            <p className={Style.WarningReceive}>Retiro en sucursal de correo</p>
+                            <p>1889,08</p>
+                        </div>
+                        <div className={Style.OptionWithdraw}>
+                            <input type="radio" />
+                            <p className={Style.WarningReceive}>Retiro en el local del vendedor</p>
+                            <p>Gratis</p>
+                        </div>
+                    </div>
+                </div>
+                <Link href={'/'} className={Style.ButtonContinue}>Continuar compra</Link>
             </div>
         </div>
     )
