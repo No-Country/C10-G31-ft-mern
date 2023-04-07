@@ -11,7 +11,7 @@
 }
 
 .icon_back {
-    @apply text-sm;
+    @apply text-sm cursor-pointer;
 }
 
 .products_added {
