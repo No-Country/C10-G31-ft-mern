@@ -17,8 +17,8 @@ const LogIn = () => {
 
   return (
     <div className="px-4">
-        <div className="text-center mt-28">
-            <div className="bg-gray-300 inline-block w-auto p-16 rounded-full">Logo</div>
+        <div className="flex justify-center items-cenetr mt-28">
+            <p className="bg-gray-300 h-40 w-40 rounded-full flex items-center justify-center text-3xl font-bold">Logo</p>
         </div>
       <form 
         className="flex flex-col mt-36"
@@ -46,7 +46,7 @@ const LogIn = () => {
         </div>
 
         <Link className="mt-4" href='/'>
-          <p className="text-blue-700">Recuperar contraseña</p>
+          <p className="text-blue-700 text-xs">Recuperar contraseña</p>
         </Link>
 
         <div className="flex mt-8">
