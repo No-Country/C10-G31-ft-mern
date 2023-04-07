@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		trim: true,
 		required: true
+	},
+	image: {
+		type: String
 	},
 	available: {
 		type: String,
-		trim: true,
 		required: true
 	},
 	category: [
