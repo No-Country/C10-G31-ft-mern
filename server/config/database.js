@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 // Disable strictQuery mode
 mongoose.set("strictQuery", false);
-
+require("dotenv").config();
 
 /**
  * Asynchronous function that connects to a MongoDB database using the provided URI.
