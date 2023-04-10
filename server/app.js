@@ -28,6 +28,7 @@ app.use(cors({
 }))*/
 app.use(express.json())
 app.use("/api/v1/products", routesProducts);
+app.use("/api/v1/admins", routesProducts)
 
 
 //Fileupload middleware
