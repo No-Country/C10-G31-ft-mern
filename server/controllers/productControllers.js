@@ -15,8 +15,7 @@ const getProductById = async(req, res) => {
 };
 
 const postProduct = async(req, res) => {
-  const body = req.body;
-  const {name, image, available, category, price, seller} = body;
+  const {...body} = req.body;
   
   const productDB = await Product.findOne({name: body.name});
 

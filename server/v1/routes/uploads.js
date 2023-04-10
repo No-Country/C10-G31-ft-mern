@@ -10,7 +10,8 @@ router.route('/')
   .post(uploadsControllers.postUploads);
 
 router.route('/products/:id')
-  .patch(uploadsControllers.patchImage)
+  .get(uploadsControllers.getImage)
+  .patch(uploadsControllers.patchImageCloudinary)
 
 // router.route('/:collections/:id')
 //   .patch(
