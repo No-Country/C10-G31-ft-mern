@@ -36,8 +36,7 @@ app.use(express.json())
 //Fileupload middleware
 app.use(fileUpload({
   useTempFiles : true,
-  tempFileDir : '/tmp/',
-  createParentPath : true
+  tempFileDir : './assets/tmp/'
 }));
 
 app.get("/", (req, res) => {
