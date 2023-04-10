@@ -1,10 +1,16 @@
 /* The above code is creating a server and listening on port 3000. */
 const express = require("express");
-const cors = require("cors")
-require("dotenv").config({ path: "./config/config.env" });
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+
 const connectDatabase = require("./config/database");
-const routesProducts = require("./v1/routes/products")
-const PORT = process.env.PORT
+
+
+/* Importing the users router. */
+const uploadsRouter = require('./v1/routes/uploads');
+const productstRouter = require('./v1/routes/products');
+
+
 const app = express();
 
 
@@ -22,6 +28,24 @@ app.use(cors({
 }))*/
 app.use(express.json())
 app.use("/api/v1/products", routesProducts);
+
+
+//Fileupload middleware
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/',
+  createParentPath : true
+}));
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "OK!",
+    spotech: `localhost: ${process.env.PORT}/api/v1/spotech`
+  });
+});
+
+app.use('/api/v1/products', productstRouter);
+app.use('/api/v1/uploads', uploadsRouter);
 
 /* Listening on port 3000. */
 app.listen(PORT || 3000, async () => {
