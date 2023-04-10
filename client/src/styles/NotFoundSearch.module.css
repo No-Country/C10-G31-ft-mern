@@ -1,0 +1,19 @@
+.container_NotResult {
+    @apply p-3;
+}
+
+.AlertsNotFound {
+    @apply w-full mt-10 text-center;
+}
+
+.AlertFirst {
+    @apply mb-2 text-2xl;
+}
+
+.AlertLast {
+    @apply mb-10;
+}
+
+.Image {
+    @apply w-48 h-48 m-auto block;
+}
