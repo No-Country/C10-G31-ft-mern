@@ -1,22 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
-const adminController = require('../controllers/adminController');
+const adminController = require('../../controllers/adminControllers');
+const { validateFields } = require('../../helpers/validateFields');
+const authMiddleware = require('../../middlewares/authMiddleware');
 
 
+router.post('/auth', adminController.login )
 // Endpoint para crear un admin
-router.post('/admins', validateFields("post"), adminController.createAdmin);
+router.post('/', validateFields('post'),  adminController.createAdmin);
 
 // Endpoint para obtener todos los admins
-router.get('/admins', adminController.getAllAdmins);
+router.get('/', adminController.getAllAdmins);
 
 // Endpoint para obtener un admin por su ID
-router.get('/admins/:adminId', adminController.getAdminById);
+router.get('/:adminId', adminController.getAdminById);
 
 // Endpoint para actualizar un admin
-router.patch('/admins/:adminId', validateFields("patch"), adminController.updateAdmin);
+router.patch('/:adminId', validateFields('patch'), authMiddleware, adminController.updateAdminById);
 
 // Endpoint para eliminar un admin
-router.delete('/admins/:adminId', adminController.deleteAdmin);
+router.delete('/:adminId', authMiddleware, adminController.deleteAdminById);
 
 module.exports = router;
+

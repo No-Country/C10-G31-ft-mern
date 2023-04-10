@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const producControllers = require('../../controllers/productControllers')
+const authMiddleware = require('../../middlewares/authMiddleware')
 
 router.route('/')
   .get(producControllers.getAllProducts)
@@ -9,6 +10,6 @@ router.route('/')
 router.route('/:id')
   .get(producControllers.getProductById)
   .patch(authMiddleware, producControllers.editProduct)
-  .delete(authMiddleware, producControllers.deleteProduct);
+  .delete( authMiddleware, producControllers.deleteProduct);
 
 module.exports = router;

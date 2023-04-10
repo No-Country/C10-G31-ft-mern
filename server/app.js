@@ -1,6 +1,7 @@
 /* The above code is creating a server and listening on port 3000. */
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config({ path: "./config/config.env" });
 const fileUpload = require("express-fileupload");
 
 const connectDatabase = require("./config/database");
@@ -9,7 +10,8 @@ const connectDatabase = require("./config/database");
 /* Importing the users router. */
 const uploadsRouter = require('./v1/routes/uploads');
 const productstRouter = require('./v1/routes/products');
-
+const adminRouter = require('./v1/routes/admin');
+const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
 
@@ -27,8 +29,8 @@ app.use(cors({
   }
 }))*/
 app.use(express.json())
-app.use("/api/v1/products", routesProducts);
-app.use("/api/v1/admins", routesProducts)
+
+
 
 
 //Fileupload middleware
@@ -45,11 +47,15 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use('/api/v1/login', adminRouter)
 app.use('/api/v1/products', productstRouter);
 app.use('/api/v1/uploads', uploadsRouter);
+app.use('/api/v1/admin', adminRouter);
+
 
 /* Listening on port 3000. */
-app.listen(PORT || 3000, async () => {
+const PORT = process.env.PORT
+app.listen(PORT || 4000, async () => {
   try {
     connectDatabase();
   } catch (error) {

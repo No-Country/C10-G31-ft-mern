@@ -2,8 +2,8 @@ const router = require("express").Router();
 const {check} = require('express-validator');
 
 const uploadsControllers = require("../../controllers/uploadsControllers");
-const {validCollections} = require('../../helpers/validators')
-const validatingFields = require('../../middlewares/validate-fields')
+//const {validCollections} = require('../../helpers/validators')
+//const validatingFields = require('../../middlewares/validate-fields')
 
 
 router.route('/')
