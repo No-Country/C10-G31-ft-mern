@@ -43,6 +43,40 @@ const postProduct = async(req, res) => {
   res.status(201).json(product);
 };
 
+const editProduct = async(req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  
+  try {
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: 'Product not found'
+      });
+    }
+
+    // update product fields
+    product.name = body.name || product.name;
+    product.image = body.image || product.image;
+    product.available = body.available || product.available;
+    product.category = body.category || product.category;
+    product.price = body.price || product.price;
+    product.seller = body.seller || product.seller;
+
+    // save updated product to database
+    const updatedProduct = await product.save();
+
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Error updating product'
+    });
+  }
+};
+
+
 const deleteProduct = async(req, res) => {
   const id = req.params.id;
 
@@ -55,5 +89,6 @@ module.exports = {
   postProduct,
   getAllProducts,
   getProductById,
+  editProduct,
   deleteProduct
 };
