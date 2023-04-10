@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const producControllers = require('../../controllers/productControllers');
+const producControllers = require('../../controllers/productControllers')
 
 router.route('/')
   .get(producControllers.getAllProducts)
@@ -8,6 +8,7 @@ router.route('/')
 
 router.route('/:id')
   .get(producControllers.getProductById)
+  .patch(producControllers.editProduct)
   .delete(producControllers.deleteProduct);
 
 module.exports = router;
