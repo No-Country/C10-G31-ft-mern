@@ -20,9 +20,11 @@ const PurchaseCompleted = () => {
         <p>República Siria 2331</p>
         <p>C.P.6000 - Junín, Buenos Aires</p>
       </div>
-      <div className="mt-8 mb-20 text-center text-xs">
-        <p className="inline-block bg-gray-600 px-4 py-3 text-white mx-auto rounded-md">Ir al inicio</p>
-      </div>
+      <Link href='/' >
+        <div className="mt-8 mb-20 text-center text-xs">
+          <p className="inline-block bg-gray-600 px-4 py-3 text-white mx-auto rounded-md">Ir al inicio</p>
+        </div>
+      </Link>
     </>
   )
 }

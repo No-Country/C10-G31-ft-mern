@@ -1,19 +1,31 @@
 import { useState } from "react"
 import Link from "next/link"
+import Alert from '../components/Alert'
 
 const LogIn = () => {
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
+    const [ alert, setAlert ] = useState({msg: '', error: false})
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if([email, password].includes('')) {
-            console.log('Todos los campos son obligatorios')
+            setAlert({
+              msg: 'Todos los campos son obligatorios',
+              error: true
+            })
+            setTimeout(() => {
+              setAlert({msg: '', error: false})
+            }, 3000);
             return
         }
+
+        // TODO enviar los datos al backend
         console.log(email, password)
     }
+
+    const { msg } = alert
 
   return (
     <div className="px-4">
@@ -24,6 +36,7 @@ const LogIn = () => {
         className="flex flex-col mt-36"
         onSubmit={handleSubmit}
       >
+        {msg && <Alert alert={alert} />}
         <div className="flex flex-col gap-x-4 gap-y-2">
             <label className="font-bold text-xs" htmlFor="email">E-mail</label>
             <input 
@@ -53,7 +66,7 @@ const LogIn = () => {
             <input 
                 type="submit" 
                 value='Iniciar Sesión'
-                className="bg-gray-600 px-4 py-5 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer"
+                className="bg-gray-600 px-4 py-5 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer mb-8"
             />
         </div>
       </form>

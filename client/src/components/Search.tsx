@@ -1,6 +1,7 @@
 import { AiOutlineHistory } from 'react-icons/ai';
 import { MdClose, MdOutlineKeyboardBackspace, MdOutlineArrowOutward } from 'react-icons/md';
-
+import { useRouter } from 'next/router'
+import { useState } from 'react';
 
 interface SearchProps {
   searchActive: boolean;
@@ -10,12 +11,17 @@ interface SearchProps {
 
 const Search = ({searchActive, setSearchActive}: SearchProps) => {
 
+  const [ textSearch, setTextSearch ] = useState('')
+  const router = useRouter()
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(textSearch === '') {
+      return
+    }
     if(e.key === 'Enter') {
-      console.log('Presionaste enter')
+      return router.push('/ListResults')
     }
   }
-
 
   return (
     <div className='bg-white fixed top-0 left-0 z-10 w-full min-h-screen'>
@@ -27,6 +33,8 @@ const Search = ({searchActive, setSearchActive}: SearchProps) => {
                 className='placeholder:text-gray-400 outline-none text-sm font-bold' 
                 placeholder='Motora G6 Plus' 
                 type='text' 
+                value={textSearch}
+                onChange={e => setTextSearch(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
           </div>

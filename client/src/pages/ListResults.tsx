@@ -2,6 +2,7 @@ import Header from "@/components/shared/Headerspotech"
 import Style from "../styles/ListResults.module.css"
 import Image from "next/image"
 import { FaShareAlt, FaRegHeart } from "react-icons/fa"
+import Link from "next/link"
 
 const ListProducts = () => {
     return(
@@ -16,7 +17,9 @@ const ListProducts = () => {
                     <div className={Style.result}>
                         <Image className={Style.imageResult} src={''} alt={''}  />
                         <div className={Style.infoResult}>
-                            <p className={Style.nameResult}>Nombre Producto</p>
+                            <Link href='/ProductDetail/1' >
+                                <p className={Style.nameResult}>Nombre Producto</p>
+                            </Link>
                             <p className={Style.priceResult}>$98670,02</p>
                             <div className={Style.icons}>
                                 <FaRegHeart />
@@ -27,7 +30,9 @@ const ListProducts = () => {
                     <div className={Style.result}>
                         <Image className={Style.imageResult} src={''} alt={''}  />
                         <div className={Style.infoResult}>
-                            <p>Nombre Producto</p>
+                            <Link href='/ProductDetail/1' >
+                                <p className={Style.nameResult}>Nombre Producto</p>
+                            </Link>
                             <p className={Style.priceResult}>$98670,02</p>
                             <div className={Style.icons}>
                                 <FaRegHeart />
@@ -38,7 +43,9 @@ const ListProducts = () => {
                     <div className={Style.result}>
                         <Image className={Style.imageResult} src={''} alt={''}  />
                         <div className={Style.infoResult}>
-                            <p>Nombre Producto</p>
+                            <Link href='/ProductDetail/1' >
+                                <p className={Style.nameResult}>Nombre Producto</p>
+                            </Link>
                             <p className={Style.priceResult}>$98670,02</p>
                             <div className={Style.icons}>
                                 <FaRegHeart />
@@ -49,7 +56,9 @@ const ListProducts = () => {
                     <div className={Style.result}>
                         <Image className={Style.imageResult} src={''} alt={''}  />
                         <div className={Style.infoResult}>
-                            <p>Nombre Producto</p>
+                            <Link href='/ProductDetail/1' >
+                                <p className={Style.nameResult}>Nombre Producto</p>
+                            </Link>
                             <p className={Style.priceResult}>$98670,02</p>
                             <div className={Style.icons}>
                                 <FaRegHeart />
@@ -60,7 +69,9 @@ const ListProducts = () => {
                     <div className={Style.result}>
                         <Image className={Style.imageResult} src={''} alt={''}  />
                         <div className={Style.infoResult}>
-                            <p>Nombre Producto</p>
+                            <Link href='/ProductDetail/1' >
+                                <p className={Style.nameResult}>Nombre Producto</p>
+                            </Link>
                             <p className={Style.priceResult}>$98670,02</p>
                             <div className={Style.icons}>
                                 <FaRegHeart />
