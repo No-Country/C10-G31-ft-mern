@@ -24,7 +24,7 @@ const PaymentMethod = () => {
                         <p>Efectivo en el local</p>
                     </div>
                 </div>
-                <button className={Style.buttonContinue}>Continuar compra</button>
+                <Link href={'/MethodDelivery'} className={Style.buttonContinue}>Continuar compra</Link>
             </div>
         </div>
     )

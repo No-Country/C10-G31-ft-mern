@@ -1,0 +1,63 @@
+.ContainerMethods {
+    @apply w-full h-screen;
+}
+
+.MethodsDeliverys {
+    @apply w-full p-3;
+}
+
+.BackMethods {
+    @apply w-full flex items-center gap-3;
+}
+
+.ContainerLocation {
+    @apply w-full mt-10 flex items-center gap-8 justify-between;
+}
+
+.Location1 {
+    @apply text-sm font-bold;
+}
+
+.Location2 {
+    @apply text-sm;
+}
+
+.buttonLocation {
+    @apply w-48 p-1 pl-7 border-2 border-gray-600 rounded;
+}
+
+.ContainerbuttonLocation {
+    @apply relative;
+}
+
+.IconLocation {
+    @apply absolute top-1/2 left-2 -translate-y-1/2 text-xl;
+}
+
+.SectionReceive {
+    @apply w-full mt-6;
+}
+
+.OptionReceive {
+    @apply mt-2 p-4 py-5 shadow-sm rounded border flex items-center justify-between  bg-[#F3F3F3];
+}
+
+.WarningReceive {
+    @apply text-left;
+}
+
+.SectionWithdraw {
+    @apply mt-5;
+}
+
+.OptionsWithdraw {
+    @apply mt-2 w-full border rounded;
+}
+
+.OptionWithdraw {
+    @apply w-full p-4 py-5 flex border  items-center justify-between bg-[#F3F3F3];
+}
+
+.ButtonContinue {
+    @apply w-44 p-2 m-auto mt-7 block rounded text-center text-white bg-[#5F5F5F];
+}

@@ -5,9 +5,11 @@ const fileUpload = require("express-fileupload");
 
 const connectDatabase = require("./config/database");
 
+
 /* Importing the users router. */
 const uploadsRouter = require('./v1/routes/uploads');
 const productstRouter = require('./v1/routes/products');
+
 
 const app = express();
 
@@ -26,6 +28,7 @@ app.use(cors({
 }))*/
 app.use(express.json())
 app.use("/api/v1/products", routesProducts);
+
 
 //Fileupload middleware
 app.use(fileUpload({

@@ -3,15 +3,17 @@ import Link from 'next/link'
 import Style from '../styles/Shopping_cart.module.css'
 import { FaArrowLeft, FaRegDotCircle, FaCreditCard, FaRegTrashAlt} from 'react-icons/fa'
 import Header from '../components/shared/Header'
+import { useRouter } from 'next/router';
 
-const Carrito = () => {
+const ShoppingCart = () => {
+
+    const router = useRouter();
+
     return(
         <div className={Style.container_cart}>
             <Header />
             <div className={Style.back_cart}>
-                <Link href=''>
-                    <FaArrowLeft className={Style.icon_back} />
-                </Link>
+                <FaArrowLeft className={Style.icon_back} onClick={() => router.back()} />
                 <p>Carrito</p>
             </div>
             <div className={Style.products_added}>
@@ -23,7 +25,9 @@ const Carrito = () => {
                         </div>
                     </div>
                     <div className={Style.descripcion_product}>
-                        <p>Nombre producto</p>
+                        <Link href={'/ProductDetail'}>
+                            <p>Nombre producto</p>
+                        </Link>
                         <p>$70788,9</p>
                     </div>
                 </div>
@@ -77,4 +81,4 @@ const Carrito = () => {
     )
 }
 
-export default Carrito
+export default ShoppingCart
