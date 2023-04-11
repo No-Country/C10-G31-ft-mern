@@ -25,7 +25,7 @@ const Header = () => {
                         <Link href='/'>Logo</Link>
                     </div>
                     <div className={Style.container_icons}>
-                        <Link href=''>
+                        <Link href='/LogIn'>
                             <FaRegUserCircle className={Style.icon_head_cart} />
                         </Link>
                         <Link href=''>

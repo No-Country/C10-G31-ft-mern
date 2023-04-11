@@ -25,7 +25,7 @@ const ShoppingCart = () => {
                         </div>
                     </div>
                     <div className={Style.descripcion_product}>
-                        <Link href={'/ProductDetail'}>
+                        <Link href={'/ProductDetail/1'}>
                             <p>Nombre producto</p>
                         </Link>
                         <p>$70788,9</p>
@@ -39,7 +39,9 @@ const ShoppingCart = () => {
                         </div>
                     </div>
                     <div className={Style.descripcion_product}>
-                        <p>Nombre producto</p>
+                        <Link href={'/ProductDetail/1'}>
+                            <p>Nombre producto</p>
+                        </Link>
                         <p>$70788,9</p>
                     </div>
                 </div>
@@ -51,7 +53,9 @@ const ShoppingCart = () => {
                         </div>
                     </div>
                     <div className={Style.descripcion_product}>
-                        <p>Nombre producto</p>
+                        <Link href={'/ProductDetail/1'}>
+                            <p>Nombre producto</p>
+                        </Link>
                         <p>$70788,9</p>
                     </div>
                 </div>
@@ -63,7 +67,9 @@ const ShoppingCart = () => {
                         </div>
                     </div>
                     <div className={Style.descripcion_product}>
-                        <p>Nombre producto</p>
+                        <Link href={'/ProductDetail/1'}>
+                            <p>Nombre producto</p>
+                        </Link>
                         <p>$70788,9</p>
                     </div>
                 </div>
