@@ -8,8 +8,9 @@ const connectDatabase = require("./config/database");
 
 
 /* Importing the users router. */
-const uploadsRouter = require('./v1/routes/uploads');
+
 const productstRouter = require('./v1/routes/products');
+const categoriesRoutes = require('./v1/routes/categories')
 const adminRouter = require('./v1/routes/admin');
 const authMiddleware = require("./middlewares/authMiddleware");
 
@@ -48,7 +49,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/v1/login', adminRouter)
 app.use('/api/v1/products', productstRouter);
-app.use('/api/v1/uploads', uploadsRouter);
+app.use('/api/v1/categories', categoriesRoutes);
 app.use('/api/v1/admin', adminRouter);
 
 
