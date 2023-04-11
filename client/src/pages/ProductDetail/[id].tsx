@@ -30,6 +30,10 @@ const ProductDetail = () => {
     }
   }
 
+  const addCart = () => {
+    console.log('Añadiendo al carro')
+  }
+
   return (
     <>
       <Header />
@@ -69,7 +73,10 @@ const ProductDetail = () => {
           <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
         </div>
         <div className='flex items-center justify-between text-xs mt-8'>
-          <div className='flex bg-black p-2 px-6 items-center text-white gap-2 rounded-lg'>
+          <div 
+            className='flex bg-black p-2 px-6 items-center text-white gap-2 rounded-lg cursor-pointer'
+            onClick={addCart}
+          >
             <HiOutlineShoppingCart className='w-5 h-5' />
             <p>Añadir al carrito</p>
           </div>

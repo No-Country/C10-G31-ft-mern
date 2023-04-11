@@ -47,9 +47,11 @@ const PurchaseSummary = () => {
             <p className="font-bold text-xs">$29.745,27</p>
         </div>
       </div>
-      <div className="mt-7 mb-20 text-center text-xs">
-        <p className="inline-block bg-gray-600 px-5 py-3 text-white mx-auto rounded-md">Confirmar Compra</p>
-      </div>
+      <Link href='/PurchaseCompleted' >
+        <div className="mt-7 mb-20 text-center text-xs">
+          <p className="inline-block bg-gray-600 px-5 py-3 text-white mx-auto rounded-md">Confirmar Compra</p>
+        </div>
+      </Link>
     </>
   )
 }

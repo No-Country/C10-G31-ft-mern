@@ -2,6 +2,7 @@ import Header from "@/components/shared/Headerspotech"
 import Style from "../styles/ListResults.module.css"
 import Image from "next/image"
 import { FaShareAlt, FaRegHeart } from "react-icons/fa"
+import Link from "next/link"
 
 const ListProducts = () => {
     return(

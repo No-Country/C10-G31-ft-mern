@@ -1,3 +1,4 @@
+import Alert from '../components/Alert'
 import { useState } from "react"
 
 const SignIn = () => {
@@ -8,19 +9,36 @@ const SignIn = () => {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ repeatPassword, setRepeatPassword ] = useState('')
+    const [ alert, setAlert ] = useState({msg: '', error: false})
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if([name, surname, phone, email, password, repeatPassword].includes('')) {
-            console.log('Todos los campos son obligatorios')
-            return
+            setAlert({
+                msg: 'Todos los campos son obligatorios',
+                error: true
+              })
+              setTimeout(() => {
+                setAlert({msg: '', error: false})
+              }, 3000);
+              return
         }
         if( password !== repeatPassword) {
-            console.log('Los password no son iguales')
-            return 
+            setAlert({
+                msg: 'Los Password no coinciden',
+                error: true
+              })
+              setTimeout(() => {
+                setAlert({msg: '', error: false})
+              }, 3000);
+              return
         }
+
+        // TODO enviar los datos al backend
         console.log(name, surname, phone, email, password, repeatPassword)
     }
+
+    const { msg } = alert
 
   return (
     <div className="px-4 mt-40">
@@ -29,6 +47,7 @@ const SignIn = () => {
         className="flex flex-col gap-3 mt-16"
         onSubmit={handleSubmit}
       >
+        {msg && <Alert alert={alert} />}
         <div className="flex flex-col gap-2">
             <label className="font-bold text-xs" htmlFor="name">Nombre/s</label>
             <input 

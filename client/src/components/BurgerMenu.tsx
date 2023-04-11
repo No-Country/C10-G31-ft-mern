@@ -4,7 +4,8 @@ import { AiOutlineTag, AiOutlineHistory, AiOutlineQuestionCircle } from 'react-i
 import { BiPackage } from 'react-icons/bi';
 import { MdSupportAgent, MdLogout, MdTabletAndroid, MdComputer, MdOutlineDesktopWindows, MdOutlineTv, MdAndroid } from 'react-icons/md';
 import { FaApple } from 'react-icons/fa';
-import { useState, useLayoutEffect } from 'react';
+import { useState } from 'react';
+import Link from 'next/link';
 
 interface BurgerMenuProps {
     menuActive: boolean;
@@ -35,16 +36,22 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                                 </div>
                                 <div className={`${smartphonesActive ? 'flex flex-col -mt-3' : 'hidden'} gap-6`}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <MdAndroid className='w-5 h-5' />
-                                        <p>Android</p>
+                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                            <MdAndroid className='w-5 h-5' />
+                                            <p>Android</p>
+                                        </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <FaApple className='w-6 h-6' />
-                                        <p>iOS</p>
+                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                            <FaApple className='w-6 h-6' />
+                                            <p>iOS</p>
+                                        </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <BsGrid className='border border-gray-900 rounded-sm w-6 h-6' />
-                                        <p>Others</p>
+                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                            <BsGrid className='border border-gray-900 rounded-sm w-6 h-6' />
+                                            <p>Others</p>
+                                        </Link>
                                     </div>
                                 </div>
                             </div> {/* Fin Categoria Smartphone */}
@@ -55,56 +62,80 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                                 </div>
                                 <div className={`${tabletsActive ? 'flex flex-col' : 'hidden'} gap-6`}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <FaApple className='w-6 h-6' />
-                                        <p>iPad</p>
+                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                            <FaApple className='w-6 h-6' />
+                                            <p>iPad</p>
+                                        </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <MdAndroid className='w-5 h-5' />
-                                        <p>Android</p>
+                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                            <MdAndroid className='w-5 h-5' />
+                                            <p>Android</p>
+                                        </Link>
                                     </div>
                                 </div>
                             </div> {/* Fin Categoria Tablets */}
                             <div className='flex items-center gap-2 px-4 -mt-3 cursor-pointer'>
-                                <MdComputer className='w-5 h-5' />
-                                <p>Notebooks</p>
+                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                    <MdComputer className='w-5 h-5' />
+                                    <p>Notebooks</p>
+                                </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                                <BsPc className='w-5 h-5' />
-                                <p>Desktop</p>
+                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                    <BsPc className='w-5 h-5' />
+                                    <p>Desktop</p>
+                                </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                                <MdOutlineDesktopWindows className='w-5 h-5' />
-                                <p>Monitores</p>
+                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                    <MdOutlineDesktopWindows className='w-5 h-5' />
+                                    <p>Monitores</p>
+                                </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                                <MdOutlineTv className='w-5 h-5' />
-                                <p>Tv</p>
+                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                    <MdOutlineTv className='w-5 h-5' />
+                                    <p>Tv</p>
+                                </Link>
                             </div>
                         </div>
                     </div> {/* Fin Categorias */}
                     <div className='flex items-center gap-2 px-4 -mt-3 cursor-pointer'>
-                        <AiOutlineTag className='-rotate-90 w-6 h-6' />
-                        <p>Ofertas</p>
+                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                            <AiOutlineTag className='-rotate-90 w-6 h-6' />
+                            <p>Ofertas</p>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <AiOutlineHistory className='w-6 h-6 transform -scale-x-100' />
-                        <p>Historial</p>
+                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                            <AiOutlineHistory className='w-6 h-6 transform -scale-x-100' />
+                            <p>Historial</p>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <BiPackage className='w-6 h-6' />
-                        <p>Compras</p>
+                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                            <BiPackage className='w-6 h-6' />
+                            <p>Compras</p>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <MdSupportAgent className='w-6 h-6' />
-                        <p>Contacto</p>
+                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                            <MdSupportAgent className='w-6 h-6' />
+                            <p>Contacto</p>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <AiOutlineQuestionCircle className='w-6 h-6' />
-                        <p>Ayuda</p>
+                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                            <AiOutlineQuestionCircle className='w-6 h-6' />
+                            <p>Ayuda</p>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <MdLogout className='w-6 h-6' />
-                        <p>Salir</p>
+                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                            <MdLogout className='w-6 h-6' />
+                            <p>Salir</p>
+                        </Link>
                     </div>
                 </div>
             </div>

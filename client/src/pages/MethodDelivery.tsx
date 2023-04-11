@@ -48,7 +48,7 @@ const MethodDelivery = () => {
                         </div>
                     </div>
                 </div>
-                <Link href={'/'} className={Style.ButtonContinue}>Continuar compra</Link>
+                <Link href={'/PurchaseSummary'} className={Style.ButtonContinue}>Continuar compra</Link>
             </div>
         </div>
     )
