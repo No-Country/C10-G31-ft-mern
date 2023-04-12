@@ -34,6 +34,11 @@ const ShoppingCart = () => {
         setProducts(cart)
     }, [])
 
+    const clearCart = () => {
+        localStorage.removeItem('cart')
+        setProducts([])
+    }
+
     return(
         <div className={Style.container_cart}>
             <Header />
@@ -55,20 +60,27 @@ const ShoppingCart = () => {
                                 <p>{product.name}</p>
                             </Link>
                             <p>${product.price}</p>
+                            <p>Cantidad: {product.amount}</p>
                         </div>
                     </div>
                 </div>
             )): (
-                <p>Agrega Productos y podrás encontrarlos aquí</p>
+                <p className='text-center mt-6 mb-8'>Agrega Productos y podrás encontrarlos aquí</p>
             )}
             <div className={Style.container_buttons}>
-                    <button className={Style.button_pay}>
-                        <FaCreditCard />
-                        Pagar
-                    </button>
-                    <button className={Style.button_trash}>
-                        <FaRegTrashAlt />
-                    </button>
+                {products.length > 0 && (
+                    <>
+                        <Link href='/PaymentMethod' >
+                            <button className={Style.button_pay}>
+                                <FaCreditCard />
+                                Pagar
+                            </button>
+                        </Link>
+                        <button className={Style.button_trash} onClick={clearCart}>
+                            <FaRegTrashAlt />
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     )

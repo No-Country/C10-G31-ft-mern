@@ -8,7 +8,7 @@ const PurchaseSummary = () => {
     <>
       <Header />
       <div className="flex px-4 mt-3 items-center gap-2 text-md font-bold">
-        <Link href='/'><FaArrowLeft /></Link>
+        <Link href='/MethodDelivery'><FaArrowLeft /></Link>
         <p>Resumen de compra</p>
       </div>
       <div className="mt-11 text-center">

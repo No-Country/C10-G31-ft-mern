@@ -147,7 +147,7 @@ const ProductDetail = () => {
                 </div>
               </div>
               <div className='mt-4'>
-                <p className='font-bold'>Capacidad: {product.available}</p>
+                <p className='font-bold'>Disponibles: {product.available}</p>
                 <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
               </div>
               <div className='flex items-center justify-between text-xs mt-8 gap-[0.7px]'>
@@ -158,7 +158,7 @@ const ProductDetail = () => {
                   <HiOutlineShoppingCart className='w-5 h-5' />
                   <p>Añadir al carrito</p>
                 </div>
-                <Link href={'/PaymentMethod'}>
+                <Link href={'/ShoppingCart'}>
                   <div className='flex bg-gray-500 p-2 px-6 items-center text-white gap-2 rounded'>
                     <MdAccountBalanceWallet className='w-5 h-5 bg-white rounded-lg text-gray-500' />
                     <p>Comprar Ahora</p>
