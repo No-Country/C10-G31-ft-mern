@@ -22,13 +22,13 @@ const HomeSpotech = () => {
           autoplay={{ delay: 5000 }}
         >
           <SwiperSlide>
-            <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
+            <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
           </SwiperSlide>
           <SwiperSlide>
-            <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={434} height={186} alt='Ofertas' />
+            <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba2.jpg' width={434} height={186} alt='Ofertas' />
           </SwiperSlide>
           <SwiperSlide>
-            <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
+            <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -48,16 +48,16 @@ const HomeSpotech = () => {
             pagination={{ clickable: true }}
           >
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg h-auto w-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg h-auto w-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg h-auto w-auto' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Image className='mx-auto rounded-lg h-auto w-auto' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
             </SwiperSlide>
           </Swiper>
         </div>
@@ -65,12 +65,12 @@ const HomeSpotech = () => {
       <div className='px-4 mt-5 mb-10'>
         <h2 className='mb-1'>Popular</h2>
         <div className='grid grid-cols-2 gap-x-2 gap-y-2'>
-          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
+          <Image className='mx-auto rounded-lg w-auto h-auto' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
         </div>
       </div>
     </>
