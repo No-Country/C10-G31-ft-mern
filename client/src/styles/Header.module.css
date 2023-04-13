@@ -11,11 +11,11 @@
 }
 
 .head_cart {
-    @apply w-full bg-[#CECECE] p-3;
+    @apply w-full bg-[#3681F0] cursor-pointer p-3;
 }
 
 .iconMenu {
-    @apply w-1/10 h-8 text-3xl bg-white py-1 rounded-lg;
+    @apply w-1/10 h-8 text-3xl text-white py-1 rounded-lg;
 }
 
 .seeker {

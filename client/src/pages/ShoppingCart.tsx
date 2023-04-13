@@ -50,7 +50,7 @@ const ShoppingCart = () => {
                 <div key={product._id} className={Style.products_added}>
                     <div className={Style.product}>
                         <div className={Style.flex_icon_image}>
-                            <FaRegDotCircle />
+                            <FaRegDotCircle className='text-[#F0604D]' />
                             <div>
                                 <Image className={Style.product_image} width={400} height={400} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
                             </div>

@@ -50,17 +50,17 @@ const HomeSpotech = () => {
         >
           <SwiperSlide>
             <Link href='/ListResults'>
-              <Image className='mx-auto rounded-lg w-[434px] h-[186px] cursor-pointer' src='/Banner1.png' width={434} height={186} alt='Ofertas' />
+              <Image className='mx-auto rounded-lg cursor-pointer' src='/Banner1.png' width={698} height={297} alt='Ofertas' />
             </Link>
           </SwiperSlide>
           <SwiperSlide>
             <Link href='/ListResults'>
-              <Image className='mx-auto rounded-lg w-[434px] h-[186px] cursor-pointer' src='/Banner1.png' width={434} height={186} alt='Ofertas' />
+              <Image className='mx-auto rounded-lg cursor-pointer' src='/Banner1.png' width={698} height={297} alt='Ofertas' />
             </Link>
           </SwiperSlide>
           <SwiperSlide>
             <Link href='/ListResults'>
-              <Image className='mx-auto rounded-lg w-[434px] h-[186px] cursor-pointer' src='/Banner1.png' width={434} height={186} alt='Ofertas' />
+              <Image className='mx-auto rounded-lg cursor-pointer' src='/Banner1.png' width={698} height={297} alt='Ofertas' />
             </Link>
           </SwiperSlide>
         </Swiper>
@@ -82,35 +82,48 @@ const HomeSpotech = () => {
           >
             <SwiperSlide>
               <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer h-auto w-auto' src='/Banner1.png' width={1200} height={700} alt='Oferta del día' />
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas1.png' width={272} height={138} alt='Oferta del día' />
               </Link>
             </SwiperSlide>
             <SwiperSlide>
               <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer h-auto w-auto' src='/Banner1.png' width={1200} height={700} alt='Oferta del día' />
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas2.png' width={272} height={138} alt='Oferta del día' />
               </Link>
             </SwiperSlide>
             <SwiperSlide>
               <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer h-auto w-auto' src='/Banner1.png' width={1200} height={700} alt='Oferta del día' />
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas3.png' width={272} height={138} alt='Oferta del día' />
               </Link>
             </SwiperSlide>
             <SwiperSlide>
               <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer h-auto w-auto' src='/Banner1.png' width={1200} height={700} alt='Oferta del día' />
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas1.png' width={272} height={138} alt='Oferta del día' />
               </Link>
             </SwiperSlide>
           </Swiper>
         </div>
       </div>
       <div className='px-4 mt-5 mb-10'>
-        <h2 className='mb-1'>Popular</h2>
-        <div className='grid grid-cols-2 gap-x-2 gap-y-2'>
-          {products.length > 0 && products.map(product => (
-            <Link key={product._id} href={`/ProductDetail/${product._id}`}>
-              <Image className='mx-auto rounded-lg w-[218px] h-[168px] cursor-pointer' src={product.image[0]} width={218} height={168} alt='Oferta del día' />
-            </Link>
-          ))}
+        <h2 className='mb-1 text-2xl'>Popular</h2>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-2'>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
         </div>
       </div>
     </>

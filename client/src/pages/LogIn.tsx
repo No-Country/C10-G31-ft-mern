@@ -66,7 +66,7 @@ const LogIn = () => {
             <input 
                 type="submit" 
                 value='Iniciar Sesión'
-                className="bg-gray-600 px-4 py-5 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer mb-8"
+                className="bg-[#3681F0] p-4 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer mb-8"
             />
         </div>
       </form>
