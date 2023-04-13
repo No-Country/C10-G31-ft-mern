@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Style from '../../styles/Header.module.css'
 import { FaBars, FaRegHeart, FaRegUserCircle, } from 'react-icons/fa'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
@@ -22,7 +23,9 @@ const Header = () => {
             <div className={Style.head_cart}>
                 <div className={Style.container_1}>
                     <div className={Style.logo}>
-                        <Link href='/'>Logo</Link>
+                        <Link href='/'>
+                            <Image src='/Logo.png' width={100} height={100} alt='Logo' />
+                        </Link>
                     </div>
                     <div className={Style.SearchHeaderTablet}>
                         <FaBars className={Style.iconMenu} onClick={() => setMenuActive(!menuActive)} />

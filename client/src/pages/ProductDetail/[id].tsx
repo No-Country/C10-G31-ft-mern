@@ -32,6 +32,7 @@ const ProductDetail = () => {
 
   const [ cantidad, setCantidad ] = useState(1)
   const [ product, setProduct ] = useState<Product | null>(null)
+  const [ imageSelected, setImageSelected ] = useState('')
   const router = useRouter()
   const { id } = router.query
 
@@ -40,6 +41,7 @@ const ProductDetail = () => {
       const getProduct = async () => {
         const { data } = await clienteAxios(`/products/${id}`)
         setProduct(data)
+        setImageSelected(data.image[0])
       }
       getProduct()
     }
@@ -113,60 +115,78 @@ const ProductDetail = () => {
               <FiChevronRight />
               <Link href=''>Sub 2</Link>
             </div>
-            <p className='text-md mt-2 font-bold'>{product.name}</p>
+            <p className='text-md mt-2 font-bold md:hidden'>{product.name}</p>
           </div>
           <div>
-            <div>
-              <Swiper
-                centeredSlides={false}
-                slidesPerView={1}
-                spaceBetween={0}
-                pagination={{ clickable: true }}
-              >
+            <div className="md:flex md:flex-row md:gap-8 md:p-9"> {/* Información Producto */}
+              <div className="hidden md:flex md:flex-col md:gap-3">
                 {product.image.length && product.image.map(image => (
-                  <SwiperSlide key={image} >
-                    <Image className="max-h-[480px]" src={image} width={480} height={480} alt={`Imagen producto ${product.name}`} />
-                  </SwiperSlide>
+                  <Image key={image} className="mx-auto border border-gray-400 rounded-md min-w-[42px] h-[46px] cursor-pointer" src={image} width={42} height={46} alt={`Imagen producto ${product.name}`} onClick={() => setImageSelected(image)} />
                 ))}
-              </Swiper>
-            </div>
-            <div className='mt-4 px-5'>
-              <p className='font-bold text-3xl'>${product.price}</p>
-              <div className='flex justify-between text-xs mt-3'>
-                <div>
-                  <p><span>12</span> cuotas de <span>${(product.price/12).toFixed(2)}</span></p>
-                  <Link className="mt-1" href='/PaymentMethod'>Ver medios de pago</Link>
-                </div>
-                <div>
-                  <p className='font-bold'>Cantidad</p>
-                  <div className='flex justify-between items-center mt-1'>
-                    <AiOutlineMinusSquare className='w-5 h-5 rounded-xl cursor-pointer' onClick={substract} />
-                    <p className="font-bold">{cantidad}</p>
-                    <AiOutlinePlusSquare className='w-5 h-5 rounded-xl cursor-pointer' onClick={sum} />
-                  </div>
-                </div>
               </div>
-              <div className='mt-4'>
-                <p className='font-bold'>Disponibles: {product.available}</p>
-                <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
+              <div className="hidden md:block">
+                <Image className="mx-auto h-[386px] w-[356px]" src={imageSelected} width={356} height={386} alt={`Imagen producto ${product.name}`} />
               </div>
-              <div className='flex items-center justify-between text-xs mt-8 gap-[0.7px]'>
-                <div 
-                  className='flex bg-black p-2 px-6 items-center text-white gap-2 rounded-lg cursor-pointer'
-                  onClick={addCart}
+              <div className="md:hidden">
+                <Swiper
+                  centeredSlides={false}
+                  slidesPerView={1}
+                  spaceBetween={0}
+                  pagination={{ clickable: true }}
                 >
-                  <HiOutlineShoppingCart className='w-5 h-5' />
-                  <p>Añadir al carrito</p>
+                  {product.image.length && product.image.map(image => (
+                    <SwiperSlide key={image} >
+                      <Image className="max-h-[448px] mx-auto" src={image} width={412} height={448} alt={`Imagen producto ${product.name}`} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              <div className='md:flex md:flex-col md:border md:border-gray-400 md:rounded-lg md:m-0 md:px-3 md:py-2 mt-4 px-5'>
+                <div className="hidden md:flex md:justify-between">
+                  <p className='text-md mt-2 md:m-0 font-bold'>{product.name}</p>
+                  <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={addFav} />
                 </div>
-                <Link href={'/ShoppingCart'}>
-                  <div className='flex bg-gray-500 p-2 px-6 items-center text-white gap-2 rounded'>
-                    <MdAccountBalanceWallet className='w-5 h-5 bg-white rounded-lg text-gray-500' />
-                    <p>Comprar Ahora</p>
+                <p className='font-bold text-3xl md:mt-4'>${product.price}</p>
+                <div className='flex md:flex-col justify-between text-xs mt-3 md:mt-0'>
+                  <div>
+                    <p className="mb-1"><span className="text-[#F0604D] font-bold">12</span> cuotas de <span className="text-[#50C21F] font-bold">${(product.price/12).toFixed(2)}</span></p>
+                    <Link className="mt-1 text-[#3681F0] md:hidden" href='/PaymentMethod'>Ver medios de pago</Link>
                   </div>
-                </Link>
-                <div className='flex gap-2'>
-                  <FaRegHeart className='w-5 h-5 cursor-pointer' onClick={addFav} />
-                  <MdShare className='w-5 h-5 cursor-pointer' onClick={() => share(product._id)} />
+                  <div className='hidden md:block mt-4'>
+                    <p className='font-extrabold text-[18px]'>Capacidad:</p>
+                    <input type='number' className='border rounded-lg mt-1 py-2 px-3 w-96 md:w-[213px]' />
+                  </div>
+                  <div className="md:flex md:items-center md:gap-7 md:mt-5">
+                    <p className='font-bold md:mt-1'>Cantidad</p>
+                    <div className='flex justify-between items-center mt-1 md:gap-3'>
+                      <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={substract} />
+                      <p className="font-extrabold text-[#50C21F]">{cantidad}</p>
+                      <AiOutlinePlusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={sum} />
+                    </div>
+                  </div>
+                </div>
+                <div className='md:hidden mt-4'>
+                  <p className='font-bold'>Capacidad:</p>
+                  <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
+                </div>
+                <div className='flex gap-[0.7px] md:flex-col md:gap-2 items-center justify-between text-xs mt-8 md:mt-5'>
+                  <div 
+                    className='flex bg-[#3681F0] p-2 px-6 items-center justify-center text-white gap-2 rounded-lg cursor-pointer md:w-[213px] md:h-[40px]'
+                    onClick={addCart}
+                  >
+                    <HiOutlineShoppingCart className='w-5 h-5' />
+                    <p>Añadir al carrito</p>
+                  </div>
+                  <Link href={'/ShoppingCart'}>
+                    <div className='flex bg-[#50C21F] p-2 px-6 items-center justify-center text-white gap-2 rounded-lg md:w-[213px] md:h-[40px]'>
+                      <MdAccountBalanceWallet className='w-5 h-5' />
+                      <p>Comprar Ahora</p>
+                    </div>
+                  </Link>
+                  <div className='flex gap-2'>
+                    <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0] md:hidden' onClick={addFav} />
+                    <MdShare className='w-5 h-5 cursor-pointer text-[#50C21F] md:hidden' onClick={() => share(product._id)} />
+                  </div>
                 </div>
               </div>
             </div>

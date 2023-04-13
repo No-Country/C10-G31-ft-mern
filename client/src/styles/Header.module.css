@@ -3,7 +3,7 @@
 }
 
 .SearchHeaderTablet {
-    @apply w-full hidden md:flex md:gap-3 md:block;
+    @apply w-full hidden md:flex md:gap-3;
 }
 
 .logo {
@@ -19,7 +19,7 @@
 }
 
 .iconMenu {
-    @apply w-1/10 h-8 text-3xl bg-white py-1 rounded-lg cursor-pointer;
+    @apply w-1/10 h-8 text-3xl text-white cursor-pointer py-1 rounded-lg;
 }
 
 .seeker {

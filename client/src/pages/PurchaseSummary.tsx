@@ -2,8 +2,42 @@ import Header from "@/components/shared/Headerspotech"
 import { FaArrowLeft } from 'react-icons/fa'
 import Image from "next/image"
 import Link from "next/link"
+import { useState, useEffect } from "react"
+
+interface Product {
+  _id: string
+  available: string
+  category: string[]
+  image: string[]
+  name: string
+  price: number
+  seller: string[]
+  apdatedAt: string
+  amount: number
+}
+
+interface ListProducts {
+  products: Product[]
+}
 
 const PurchaseSummary = () => {
+
+  const [ products, setProducts ] = useState<ListProducts['products']>([])
+  const [ price, setPrice ] = useState<number>(0)
+  const [ shipping, setShipping ] = useState(1239.99)
+
+  useEffect(() => {
+      const cartRaw = localStorage.getItem('cart')
+      const cart: ListProducts['products'] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+      setProducts(cart)
+      let newPrice = 0
+      cart.forEach(car => {
+        newPrice += car.amount * car.price
+      })
+      setPrice(newPrice)
+  }, [])
+
+
   return (
     <>
       <Header />
@@ -11,9 +45,15 @@ const PurchaseSummary = () => {
         <Link href='/MethodDelivery'><FaArrowLeft /></Link>
         <p>Resumen de compra</p>
       </div>
-      <div className="mt-11 text-center">
-        <Image className="bg-gray-500 mx-auto rounded-lg" src='/' width={120} height={120} alt='Producto' />
-        <p className="font-bold px-20 mt-4">Producto específico con sus características intrínsecas y modelo</p>
+      <div className="mt-11 text-center space-y-8">
+        {products.length && products.map(product => (
+          <div key={product._id} >
+            <Image className="bg-gray-500 mx-auto rounded-lg" src={product.image[0]} width={120} height={120} alt='Producto' />
+            <p className="font-bold px-20 mt-4">{product.name}</p>
+            <p className="text-[#50C21F]">${product.price}</p>
+            <p className="text-[#3681F0]">Cantidad: {product.amount}</p>
+          </div>
+        ))}
       </div>
       <div className="space-y-3 mt-8 px-8 text-sm">
         <div className="flex justify-between">
@@ -36,20 +76,20 @@ const PurchaseSummary = () => {
         </div>
         <div className="flex justify-between">
             <p className="font-bold">Precio</p>
-            <p className="font-bold text-xs">$28.505,28</p>
+            <p className="font-bold text-xs">${price}</p>
         </div>
         <div className="flex justify-between">
             <p className="font-bold">Envío</p>
-            <p className="font-bold text-xs">$1239,99</p>
+            <p className="font-bold text-xs">${shipping}</p>
         </div>
         <div className="flex justify-between">
             <p className="font-bold">Total</p>
-            <p className="font-bold text-xs">$29.745,27</p>
+            <p className="font-bold text-xs">${price + shipping}</p>
         </div>
       </div>
       <Link href='/PurchaseCompleted' >
         <div className="mt-7 mb-20 text-center text-xs">
-          <p className="inline-block bg-gray-600 px-5 py-3 text-white mx-auto rounded-md">Confirmar Compra</p>
+          <p className="inline-block bg-[#50C21F] px-5 py-3 text-white mx-auto rounded-md">Confirmar Compra</p>
         </div>
       </Link>
     </>
