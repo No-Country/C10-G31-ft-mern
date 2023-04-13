@@ -20,7 +20,6 @@ router.get('/:categoryId', categoriesControllers.getCategoryById);
 router.patch('/:categoryId', authMiddleware, categoriesControllers.updateCategoryById);
 
 // Endpoint para eliminar 
-
 router.delete('/:categoryId', authMiddleware, categoriesControllers.deleteCategoryById);
 
 module.exports = router;
