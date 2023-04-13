@@ -185,16 +185,24 @@ const ProductDetail = () => {
                   pagination={{ clickable: true }}
                 >
                   <SwiperSlide>
-                    <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
+                    <Link href={`/ProductDetail/${product._id}`}>
+                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
+                    </Link>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
+                    <Link href={`/ProductDetail/${product._id}`}>
+                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
+                    </Link>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
+                    <Link href={`/ProductDetail/${product._id}`}>
+                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
+                    </Link>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <Image src='/prueba4.jpg' width={163} height={240} alt='producto' />
+                    <Link href={`/ProductDetail/${product._id}`}>
+                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
+                    </Link>
                   </SwiperSlide>
                 </Swiper>
               </div>
