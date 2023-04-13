@@ -31,7 +31,7 @@ const Search = ({searchActive, setSearchActive}: SearchProps) => {
               <MdOutlineKeyboardBackspace className='w-6 h-6 cursor-pointer' onClick={() => setSearchActive(!searchActive)} />
               <input 
                 className='placeholder:text-gray-400 flex-1 outline-none text-sm font-bold' 
-                placeholder='Motora G6 Plus' 
+                placeholder='Motora G6 Plus Mejorado' 
                 type='text' 
                 value={textSearch}
                 onChange={e => setTextSearch(e.target.value)}
