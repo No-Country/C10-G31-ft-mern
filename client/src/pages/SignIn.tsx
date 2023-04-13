@@ -113,7 +113,7 @@ const SignIn = () => {
             <input 
                 type="submit" 
                 value='Continuar' 
-                className="bg-[#3681F0] px-3 py-5 rounded-md mt-7 w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 md:w-full md:text-2xl cursor-pointer"
+                className="bg-[#3681F0] px-3 py-5 rounded-md mt-7 w-full text-white font-bold text-xl md:inline-block md:w-full md:px-12 md:text-2xl cursor-pointer"
             />
         </div>
       </form>

@@ -3,7 +3,7 @@
 }
 
 .SearchHeaderTablet {
-    @apply w-full hidden md:flex md:gap-3 md:block;
+    @apply w-full hidden md:flex md:gap-3;
 }
 
 .logo {
