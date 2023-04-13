@@ -21,7 +21,7 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
   return (
     <div className='fixed top-0 left-0 z-10 w-full' >
         <div className='flex min-h-screen'>
-            <div className='min-w-[240px] bg-gray-500 pt-36 min-h-screen h-full overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-400'>
+            <div className='min-w-[240px] bg-white pt-36 min-h-screen h-full overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-400'>
                 <div id='menuBurguer' className="flex flex-col gap-6 py-3">
                     <div className={`${categoriesActive ? 'bg-gray-400' : ''} flex flex-col gap-6 pb-3 transition duration-500 ease-in-out`}> {/* Inicio Categorias */}
                         <div className='flex items-center gap-2 cursor-pointer px-4 mt-3 -mb-3 pb-3' onClick={() => setCategoriesActive(!categoriesActive)}>

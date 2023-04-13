@@ -157,7 +157,7 @@ const ProductDetail = () => {
                     <input type='number' className='border rounded-lg mt-1 py-2 px-3 w-96 md:w-[213px]' />
                   </div>
                   <div className="md:flex md:items-center md:gap-7 md:mt-5">
-                    <p className='font-bold md:mt-1'>Cantidad</p>
+                    <p className='font-bold md:mt-1 text-[14px]'>Cantidad</p>
                     <div className='flex justify-between items-center mt-1 md:gap-3'>
                       <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={substract} />
                       <p className="font-extrabold text-[#50C21F]">{cantidad}</p>
