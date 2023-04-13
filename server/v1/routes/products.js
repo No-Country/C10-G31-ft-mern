@@ -11,5 +11,5 @@ router.route('/:id')
   .get(producControllers.getProductById)
   .patch(authMiddleware, producControllers.editProduct)
   .delete( authMiddleware, producControllers.deleteProduct);
-console.log("prueba")
+
 module.exports = router;

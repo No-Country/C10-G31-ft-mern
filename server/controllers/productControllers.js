@@ -66,7 +66,7 @@ const postProduct = async(req, res, next) => {
   
       // Guardar el producto en la base de datos
       const savedProduct = await product.save();
-
+      console.log(savedProduct.image)
       // Responder con el producto guardado
       res.status(201).json(savedProduct);
     } catch (error) {

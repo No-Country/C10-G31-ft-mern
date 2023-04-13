@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import HomeSpotech from '@/components/HomeSpotechspotech'
-import Busqueda from '@/components/Busquedaspotech'
 
 export default function Home() {
   

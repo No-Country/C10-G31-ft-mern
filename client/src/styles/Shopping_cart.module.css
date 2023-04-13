@@ -43,9 +43,9 @@
 }
 
 .button_pay {
-    @apply px-4 py-3 text-sm text-white rounded flex items-center gap-2 bg-[#5F5F5F];
+    @apply px-4 py-3 text-sm text-white rounded-lg flex items-center gap-2 bg-[#50C21F];
 }
 
 .button_trash {
-    @apply text-lg py-1 px-3 border-2 border-gray-500 rounded;
+    @apply text-lg py-1 px-3 border-2 border-[#F0604D] rounded;
 }

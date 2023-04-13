@@ -1,5 +1,5 @@
 .ContainerSplash {
-    @apply w-full h-screen p-3;
+    @apply w-full h-screen p-3 md:w-1/7 md:m-auto md:mb-10;
 }
 
 .ContainerLogo {
@@ -23,7 +23,7 @@
 }
 
 .ContainerbuttonGogle {
-    @apply w-full mt-10;
+    @apply w-full mt-10 md:mt-4;
 }
 
 .ButtonGoogle {

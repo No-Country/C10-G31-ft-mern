@@ -7,20 +7,21 @@ const login = async (req, res) => {
   try {
     // Verificar si el usuario existe
     const admin = await Admin.findOne({ email: req.body.email });
+    console.log(admin)
     if (!admin) {
       return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
     }
 
     // Verificar si la contraseña es correcta
     const isValidPassword = await bcrypt.compare(req.body.password, admin.password);
-
+    console.log(isValidPassword)
     if (!isValidPassword) {
       return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
     }
 
     // Generar y devolver el token
     const token = generateToken(admin) ;
-
+    console.log(token)
     return res.status(200).json({ token });
   } catch (error) {
     console.log(error);

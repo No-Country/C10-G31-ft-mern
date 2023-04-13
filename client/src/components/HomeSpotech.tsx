@@ -1,15 +1,42 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import Header from './shared/Header';
 import { FaArrowRight } from 'react-icons/fa'
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import { useState, useEffect } from 'react'
+import clienteAxios from '@/config/clienteAxiosspotech';
 
+interface Product {
+    _id: string
+    available: string
+    category: string[]
+    image: string[]
+    name: string
+    price: number
+    seller: string[]
+    apdatedAt: string
+}
 
+interface ListProducts {
+    products: Product[]
+}
 
 const HomeSpotech = () => {
 
   SwiperCore.use([Autoplay]);
+
+  const [ products, setProducts ] = useState<ListProducts['products']>([])
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const { data } = await clienteAxios('/products')
+      const populares = [ data[0], data[1], data[2], data[3], data[4], data[5] ]
+      setProducts(populares)
+    }
+    getProducts()
+  }, [])
 
   return (
     <>
@@ -22,23 +49,29 @@ const HomeSpotech = () => {
           autoplay={{ delay: 5000 }}
         >
           <SwiperSlide>
-            <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
+            <Link href='/ListResults'>
+              <Image className='mx-auto rounded-lg cursor-pointer' src='/Banner1.png' width={698} height={297} alt='Ofertas' />
+            </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={434} height={186} alt='Ofertas' />
+            <Link href='/ListResults'>
+              <Image className='mx-auto rounded-lg cursor-pointer' src='/Banner1.png' width={698} height={297} alt='Ofertas' />
+            </Link>
           </SwiperSlide>
           <SwiperSlide>
-            <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={434} height={186} alt='Ofertas' />
+            <Link href='/ListResults'>
+              <Image className='mx-auto rounded-lg cursor-pointer' src='/Banner1.png' width={698} height={297} alt='Ofertas' />
+            </Link>
           </SwiperSlide>
         </Swiper>
       </div>
       <div className='mt-4 px-4'>
         <div className='flex items-center justify-between'>
           <h2>Ofertas del Día</h2>
-          <div className='flex items-center gap-2 text-sky-400'>
+          <Link href='/ListResults' className='flex items-center gap-2 text-sky-400'>
             <p className='text-xs'>Ver todo</p>
             <FaArrowRight className='w-3' />
-          </div>
+          </Link>
         </div>
         <div className='mt-2'>
           <Swiper
@@ -48,29 +81,49 @@ const HomeSpotech = () => {
             pagination={{ clickable: true }}
           >
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Link href='/ListResults'>
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas1.png' width={272} height={138} alt='Oferta del día' />
+              </Link>
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Link href='/ListResults'>
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas2.png' width={272} height={138} alt='Oferta del día' />
+              </Link>
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba1.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Link href='/ListResults'>
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas3.png' width={272} height={138} alt='Oferta del día' />
+              </Link>
             </SwiperSlide>
             <SwiperSlide>
-              <Image className='mx-auto rounded-lg' src='/prueba2.jpg' width={1200} height={700} alt='Oferta del día' />
+              <Link href='/ListResults'>
+                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas1.png' width={272} height={138} alt='Oferta del día' />
+              </Link>
             </SwiperSlide>
           </Swiper>
         </div>
       </div>
       <div className='px-4 mt-5 mb-10'>
-        <h2 className='mb-1'>Popular</h2>
-        <div className='grid grid-cols-2 gap-x-2 gap-y-2'>
-          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba5.jpg' width={218} height={168} alt='Oferta del día' />
-          <Image className='mx-auto rounded-lg' src='/prueba6.jpg' width={218} height={168} alt='Oferta del día' />
+        <h2 className='mb-1 text-2xl'>Popular</h2>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-2'>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
         </div>
       </div>
     </>

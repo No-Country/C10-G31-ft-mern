@@ -9,7 +9,7 @@ const PaymentMethod = () => {
             <Header />
             <div className={Style.Methods_pay}>
                 <div className={Style.back_payment}>
-                    <Link href={'/'}>
+                    <Link href={'/ShoppingCart'}>
                         <FaArrowLeft />
                     </Link>
                     <p>Seleccionar metodo de pago</p>

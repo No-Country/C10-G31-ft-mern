@@ -27,7 +27,7 @@ const Search = ({searchActive, setSearchActive}: SearchProps) => {
     <div className='bg-white fixed top-0 left-0 z-10 w-full min-h-screen'>
       <div className='my-1'>
         <div className='flex justify-between items-center border-b shadow-md'>
-          <div className='flex gap-3 items-center py-1 px-6'>
+          <div className='flex w-full gap-3 items-center py-1 px-6'>
               <MdOutlineKeyboardBackspace className='w-6 h-6 cursor-pointer' onClick={() => setSearchActive(!searchActive)} />
               <input 
                 className='placeholder:text-gray-400 flex-1 outline-none text-sm font-bold' 
@@ -38,7 +38,7 @@ const Search = ({searchActive, setSearchActive}: SearchProps) => {
                 onKeyDown={handleKeyDown}
               />
           </div>
-          <MdClose className='w-6 h-6 mr-6' />
+          <MdClose className='w-6 h-6 mr-6 cursor-pointer' onClick={() => setSearchActive(!searchActive)} />
         </div>
         <div className='space-y-2 my-2 px-6'>
           <div className='flex justify-between items-center'>

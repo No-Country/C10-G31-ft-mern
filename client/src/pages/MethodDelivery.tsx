@@ -10,7 +10,7 @@ const MethodDelivery = () => {
             <Header />
             <div className={Style.MethodsDeliverys}>
                 <div className={Style.BackMethods}>
-                    <Link href={'/'}>
+                    <Link href={'/PaymentMethod'}>
                         <FaArrowLeft />
                     </Link>
                     <p>Seleccionar metodo de entrega</p>
