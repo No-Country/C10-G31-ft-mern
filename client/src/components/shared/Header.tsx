@@ -32,7 +32,7 @@ const Header = () => {
                         <Link href='/LogIn'>
                             <FaRegUserCircle className={Style.icon_head_cart} />
                         </Link>
-                        <Link href=''>
+                        <Link href='/Favorites'>
                             <FaRegHeart className={Style.icon_head_cart} />
                         </Link>
                         <Link href='/ShoppingCart'>

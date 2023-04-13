@@ -15,7 +15,7 @@
 }
 
 .head_cart {
-    @apply w-full bg-[#CECECE] p-3 md:py-4;
+    @apply w-full bg-[#3681F0] p-3 md:py-4;
 }
 
 .iconMenu {
