@@ -35,7 +35,7 @@ const Header = () => {
                         <Link href='/LogIn'>
                             <FaRegUserCircle className={Style.icon_head_cart} />
                         </Link>
-                        <Link href='/Favorites'>
+                        <Link href='/FavoritesProduct'>
                             <FaRegHeart className={Style.icon_head_cart} />
                         </Link>
                         <Link href='/ShoppingCart'>
