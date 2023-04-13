@@ -19,7 +19,7 @@
 }
 
 .iconMenu {
-    @apply w-1/10 h-8 text-3xl text-white py-1 rounded-lg;
+    @apply w-1/10 h-8 text-3xl text-white cursor-pointer py-1 rounded-lg;
 }
 
 .seeker {
