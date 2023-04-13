@@ -13,6 +13,7 @@ module.exports = {
       width: {
         '1/10':'10%',
         '1/90': '90%',
+        '1/7':'70%'
       },
       fontFamily: {
         'sans': ['Poppins'],

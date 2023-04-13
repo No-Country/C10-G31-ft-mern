@@ -1,20 +1,22 @@
 import { TbMailFast } from 'react-icons/tb'
+import Link from 'next/link'
 
 const CheckEmail = () => {
     return(
-        <div className='p-3'>
-            <p className='w-full my-16 text-center'>Verifica tu correo</p>
-            <div className='w-full text-center'>
+        <div className='p-3 md:w-3/4 md:m-auto md:my-4'>
+            <p className='w-full my-16 text-center md:text-lg'>Verifica tu correo</p>
+            <div className='w-full mb-20 text-center'>
                 <TbMailFast className='text-5xl m-auto mb-2' />
                 <div className='w-full'>
-                    <p className='w-full text-sm'>Te enviamos un <span className='font-bold'>codigo de confirmacion</span> a <span className='font-bold'>unknowplayer@gmail.com</span></p>
-                    <p className='text-sm'>Ingresalo a continuacion</p>
+                    <p className='w-full text-sm md:text-xl'>Te enviamos un <span className='font-bold'>codigo de confirmacion</span> a <span className='font-bold'>unknowplayer@gmail.com</span></p>
+                    <p className='text-sm md:mb-6'>Ingresalo a continuacion</p>
                 </div>
                 <div>
                     <input className='m-auto border border-gray-500 grid mt-2' type='text' />
                 </div>
             </div>
-            <button className='w-full p-3 rounded-lg mt-16 text-white text-lg bg-[#333]'>Continuar</button>
+            <Link href={""} className='w-full p-3 rounded-lg mt-16 text-center text-white text-lg bg-[#333] md:w-3/5 md:m-auto md:block md:mb-6 md:p-4 md:text-lg'>Continuar</Link>
+            <button className='w-full mt-5 p-3 border border-gray-500 rounded-lg text-black text-lg md:w-3/5 md:m-auto md:block md:p-4 md:text-lg'>Volver a enviar</button>
         </div>
     )
 }

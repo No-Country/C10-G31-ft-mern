@@ -1,5 +1,9 @@
 .container_1 {
-    @apply w-full flex justify-between items-end mb-3;
+    @apply w-full flex justify-between gap-5 items-center mb-3 md:mb-0;
+}
+
+.SearchHeaderTablet {
+    @apply w-full hidden md:flex md:gap-3 md:block;
 }
 
 .logo {
@@ -7,15 +11,15 @@
 }
 
 .container_2 {
-    @apply w-full flex gap-3 items-center;
+    @apply w-full flex gap-3 items-center md:hidden;
 }
 
 .head_cart {
-    @apply w-full bg-[#CECECE] p-3;
+    @apply w-full bg-[#CECECE] p-3 md:py-4;
 }
 
 .iconMenu {
-    @apply w-1/10 h-8 text-3xl bg-white py-1 rounded-lg;
+    @apply w-1/10 h-8 text-3xl bg-white py-1 rounded-lg cursor-pointer;
 }
 
 .seeker {
