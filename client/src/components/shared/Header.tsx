@@ -27,6 +27,10 @@ const Header = () => {
                             <Image src='/Logo.png' width={100} height={100} alt='Logo' />
                         </Link>
                     </div>
+                    <div className={Style.SearchHeaderTablet}>
+                        <FaBars className={Style.iconMenu} onClick={() => setMenuActive(!menuActive)} />
+                        <input type='text' onClick={() => setSearchActive(!searchActive)} className={Style.seeker} />
+                    </div>
                     <div className={Style.container_icons}>
                         <Link href='/LogIn'>
                             <FaRegUserCircle className={Style.icon_head_cart} />
@@ -39,7 +43,7 @@ const Header = () => {
                         </Link>
                     </div>
                 </div>
-                    <div className={Style.container_2}>
+                <div className={Style.container_2}>
                     <FaBars className={Style.iconMenu} onClick={() => setMenuActive(!menuActive)} />
                     <input type='text' onClick={() => setSearchActive(!searchActive)} className={Style.seeker} />
                 </div>
