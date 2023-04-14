@@ -4,47 +4,26 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
-
-interface Product {
-    _id: string
-    available: string
-    category: string[]
-    image: string[]
-    name: string
-    price: number
-    seller: string[]
-    apdatedAt: string
-}
-
-interface ListProducts {
-  favs: Product[]
-}
+import { useDispatch } from 'react-redux'
+import { addFavorite } from "../features/favorites/favoritesSlice"
+import { Product } from '../types/products'
 
 
 const Favorites = () => {
 
-    const [ products, setProducts ] = useState<ListProducts['favs']>([])
+    const [ favorites, setFavorites ] = useState<Product[]>([])
+    const dispatch = useDispatch()
     const router = useRouter();
 
     useEffect(() => {
         const favsRaw = localStorage.getItem('favs')
-        const favs: ListProducts['favs'] = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-        setProducts(favs)
+        const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+        setFavorites(favoritesStorage)
     }, [])
 
     const addFav = (product: Product) => {
-
-        const existe = products.filter(fav => fav._id === product._id)
-    
-        if(existe[0]?._id === product._id) {
-          const filterFavs = products.filter(fav => fav._id !== product._id)
-          setProducts(filterFavs)
-          localStorage.setItem('favs', JSON.stringify(filterFavs))
-        } else {
-          const newFavs = [...products, product]
-          setProducts(newFavs)
-          localStorage.setItem('favs', JSON.stringify(newFavs))
-        }
+        dispatch(addFavorite(product))
+        setFavorites(favorites.filter(fav => fav._id !== product._id))
     }
 
     return(
@@ -56,7 +35,7 @@ const Favorites = () => {
                     <FaArrowLeft className="cursor-pointer" onClick={() => router.back()} />
                     <p className="font-bold">Favoritos</p>
                 </div>
-                {products.length ? products.map(product => (
+                {favorites.length ? favorites.map(product => (
                     <div key={product._id} className="w-full mt-5">
                         <div className="w-full border-b-2 border-gray-300 py-4 flex justify-between">
                             <div className="pb-1 flex gap-3">

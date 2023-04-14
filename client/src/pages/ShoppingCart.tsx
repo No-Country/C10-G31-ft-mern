@@ -1,42 +1,34 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Style from '../styles/Shopping_cart.module.css'
-import { FaArrowLeft, FaRegDotCircle, FaCreditCard, FaRegTrashAlt} from 'react-icons/fa'
+import { FaArrowLeft, FaRegCircle, FaRegDotCircle, FaCreditCard, FaRegTrashAlt} from 'react-icons/fa'
 import Header from '../components/shared/Header'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react'
+import { ProductCart } from '../types/products'
 
-
-interface Product {
-    _id: string
-    available: string
-    category: string[]
-    image: string[]
-    name: string
-    price: number
-    seller: string[]
-    apdatedAt: string
-    amount: number
-}
-
-interface ListProducts {
-  products: Product[]
-}
 
 const ShoppingCart = () => {
 
-    const [ products, setProducts ] = useState<ListProducts['products']>([])
+    const [ products, setProducts ] = useState<ProductCart[]>([])
     const router = useRouter();
 
     useEffect(() => {
         const cartRaw = localStorage.getItem('cart')
-        const cart: ListProducts['products'] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+        const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
         setProducts(cart)
     }, [])
 
     const clearCart = () => {
-        localStorage.removeItem('cart')
-        setProducts([])
+        const cartDeleted = products.filter(product => !product.selected)
+        localStorage.setItem('cart', JSON.stringify(cartDeleted))
+        setProducts(cartDeleted)
+    }
+
+    const changeSelected = (id: string) => {
+        const newProducts = products.map(prod => prod._id === id ? {...prod, selected: !prod.selected} : prod)
+        setProducts(newProducts)
+        localStorage.setItem('cart', JSON.stringify(newProducts))
     }
 
     return(
@@ -50,7 +42,11 @@ const ShoppingCart = () => {
                 <div key={product._id} className={Style.products_added}>
                     <div className={Style.product}>
                         <div className={Style.flex_icon_image}>
-                            <FaRegDotCircle className='text-[#F0604D]' />
+                            {product.selected ? (
+                                <FaRegDotCircle className='text-[#F0604D] cursor-pointer' onClick={() => changeSelected(product._id)} />
+                            ) : (
+                                <FaRegCircle className='text-[#3681F0] cursor-pointer' onClick={() => changeSelected(product._id)} />
+                            )}
                             <div>
                                 <Image className={Style.product_image} width={400} height={400} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
                             </div>

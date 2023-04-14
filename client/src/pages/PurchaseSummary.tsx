@@ -3,35 +3,21 @@ import { FaArrowLeft } from 'react-icons/fa'
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-
-interface Product {
-  _id: string
-  available: string
-  category: string[]
-  image: string[]
-  name: string
-  price: number
-  seller: string[]
-  apdatedAt: string
-  amount: number
-}
-
-interface ListProducts {
-  products: Product[]
-}
+import { ProductCart } from "../types/products"
 
 const PurchaseSummary = () => {
 
-  const [ products, setProducts ] = useState<ListProducts['products']>([])
+  const [ products, setProducts ] = useState<ProductCart[]>([])
   const [ price, setPrice ] = useState<number>(0)
   const [ shipping, setShipping ] = useState(1239.99)
 
   useEffect(() => {
       const cartRaw = localStorage.getItem('cart')
-      const cart: ListProducts['products'] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
-      setProducts(cart)
+      const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+      const cartSelected = cart.filter(car => car.selected)
+      setProducts(cartSelected)
       let newPrice = 0
-      cart.forEach(car => {
+      cartSelected.forEach(car => {
         newPrice += car.amount * car.price
       })
       setPrice(newPrice)

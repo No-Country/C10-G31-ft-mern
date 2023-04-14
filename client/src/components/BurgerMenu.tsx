@@ -19,127 +19,127 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
     const [ tabletsActive, setTabletsActive ] = useState(false)
 
   return (
-    <div className='fixed top-0 left-0 z-10 w-full' >
+    <div className={`fixed top-0 left-0 -z-10 w-full opacity-0 transition duration-500 ${menuActive ? 'opacity-100 z-50' : ''}`} >
         <div className='flex min-h-screen'>
             <div className='min-w-[240px] bg-white pt-36 min-h-screen h-full overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-400'>
                 <div id='menuBurguer' className="flex flex-col gap-6 py-3">
-                    <div className={`${categoriesActive ? 'bg-gray-400' : ''} flex flex-col gap-6 pb-3 transition duration-500 ease-in-out`}> {/* Inicio Categorias */}
+                    <div className={`${categoriesActive ? 'bg-gray-200' : ''} flex flex-col gap-6 pb-3 transition duration-500 ease-in-out`}> {/* Inicio Categorias */}
                         <div className='flex items-center gap-2 cursor-pointer px-4 mt-3 -mb-3 pb-3' onClick={() => setCategoriesActive(!categoriesActive)}>
-                            <BsGrid className='border border-gray-900 rounded-sm w-6 h-6' />
-                            <p>Categorías</p>
+                            <BsGrid className='text-[#F0604D] border border-[#F0604D] rounded-sm w-6 h-6' />
+                            <p className='text-[#3681F0]'>Categorías</p>
                         </div>
                         <div className={`${categoriesActive ? 'flex flex-col' : 'hidden'} gap-6`}>
                             <div className={`${smartphonesActive ? 'bg-gray-300 py-3 -mt-3' : ''} flex flex-col gap-6 px-4`}> {/* Comienzo Categoria Smartphone */}
                                 <div className='flex items-center gap-2 cursor-pointer mb-3' onClick={() => setSmartphonesActive(!smartphonesActive)}>
-                                    <GiSmartphone className='w-5 h-5' />
-                                    <p>Smartphones</p>
+                                    <GiSmartphone className='text-[#F0604D] w-5 h-5' />
+                                    <p className='text-[#3681F0]' >Smartphones</p>
                                 </div>
                                 <div className={`${smartphonesActive ? 'flex flex-col -mt-3' : 'hidden'} gap-6`}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
                                         <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                            <MdAndroid className='w-5 h-5' />
-                                            <p>Android</p>
+                                            <MdAndroid className='text-[#50C21F] w-5 h-5' />
+                                            <p className='text-[#3681F0]' >Android</p>
                                         </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
                                         <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                            <FaApple className='w-6 h-6' />
-                                            <p>iOS</p>
+                                            <FaApple className='text-[#50C21F] w-6 h-6' />
+                                            <p className='text-[#3681F0]' >iOS</p>
                                         </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
                                         <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                            <BsGrid className='border border-gray-900 rounded-sm w-6 h-6' />
-                                            <p>Others</p>
+                                            <BsGrid className='text-[#50C21F] border border-[#50C21F] rounded-sm w-6 h-6' />
+                                            <p className='text-[#3681F0]' >Otros</p>
                                         </Link>
                                     </div>
                                 </div>
                             </div> {/* Fin Categoria Smartphone */}
-                            <div className={`${tabletsActive ? 'bg-gray-200 pt-6 -mt-6' : ''} flex flex-col gap-6 px-4 pb-3`}> {/* Comienzo Categoria Tablets */}
+                            <div className={`${tabletsActive ? 'bg-gray-300 pt-6 -mt-6' : ''} flex flex-col gap-6 px-4 pb-3`}> {/* Comienzo Categoria Tablets */}
                                 <div className={`${smartphonesActive ? '-mt-3' : '-mt-3'} flex items-center gap-2 cursor-pointer`} onClick={() => setTabletsActive(!tabletsActive)}>
-                                    <MdTabletAndroid className='w-5 h-5' />
-                                    <p>Tablets</p>
+                                    <MdTabletAndroid className='text-[#F0604D] w-5 h-5' />
+                                    <p className='text-[#3681F0]' >Tablets</p>
                                 </div>
                                 <div className={`${tabletsActive ? 'flex flex-col' : 'hidden'} gap-6`}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
                                         <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                            <FaApple className='w-6 h-6' />
-                                            <p>iPad</p>
+                                            <FaApple className='text-[#50C21F] w-6 h-6' />
+                                            <p className='text-[#3681F0]' >iPad</p>
                                         </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
                                         <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                            <MdAndroid className='w-5 h-5' />
-                                            <p>Android</p>
+                                            <MdAndroid className='text-[#50C21F] w-5 h-5' />
+                                            <p className='text-[#3681F0]' >Android</p>
                                         </Link>
                                     </div>
                                 </div>
                             </div> {/* Fin Categoria Tablets */}
                             <div className='flex items-center gap-2 px-4 -mt-3 cursor-pointer'>
                                 <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                    <MdComputer className='w-5 h-5' />
-                                    <p>Notebooks</p>
+                                    <MdComputer className='text-[#F0604D] w-5 h-5' />
+                                    <p className='text-[#3681F0]' >Notebooks</p>
                                 </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
                                 <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                    <BsPc className='w-5 h-5' />
-                                    <p>Desktop</p>
+                                    <BsPc className='text-[#F0604D] w-5 h-5' />
+                                    <p className='text-[#3681F0]' >Desktop</p>
                                 </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
                                 <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                    <MdOutlineDesktopWindows className='w-5 h-5' />
-                                    <p>Monitores</p>
+                                    <MdOutlineDesktopWindows className='text-[#F0604D] w-5 h-5' />
+                                    <p className='text-[#3681F0]' >Monitores</p>
                                 </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
                                 <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                                    <MdOutlineTv className='w-5 h-5' />
-                                    <p>Tv</p>
+                                    <MdOutlineTv className='text-[#F0604D] w-5 h-5' />
+                                    <p className='text-[#3681F0]' >Tv</p>
                                 </Link>
                             </div>
                         </div>
                     </div> {/* Fin Categorias */}
                     <div className='flex items-center gap-2 px-4 -mt-3 cursor-pointer'>
                         <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
-                            <AiOutlineTag className='-rotate-90 w-6 h-6' />
-                            <p>Ofertas</p>
+                            <AiOutlineTag className='text-[#F0604D] -rotate-90 w-6 h-6' />
+                            <p className='text-[#3681F0]' >Ofertas</p>
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
-                            <AiOutlineHistory className='w-6 h-6 transform -scale-x-100' />
-                            <p>Historial</p>
+                            <AiOutlineHistory className='text-[#F0604D] w-6 h-6 transform -scale-x-100' />
+                            <p className='text-[#3681F0]' >Historial</p>
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
-                            <BiPackage className='w-6 h-6' />
-                            <p>Compras</p>
+                            <BiPackage className='text-[#F0604D] w-6 h-6' />
+                            <p className='text-[#3681F0]' >Compras</p>
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
-                            <MdSupportAgent className='w-6 h-6' />
-                            <p>Contacto</p>
+                            <MdSupportAgent className='text-[#F0604D] w-6 h-6' />
+                            <p className='text-[#3681F0]' >Contacto</p>
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
-                            <AiOutlineQuestionCircle className='w-6 h-6' />
-                            <p>Ayuda</p>
+                            <AiOutlineQuestionCircle className='text-[#F0604D] w-6 h-6' />
+                            <p className='text-[#3681F0]' >Ayuda</p>
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
-                            <MdLogout className='w-6 h-6' />
-                            <p>Salir</p>
+                            <MdLogout className='text-[#F0604D] w-6 h-6' />
+                            <p className='text-[#3681F0]' >Salir</p>
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className='flex-1 bg-gray-700 opacity-90' onClick={() => setMenuActive(!menuActive)}></div>
+            <div className={`flex-1 opacity-50 transition duration-100 ${menuActive ? 'bg-gray-400' : ''}`} onClick={() => setMenuActive(!menuActive)}></div>
         </div>
     </div>
   )

@@ -3,25 +3,12 @@ import Style from "../styles/ListResults.module.css"
 import ProductCard from "@/components/ProductCardspotech"
 import clienteAxios from '@/config/clienteAxiosspotech'
 import { useState, useEffect } from 'react'
+import { Product } from '../types/products'
 
-interface Product {
-    _id: string
-    available: string
-    category: string[]
-    image: string[]
-    name: string
-    price: number
-    seller: string[]
-    apdatedAt: string
-}
-
-interface ListProducts {
-    products: Product[]
-}
 
 const ListProducts = () => {
 
-    const [ products, setProducts ] = useState<ListProducts['products']>([])
+    const [ products, setProducts ] = useState<Product[]>([])
 
     useEffect(() => {
       const getProducts = async () => {
@@ -41,8 +28,8 @@ const ListProducts = () => {
                     <p>{products.length} resultados</p>
                     <span></span>
                 </div>
-                {products.length && products.map(product => (
-                    <ProductCard key={product._id} product={product} />
+                {products.length && products.map((product: Product) => (
+                    <ProductCard product={product} key={product._id} />
                 ))}
             </div>
         </div>

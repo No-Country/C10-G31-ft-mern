@@ -10,23 +10,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from "react";
-import clienteAxios from "@/config/clienteAxiosspotech";
-
-
-interface Product {
-    _id: string
-    available: string
-    category: string[]
-    image: string[]
-    name: string
-    price: number
-    seller: string[]
-    apdatedAt: string
-}
-
-interface ListProducts {
-  favs: Product[]
-}
+import clienteAxios from "../../config/clienteAxios";
+import { useDispatch } from 'react-redux'
+import { addFavorite } from "../../features/favorites/favoritesSlice"
+import { addCart } from "../../features/favorites/cartSlice";
+import { Product } from '../../types/products'
 
 const ProductDetail = () => {
 
@@ -35,6 +23,7 @@ const ProductDetail = () => {
   const [ imageSelected, setImageSelected ] = useState('')
   const router = useRouter()
   const { id } = router.query
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if(id) {
@@ -59,34 +48,13 @@ const ProductDetail = () => {
     }
   }
 
-  const addCart = () => {
-    const cartRaw = localStorage.getItem('cart')
-    const cart: ListProducts['favs'] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
-    
-    const existe = cart.filter(car => car._id === product?._id)
-
-    if(existe[0]?._id === product?._id) {
-      const filtercart = cart.map(car => car._id === product?._id ? {...product, amount: cantidad } : car)
-      localStorage.setItem('cart', JSON.stringify(filtercart))
-    } else {
-      const newcart = [...cart, {...product, amount: cantidad}]
-      localStorage.setItem('cart', JSON.stringify(newcart))
-    }
+  const addCartProduct = (product: Product) => {
+    const productWithAmount = {...product, amount: cantidad, selected: false}
+    dispatch(addCart(productWithAmount))
   }
 
-  const addFav = () => {
-    const favsRaw = localStorage.getItem('favs')
-    const favs: ListProducts['favs'] = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-    
-    const existe = favs.filter(fav => fav._id === product?._id)
-
-    if(existe[0]?._id === product?._id) {
-      const filterFavs = favs.filter(fav => fav._id !== product?._id)
-      localStorage.setItem('favs', JSON.stringify(filterFavs))
-    } else {
-      const newFavs = [...favs, product]
-      localStorage.setItem('favs', JSON.stringify(newFavs))
-    }
+  const addFav = (product: Product) => {
+    dispatch(addFavorite(product))
   }
 
   const share = (id: string) => {
@@ -144,7 +112,7 @@ const ProductDetail = () => {
               <div className='md:flex md:flex-col md:border md:border-gray-400 md:rounded-lg md:m-0 md:px-3 md:py-2 mt-4 px-5'>
                 <div className="hidden md:flex md:justify-between">
                   <p className='text-md mt-2 md:m-0 font-bold'>{product.name}</p>
-                  <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={addFav} />
+                  <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
                 </div>
                 <p className='font-bold text-3xl md:mt-4'>${product.price}</p>
                 <div className='flex md:flex-col justify-between text-xs mt-3 md:mt-0'>
@@ -169,23 +137,23 @@ const ProductDetail = () => {
                   <p className='font-bold'>Capacidad:</p>
                   <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
                 </div>
-                <div className='flex gap-[0.7px] md:flex-col md:gap-2 items-center justify-between text-xs mt-8 md:mt-5'>
+                <div className='flex gap-6 md:flex-col md:gap-2 items-center justify-between text-xs mt-8 md:mt-5'>
                   <div 
-                    className='flex bg-[#3681F0] p-2 px-6 items-center justify-center text-white gap-2 rounded-lg cursor-pointer md:w-[213px] md:h-[40px]'
-                    onClick={addCart}
+                    className='flex bg-[#3681F0] p-2 px-7 items-center justify-center text-white gap-2 rounded-lg cursor-pointer md:w-[213px] md:h-[40px]'
+                    onClick={() => addCartProduct(product)}
                   >
                     <HiOutlineShoppingCart className='w-5 h-5' />
                     <p>Añadir al carrito</p>
                   </div>
                   <Link href={'/ShoppingCart'}>
-                    <div className='flex bg-[#50C21F] p-2 px-6 items-center justify-center text-white gap-2 rounded-lg md:w-[213px] md:h-[40px]'>
+                    <div className='flex bg-[#50C21F] p-2 px-7 items-center justify-center text-white gap-2 rounded-lg md:w-[213px] md:h-[40px]'>
                       <MdAccountBalanceWallet className='w-5 h-5' />
                       <p>Comprar Ahora</p>
                     </div>
                   </Link>
-                  <div className='flex gap-2'>
-                    <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0] md:hidden' onClick={addFav} />
-                    <MdShare className='w-5 h-5 cursor-pointer text-[#50C21F] md:hidden' onClick={() => share(product._id)} />
+                  <div className='flex gap-5 justify-evenly md:hidden'>
+                    <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
+                    <MdShare className='w-5 h-5 cursor-pointer text-[#50C21F]' onClick={() => share(product._id)} />
                   </div>
                 </div>
               </div>

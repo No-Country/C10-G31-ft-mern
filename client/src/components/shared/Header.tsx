@@ -3,23 +3,29 @@ import Image from 'next/image'
 import Style from '../../styles/Header.module.css'
 import { FaBars, FaRegHeart, FaRegUserCircle, } from 'react-icons/fa'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BurgerMenu from '../BurgerMenu'
 import Search from '../Search'
+import { ProductCart } from '../../types/products'
 
 const Header = () => {
 
     const [ menuActive, setMenuActive ] = useState(false)
     const [ searchActive, setSearchActive ] = useState(false)
+    const [ totalProducts, setTotalProducts ] = useState(0)
+
+    useEffect(() => {
+        const cartRaw = localStorage.getItem('cart')
+        const cart: ProductCart[] = cartRaw && cartRaw?.length > 0 ? JSON.parse(cartRaw) : []
+        setTotalProducts(cart.length)
+    }, [])
 
     return(
         <>
             {searchActive && (
                 <Search searchActive={searchActive} setSearchActive={setSearchActive} />
             )}
-            {menuActive && (
-                <BurgerMenu menuActive={menuActive} setMenuActive={setMenuActive} />
-            )}
+            <BurgerMenu menuActive={menuActive} setMenuActive={setMenuActive} />
             <div className={Style.head_cart}>
                 <div className={Style.container_1}>
                     <div className={Style.logo}>
@@ -39,7 +45,12 @@ const Header = () => {
                             <FaRegHeart className={Style.icon_head_cart} />
                         </Link>
                         <Link href='/ShoppingCart'>
-                            <HiOutlineShoppingCart className={Style.icon_head_cart} />
+                            <div className='relative'>
+                                <HiOutlineShoppingCart className={Style.icon_head_cart} />
+                                <span className="absolute top-1 right-1 inline-flex items-center justify-center px-[6px] py-[3px] text-[8px] font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                                    {totalProducts}
+                                </span>
+                            </div>
                         </Link>
                     </div>
                 </div>

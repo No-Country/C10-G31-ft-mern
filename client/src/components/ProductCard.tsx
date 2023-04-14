@@ -2,36 +2,21 @@ import Image from "next/image"
 import Style from "../styles/ListResults.module.css"
 import { FaShareAlt, FaRegHeart } from "react-icons/fa"
 import Link from "next/link"
+import { useDispatch } from 'react-redux'
+import { addFavorite } from "@/features/favorites/favoritesSlicespotech"
+import { Product } from '../types/products'
 
 
-interface Product {
-    product: {
-        _id: string
-        available: string
-        category: string[]
-        image: string[]
-        name: string
-        price: number
-        seller: string[]
-        apdatedAt: string
-    }
+interface ProductCardProps {
+    key: string;
+    product: Product;
 }
 
-const ProductCard = ({product}: Product) => {
+const ProductCard = ({product}: ProductCardProps) => {
 
+    const dispatch = useDispatch()
     const addFav = () => {
-        const favsRaw = localStorage.getItem('favs')
-        const favs: Product['product'][] = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-        
-        const existe = favs.filter(fav => fav._id === product?._id)
-    
-        if(existe[0]?._id === product?._id) {
-          const filterFavs = favs.filter(fav => fav._id !== product?._id)
-          localStorage.setItem('favs', JSON.stringify(filterFavs))
-        } else {
-          const newFavs = [...favs, product]
-          localStorage.setItem('favs', JSON.stringify(newFavs))
-        }
+        dispatch(addFavorite(product))
     }
 
     const share = (id: string) => {

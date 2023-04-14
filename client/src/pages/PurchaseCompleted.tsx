@@ -3,35 +3,30 @@ import { FaArrowLeft } from 'react-icons/fa'
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-
-
-interface Product {
-  _id: string
-  available: string
-  category: string[]
-  image: string[]
-  name: string
-  price: number
-  seller: string[]
-  apdatedAt: string
-  amount: number
-}
-
-interface ListProducts {
-  products: Product[]
-}
+import { ProductCart } from '../types/products'
 
 
 const PurchaseCompleted = () => {
 
-  const [ products, setProducts ] = useState<ListProducts['products']>([])
+  const [ products, setProducts ] = useState<ProductCart[]>([])
   const [ totalProducts, setTotalProducts ] = useState(0)
 
   useEffect(() => {
       const cartRaw = localStorage.getItem('cart')
-      const cart: ListProducts['products'] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
-      setProducts(cart)
-      setTotalProducts(cart.length)
+      const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+      const cartSelected = cart.filter(car => car.selected)
+      let cartShort: ProductCart[] = []
+      if(cartSelected.length > 3) {
+        for(let i = 0; i < 3; i++) {
+          cartShort = [...cartShort, cartSelected[i]]
+        }
+      } else {
+        for(let i = 0; i < cartSelected.length; i++) {
+          cartShort = [...cartShort, cartSelected[i]]
+        }
+      }
+      setProducts(cartShort)
+      setTotalProducts(cartSelected.length)
   }, [])
 
 
@@ -42,17 +37,26 @@ const PurchaseCompleted = () => {
         <Link href='/'><FaArrowLeft /></Link>
         <p>¡Compra Exitosa!</p>
       </div>
-      <div className="mt-11 text-center flex flex-col items-center">
-          <div className="flex" >
-            {products.length && products.map(product => (
-                <Image key={product._id} className="p-1 rounded-lg border border-red-700" src={product.image[0]} width={120} height={120} alt='Producto' />
-            ))}
-          </div>
-        <p className="text-md px-20 mt-4">| {' '}
-          {products.length && products.map(product => (
-            <span key={product._id} >{product.name} | </span>
+      <div className="flex flex-col items-center mt-11">
+        <div className={`relative ${products.length < 3 ? 'ml-12' : 'mr-4'}`} >
+          {products.length && products.map((product, index) => (
+              <Image key={product._id} className={`absolute -right-8 transform translate-x-${8 * (index)} min-w-[120px] max-w-[120px] min-h-[120px] max-h-[120px] rounded-lg border ${index%2 ? 'border-red-700' : 'border-blue-700'}`} src={product.image[0]} width={120} height={120} alt='Producto' />
           ))}
-        </p>
+          {totalProducts > 3 && 
+            <div className="absolute w-[120px] h-[120px] bg-white -right-8 transform translate-x-24 rounded-lg border border-red-700">
+              <div className="flex items-center justify-center mt-10">
+                <p className="text-4xl font-bold">{totalProducts - 3}+</p>
+              </div>
+            </div>
+          }
+        </div>
+        <div className="mt-[152px]">
+          <p className="text-md text-center px-20">| {' '}
+            {products.length && products.map(product => (
+              <span key={product._id} >{product.name} | </span>
+            ))} {totalProducts > 3 && <span className="text-[#3681F0] font-bold">y {totalProducts - 3}+</span>}
+          </p>
+        </div>
       </div>
       <div className="mt-6 px-6 text-xs text-center">
         <p className="font-bold">Llega el Martes 32 de febrero a</p>
