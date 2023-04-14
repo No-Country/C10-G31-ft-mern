@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../app/hooks'
 import { addFavorite } from "../features/favorites/favoritesSlice"
 import { Product } from '../types/products'
 
@@ -12,7 +12,7 @@ import { Product } from '../types/products'
 const Favorites = () => {
 
     const [ favorites, setFavorites ] = useState<Product[]>([])
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter();
 
     useEffect(() => {

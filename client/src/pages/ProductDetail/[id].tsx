@@ -1,7 +1,7 @@
 import Header from "@/components/shared/Headerspotech"
 import Link from 'next/link'
 import Image from 'next/image';
-import { FaRegHeart } from 'react-icons/fa'
+import { FaRegHeart, FaHeart, FaCheckCircle } from 'react-icons/fa'
 import { FiChevronRight } from 'react-icons/fi'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { MdAccountBalanceWallet, MdShare } from 'react-icons/md';
@@ -11,19 +11,24 @@ import 'swiper/swiper-bundle.css';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from "react";
 import clienteAxios from "../../config/clienteAxios";
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../app/hooks'
 import { addFavorite } from "../../features/favorites/favoritesSlice"
 import { addCart } from "../../features/favorites/cartSlice";
-import { Product } from '../../types/products'
+import { Product, ProductCart } from '../../types/products'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetail = () => {
 
   const [ cantidad, setCantidad ] = useState(1)
   const [ product, setProduct ] = useState<Product | null>(null)
+  const [ favorites, setFavorites ] = useState<Product[]>([])
   const [ imageSelected, setImageSelected ] = useState('')
+  const [ totalProducts, setTotalProducts ] = useState(0)
+
   const router = useRouter()
   const { id } = router.query
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if(id) {
@@ -33,6 +38,12 @@ const ProductDetail = () => {
         setImageSelected(data.image[0])
       }
       getProduct()
+      const favsRaw = localStorage.getItem('favs')
+      const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+      setFavorites(favoritesStorage)
+      const cartRaw = localStorage.getItem('cart')
+      const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+      setTotalProducts(cart.length)
     }
   }, [id])
 
@@ -51,17 +62,38 @@ const ProductDetail = () => {
   const addCartProduct = (product: Product) => {
     const productWithAmount = {...product, amount: cantidad, selected: false}
     dispatch(addCart(productWithAmount))
+    toast.success("Producto Agregado al carrito de compras!", {
+      position: 'top-right',
+      className: 'max-w-[450px]',
+      icon: <FaCheckCircle className="w-6 h-6 text-[#3681F0]" />,
+      autoClose: 1500,
+      closeOnClick: true,
+      pauseOnHover: false,
+      progressStyle: {background: "#3681F0"}
+    })
+    const cartRaw = localStorage.getItem('cart')
+    const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+    setTotalProducts(cart.length)
   }
 
   const addFav = (product: Product) => {
     dispatch(addFavorite(product))
+    const favsRaw = localStorage.getItem('favs')
+    const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+    setFavorites(favoritesStorage)
   }
 
   const share = (id: string) => {
     // TODO Pasar a variable de entorno
     navigator.clipboard.writeText(`http://localhost:3000/ProductDetail/${id}`)
         .then(() => {
-            console.log('Texto copiado al portapapeles');
+          toast.success("Enlace del producto copiado correctamente!", {
+            position: 'top-right',
+            className: 'max-w-[450px]',
+            autoClose: 1500,
+            closeOnClick: true,
+            pauseOnHover: false
+          })
         })
         .catch((error) => {
             console.error('Error al copiar al portapapeles: ', error);
@@ -70,9 +102,10 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Header />
+      <Header totalProducts={totalProducts} />
       {product?._id && (
         <>
+          <ToastContainer />
           <div className='px-5 my-4'>
             <div className='flex items-center gap-1 text-xs font-bold'>
               <Link href='/' >HOME</Link>
@@ -112,7 +145,11 @@ const ProductDetail = () => {
               <div className='md:flex md:flex-col md:border md:border-gray-400 md:rounded-lg md:m-0 md:px-3 md:py-2 mt-4 px-5'>
                 <div className="hidden md:flex md:justify-between">
                   <p className='text-md mt-2 md:m-0 font-bold'>{product.name}</p>
-                  <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
+                  {favorites.length && favorites.some(fav => fav._id === product._id) ? (
+                    <FaHeart className="w-5 h-5 cursor-pointer text-[#3681F0]" onClick={() => addFav(product)} />
+                  ) : (
+                    <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
+                  )}
                 </div>
                 <p className='font-bold text-3xl md:mt-4'>${product.price}</p>
                 <div className='flex md:flex-col justify-between text-xs mt-3 md:mt-0'>
@@ -137,22 +174,26 @@ const ProductDetail = () => {
                   <p className='font-bold'>Capacidad:</p>
                   <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
                 </div>
-                <div className='flex gap-6 md:flex-col md:gap-2 items-center justify-between text-xs mt-8 md:mt-5'>
+                <div className='flex gap-4 md:flex-col md:gap-2 items-center justify-between sm:justify-evenly text-xs mt-8 md:mt-5'>
                   <div 
-                    className='flex bg-[#3681F0] p-2 px-7 items-center justify-center text-white gap-2 rounded-lg cursor-pointer md:w-[213px] md:h-[40px]'
+                    className='flex bg-[#3681F0] p-2 items-center justify-center text-white gap-2 rounded-lg cursor-pointer md:w-[213px] md:h-[40px]'
                     onClick={() => addCartProduct(product)}
                   >
                     <HiOutlineShoppingCart className='w-5 h-5' />
                     <p>Añadir al carrito</p>
                   </div>
                   <Link href={'/ShoppingCart'}>
-                    <div className='flex bg-[#50C21F] p-2 px-7 items-center justify-center text-white gap-2 rounded-lg md:w-[213px] md:h-[40px]'>
+                    <div className='flex bg-[#50C21F] p-2 items-center justify-center text-white gap-2 rounded-lg md:w-[213px] md:h-[40px]'>
                       <MdAccountBalanceWallet className='w-5 h-5' />
                       <p>Comprar Ahora</p>
                     </div>
                   </Link>
-                  <div className='flex gap-5 justify-evenly md:hidden'>
-                    <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
+                  <div className='flex gap-4 justify-between md:hidden'>
+                    {favorites.length && favorites.some(fav => fav._id === product._id) ? (
+                      <FaHeart className="w-5 h-5 cursor-pointer text-[#3681F0]" onClick={() => addFav(product)} />
+                    ) : (
+                      <FaRegHeart className='w-5 h-5 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
+                    )}
                     <MdShare className='w-5 h-5 cursor-pointer text-[#50C21F]' onClick={() => share(product._id)} />
                   </div>
                 </div>

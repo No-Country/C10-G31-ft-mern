@@ -15,7 +15,7 @@ const SignIn = () => {
         e.preventDefault()
         if([name, surname, phone, email, password, repeatPassword].includes('')) {
             setAlert({
-                msg: 'Todos los campos son obligatorios',
+                msg: 'Todos los campos son requeridos',
                 error: true
               })
               setTimeout(() => {

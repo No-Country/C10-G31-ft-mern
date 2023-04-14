@@ -1,10 +1,13 @@
 import Image from "next/image"
 import Style from "../styles/ListResults.module.css"
-import { FaShareAlt, FaRegHeart } from "react-icons/fa"
+import { FaShareAlt, FaHeart, FaRegHeart } from "react-icons/fa"
 import Link from "next/link"
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from "react"
+import { useAppDispatch } from '../app/hooks'
 import { addFavorite } from "@/features/favorites/favoritesSlicespotech"
 import { Product } from '../types/products'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface ProductCardProps {
@@ -14,16 +17,34 @@ interface ProductCardProps {
 
 const ProductCard = ({product}: ProductCardProps) => {
 
-    const dispatch = useDispatch()
-    const addFav = () => {
+    const [ favorites, setFavorites ] = useState<Product[]>([])
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        const favsRaw = localStorage.getItem('favs')
+        const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+        setFavorites(favoritesStorage)
+    }, [])
+
+
+    const addFav = (product: Product) => {
         dispatch(addFavorite(product))
+        const favsRaw = localStorage.getItem('favs')
+        const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+        setFavorites(favoritesStorage)
     }
 
     const share = (id: string) => {
         // TODO Pasar a variable de entorno
         navigator.clipboard.writeText(`http://localhost:3000/ProductDetail/${id}`)
             .then(() => {
-                console.log('Texto copiado al portapapeles');
+                toast.success("Enlace del producto copiado correctamente!", {
+                    position: 'top-right',
+                    className: 'max-w-[450px]',
+                    autoClose: 1500,
+                    closeOnClick: true,
+                    pauseOnHover: false
+                })
             })
             .catch((error) => {
                 console.error('Error al copiar al portapapeles: ', error);
@@ -32,6 +53,7 @@ const ProductCard = ({product}: ProductCardProps) => {
 
   return (
     <div className={Style.results}>
+        <ToastContainer />
         <div className={Style.result}>
             <Image className={Style.imageResult} width={400} height={400} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
             <div className={Style.infoResult}>
@@ -40,8 +62,12 @@ const ProductCard = ({product}: ProductCardProps) => {
                 <p className={Style.priceResult}>${product.price}</p>
                 <p className={Style.shippingcostResult}>Envio gratis</p>
                 <div className={Style.icons}>
-                    <FaRegHeart className="cursor-pointer" onClick={addFav} />
-                    <FaShareAlt className="cursor-pointer" onClick={() => share(product._id)} />
+                    {favorites.length && favorites.some(fav => fav._id === product._id) ? (
+                      <FaHeart className="w-6 h-6 cursor-pointer text-[#3681F0]" onClick={() => addFav(product)} />
+                    ) : (
+                      <FaRegHeart className='w-6 h-6 cursor-pointer text-[#3681F0]' onClick={() => addFav(product)} />
+                    )}
+                    <FaShareAlt className="cursor-pointer text-[#50C21F]" onClick={() => share(product._id)} />
                 </div>
             </div>
         </div>

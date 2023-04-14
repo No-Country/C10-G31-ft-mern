@@ -8,17 +8,25 @@ import BurgerMenu from '../BurgerMenu'
 import Search from '../Search'
 import { ProductCart } from '../../types/products'
 
-const Header = () => {
+interface HeaderProps {
+    totalProducts?: number;
+  }
+
+const Header = ({totalProducts}: HeaderProps) => {
 
     const [ menuActive, setMenuActive ] = useState(false)
     const [ searchActive, setSearchActive ] = useState(false)
-    const [ totalProducts, setTotalProducts ] = useState(0)
+    const [ totalProductsStorage, setTotalProductsStorage ] = useState(0)
 
     useEffect(() => {
         const cartRaw = localStorage.getItem('cart')
-        const cart: ProductCart[] = cartRaw && cartRaw?.length > 0 ? JSON.parse(cartRaw) : []
-        setTotalProducts(cart.length)
-    }, [])
+        const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
+        if(totalProducts) {
+            setTotalProductsStorage(totalProducts)
+        } else {
+            setTotalProductsStorage(cart.length)
+        }
+    }, [totalProducts])
 
     return(
         <>
@@ -48,7 +56,7 @@ const Header = () => {
                             <div className='relative'>
                                 <HiOutlineShoppingCart className={Style.icon_head_cart} />
                                 <span className="absolute top-1 right-1 inline-flex items-center justify-center px-[6px] py-[3px] text-[8px] font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                                    {totalProducts}
+                                    {totalProductsStorage}
                                 </span>
                             </div>
                         </Link>

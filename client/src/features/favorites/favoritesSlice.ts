@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Product } from '../../types/products'
+import type { RootState } from '../../app/store'
 
 const initialState: Product[] = []
 
@@ -27,5 +28,7 @@ export const favoritesSlice = createSlice({
   
   // Action creators are generated for each case reducer function
   export const { addFavorite } = favoritesSlice.actions
+
+  // export const selectFavorites = (state: RootState) => state.favorites
   
   export default favoritesSlice.reducer

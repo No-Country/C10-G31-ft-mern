@@ -11,18 +11,21 @@ import { ProductCart } from '../types/products'
 const ShoppingCart = () => {
 
     const [ products, setProducts ] = useState<ProductCart[]>([])
+    const [ totalProducts, setTotalProducts ] = useState(0)
     const router = useRouter();
 
     useEffect(() => {
         const cartRaw = localStorage.getItem('cart')
         const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
         setProducts(cart)
+        setTotalProducts(cart.length)
     }, [])
 
     const clearCart = () => {
         const cartDeleted = products.filter(product => !product.selected)
         localStorage.setItem('cart', JSON.stringify(cartDeleted))
         setProducts(cartDeleted)
+        setTotalProducts(cartDeleted.length)
     }
 
     const changeSelected = (id: string) => {
@@ -33,7 +36,7 @@ const ShoppingCart = () => {
 
     return(
         <div className={Style.container_cart}>
-            <Header />
+            <Header totalProducts={totalProducts} />
             <div className={Style.back_cart}>
                 <FaArrowLeft className={Style.icon_back} onClick={() => router.back()} />
                 <p>Carrito</p>
