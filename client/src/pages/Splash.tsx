@@ -1,6 +1,6 @@
 import Style from "../styles/Splash.module.css"
 import { FaGoogle } from "react-icons/fa"
-import Logo from '../../public/Logo.png'
+import Logo from '../../public/Logo Login.png'
 import Image from "next/image"
 
 const Splash = () => {
