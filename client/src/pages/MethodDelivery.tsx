@@ -28,7 +28,7 @@ const MethodDelivery = () => {
                 <div className={Style.SectionReceive}>
                         <p>Recibir</p>
                         <div className={Style.OptionReceive}>
-                            <input type="radio" defaultChecked />
+                            <input type="radio" className={Style.input} defaultChecked />
                             <p className={Style.WarningReceive}>Llega a tu domicilio el martes</p>
                             <p>1889,08</p>
                         </div>
@@ -37,14 +37,14 @@ const MethodDelivery = () => {
                     <p>Retirar</p>
                     <div className={Style.OptionsWithdraw}>
                         <div className={Style.OptionWithdraw}>
-                            <input type="radio" />
+                            <input className={Style.input} type="radio" />
                             <p className={Style.WarningReceive}>Retiro en sucursal de correo</p>
                             <p>1889,08</p>
                         </div>
                         <div className={Style.OptionWithdraw}>
-                            <input type="radio" />
+                            <input type="radio" className="focus:border focus:border-green-500 focus:outline-none" />
                             <p className={Style.WarningReceive}>Retiro en el local del vendedor</p>
-                            <p>Gratis</p>
+                            <p className='text-[#50C21F]'>Gratis</p>
                         </div>
                     </div>
                 </div>

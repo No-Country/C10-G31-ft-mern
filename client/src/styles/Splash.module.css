@@ -7,7 +7,7 @@
 }
 
 .Logo {
-    @apply w-40 h-40 flex items-center rounded-full justify-center text-black text-4xl font-bold bg-[#333];
+    @apply w-1/2 h-28 flex text-black bg-[#333] items-center justify-center;
 }
 
 .ContainerButtons {
@@ -15,11 +15,11 @@
 }
 
 .ButtonInit {
-    @apply w-full mb-3 p-3 block rounded border-2 border-gray-300 text-lg bg-[#444] text-white;
+    @apply w-full mb-3 p-3 block rounded border-2 border-blue-500 text-lg bg-[#3681F0] text-white;
 }
 
 .ButtonRegistrer {
-    @apply w-full mb-3 p-3 block rounded text-lg border-2 border-gray-400 text-black;
+    @apply w-full mb-3 p-3 block rounded text-lg border-2 border-green-500 text-black;
 }
 
 .ContainerbuttonGogle {
