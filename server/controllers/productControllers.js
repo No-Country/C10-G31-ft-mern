@@ -16,7 +16,7 @@ const getAllProducts = async (req, res) => {
       ? res.status(200).json(searchOnDB)
       : res.status(404).json({ message: "No hay productos" });
   } catch (error) {
-    return res.status(404).json({ message: "Error al obtener los productos" });
+    return res.status(404).json({ message: "Error al obtener los productos", mess: error.message });
   }
 };
 
@@ -31,7 +31,7 @@ const getProductById = async (req, res) => {
       ? res.status(200).json(productById)
       : res.status(404).json({ message: "No hay producto con ese id" });
   } catch (error) {
-    res.status(404).json({ message: "Error al obtener un producto por ID" });
+    res.status(404).json({ message: "Error al obtener un producto por ID", mess: error.message });
   }
 };
 
@@ -81,7 +81,7 @@ const postProduct = async (req, res, next) => {
     const product = new Product({
       name,
       description,
-      images: imageUrls,
+      image: imageUrls,
       available,
       category,
       variations,
@@ -96,27 +96,28 @@ const postProduct = async (req, res, next) => {
     // Responder con el producto guardado
     res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(500).json({error, message:"alguna vaina se danó creando el product"});
+    res.status(500).json({error, mess: error.message ,  message:"error creando un producto"});
   }
 };
 
 const editProduct = async (req, res) => {
   const id = req.params.id;
   const body = req.body;
-  const file = req.files && req.files.image;
+  const file = req.files?.image;
+  console.log(req.body, req.files)
 
   try {
     const product = await Product.findById(id);
 
     if (!product) {
       return res.status(404).json({
-        message: "Product not found",
+        message: "Product no encontrado",
       });
     }
 
     // Eliminar la imagen anterior en Cloudinary
-    if (file && product.images) {
-      const public_id = product.images.split("/").pop().split(".")[0];
+    if (file && product.image) {
+      const public_id = product.image.split("/").pop().split(".")[0];
       await cloudinary.uploader.destroy(public_id);
     }
 
@@ -128,7 +129,7 @@ const editProduct = async (req, res) => {
 
     // Actualizar los campos del producto
     product.name = body.name || product.name;
-    product.images = body.image || product.images;
+    product.image = body.image || product.image;
     product.available = body.available || product.available;
     product.category = body.category || product.category;
     product.variations = body.variations || product.variations;
@@ -143,7 +144,8 @@ const editProduct = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "Error updating product",
+      mess: error.message ,
+      message: "Error actualizando el product",
     });
   }
 };
@@ -156,13 +158,13 @@ const deleteProduct = async (req, res) => {
 
     if (!product) {
       return res.status(404).json({
-        message: "Product not found",
+        message: "Product no encontrado",
       });
     }
 
     // get image URLs from the product object
     const imageUrls =
-      product.images instanceof Array ? product.images : [product.images];
+      product.image instanceof Array ? product.image : [product.image];
 
     // delete images from Cloudinary
     for (const url of imageUrls) {
@@ -174,12 +176,12 @@ const deleteProduct = async (req, res) => {
     await Product.findByIdAndDelete(id);
 
     res.json({
-      message: "Product deleted successfully",
+      message: "Product eliminado satisfactoriamente",
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "Error deleting product",
+      message: "Error eliminando el producto",
     });
   }
 };
