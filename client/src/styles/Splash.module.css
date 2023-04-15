@@ -7,7 +7,7 @@
 }
 
 .Logo {
-    @apply w-40 h-40 flex items-center rounded-full justify-center text-black text-4xl font-bold bg-[#333];
+    @apply w-4/5 h-20 flex items-center justify-center md:h-28 md:w-3/4;
 }
 
 .ContainerButtons {
@@ -15,11 +15,11 @@
 }
 
 .ButtonInit {
-    @apply w-full mb-3 p-3 block rounded border-2 border-gray-300 text-lg bg-[#444] text-white;
+    @apply w-full mb-3 p-3 md:p-5 block rounded border-2 border-blue-500 text-lg bg-[#3681F0] text-white md:text-3xl;
 }
 
 .ButtonRegistrer {
-    @apply w-full mb-3 p-3 block rounded text-lg border-2 border-gray-400 text-black;
+    @apply w-full mb-3 p-3 md:p-5 block rounded text-lg border-2 border-[#50C21F] text-black md:text-3xl;
 }
 
 .ContainerbuttonGogle {
@@ -27,9 +27,9 @@
 }
 
 .ButtonGoogle {
-    @apply w-full p-3 rounded block text-center text-lg border-2 border-gray-400; 
+    @apply w-full p-3 md:p-5 rounded block text-gray-600 text-center text-lg border-2 border-blue-400 md:text-3xl; 
 }
 
 .LogoGoogle {
-    @apply text-2xl absolute;
+    @apply text-3xl md:text-4xl absolute;
 }

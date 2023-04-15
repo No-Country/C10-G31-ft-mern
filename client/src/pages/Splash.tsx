@@ -1,11 +1,13 @@
 import Style from "../styles/Splash.module.css"
 import { FaGoogle } from "react-icons/fa"
+import Logo from '../../public/Logo Login.png'
+import Image from "next/image"
 
 const Splash = () => {
     return (
         <div className={Style.ContainerSplash}>
             <div className={Style.ContainerLogo}>
-                <p className={Style.Logo}>Logo</p>
+                <Image className={Style.Logo} src={Logo} alt={'Logo empresa'} />
             </div>
             <div className={Style.ContainerButtons}>
                 <button className={Style.ButtonInit}>Inicar seccion</button>

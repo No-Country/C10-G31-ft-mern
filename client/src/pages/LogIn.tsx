@@ -1,6 +1,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import Alert from '../components/Alert'
+import Image from "next/image"
+import Logo from '../../public/Logo Login.png'
+import { FaArrowLeft } from 'react-icons/fa'
 
 const LogIn = () => {
 
@@ -28,10 +31,13 @@ const LogIn = () => {
     const { msg } = alert
 
   return (
-    <div className="px-4 w-full md:w-3/4 md:m-auto h-full">
-        <div className="flex justify-center items-center mt-28">
-            <p className="bg-gray-300 h-40 w-40 rounded-full flex items-center justify-center text-3xl font-bold">Logo</p>
-        </div>
+    <div className="px-4 w-full md:w-3/4 md:m-auto h-full md:mt-14">
+      <div className="pt-7 pl-3">
+        <FaArrowLeft />
+      </div>      
+      <div className="flex justify-center items-center mt-28">
+          <Image src={Logo} alt="Logo" />
+      </div>
       <form 
         className="flex flex-col mt-36 md:gap-y-3"
         onSubmit={handleSubmit}
@@ -57,19 +63,25 @@ const LogIn = () => {
                 onChange={e => setPassword(e.target.value)}
             />
         </div>
-
         <Link className="mt-4" href='/'>
           <p className="text-blue-700 text-xs md:text-lg">Recuperar contraseña</p>
         </Link>
-
         <div className="flex mt-8">
             <input 
                 type="submit" 
                 value='Iniciar Sesión'
-                className="bg-[#3681F0] px-4 py-5 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-auto md:px-12 cursor-pointer mb-8"
+                className="bg-[#3681F0] px-4 py-5 rounded-md w-full text-white font-bold text-xl md:inline-block md:w-full md:px-4 md:py-4 cursor-pointer mb-8"
             />
         </div>
       </form>
+      <div className="w-full text-center mb-10">
+        <p>
+          ¿No tienes una cuenta? 
+          <Link href={'/SignIn'}>
+            <span className="text-[#3681F0]"> Registrate</span>
+          </Link>
+        </p>
+      </div>
     </div>
   )
 }
