@@ -3,8 +3,8 @@ import Style from "../styles/ListResults.module.css"
 import { FaShareAlt, FaHeart, FaRegHeart } from "react-icons/fa"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { useAppDispatch } from '../app/hooks'
-import { addFavorite } from "@/features/favorites/favoritesSlicespotech"
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { addFavorite, getFavorites } from "@/features/favorites/favoritesSlicespotech"
 import { Product } from '../types/products'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,21 +17,15 @@ interface ProductCardProps {
 
 const ProductCard = ({product}: ProductCardProps) => {
 
-    const [ favorites, setFavorites ] = useState<Product[]>([])
+    const favorites = useAppSelector((state) => state.favorites.favs)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const favsRaw = localStorage.getItem('favs')
-        const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-        setFavorites(favoritesStorage)
-    }, [])
-
+        dispatch(getFavorites(''))
+    }, [dispatch])
 
     const addFav = (product: Product) => {
         dispatch(addFavorite(product))
-        const favsRaw = localStorage.getItem('favs')
-        const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-        setFavorites(favoritesStorage)
     }
 
     const share = (id: string) => {

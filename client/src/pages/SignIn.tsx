@@ -1,27 +1,32 @@
 import Alert from '../components/Alert'
 import { useState } from "react"
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { registerUser } from "../features/auth/authSlice"
+import { setAlert } from "../features/alert/alertSlice"
 
 const SignIn = () => {
 
     const [ name, setName ] = useState('')
-    const [ surname, setSurname ] = useState('')
+    const [ lastName, setLastName ] = useState('')
     const [ phone, setPhone ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ repeatPassword, setRepeatPassword ] = useState('')
-    const [ alert, setAlert ] = useState({msg: '', error: false})
+    const alert = useAppSelector((state) => state.alert)
+
+    const dispatch = useAppDispatch()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if([name, surname, phone, email, password, repeatPassword].includes('')) {
-            setAlert({
+        if([name, lastName, phone, email, password, repeatPassword].includes('')) {
+            dispatch(setAlert({
                 msg: 'Todos los campos son requeridos',
                 error: true
-              })
-              setTimeout(() => {
-                setAlert({msg: '', error: false})
-              }, 3000);
-              return
+            }))
+            setTimeout(() => {
+                dispatch(setAlert({msg: '', error: false}))
+            }, 3000);
+            return
         }
         if( password !== repeatPassword) {
             setAlert({
@@ -34,8 +39,15 @@ const SignIn = () => {
               return
         }
 
-        // TODO enviar los datos al backend
-        console.log(name, surname, phone, email, password, repeatPassword)
+        dispatch(registerUser(name, lastName, phone, email, password))
+        if(!alert.error) {
+            setName('')
+            setLastName('')
+            setPhone('')
+            setEmail('')
+            setPassword('')
+            setRepeatPassword('')
+        }
     }
 
     const { msg } = alert
@@ -64,8 +76,8 @@ const SignIn = () => {
                 type="text" 
                 id='surname' 
                 className="border-2 border-gray-400  rounded-md p-1 md:p-2 md:border-gray-400"
-                value={surname}
-                onChange={e => setSurname(e.target.value)}
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
             />
         </div>
         <div className="flex flex-col gap-2">

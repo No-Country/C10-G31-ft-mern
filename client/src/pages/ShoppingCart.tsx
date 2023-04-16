@@ -3,45 +3,41 @@ import Link from 'next/link'
 import Style from '../styles/Shopping_cart.module.css'
 import { FaArrowLeft, FaRegCircle, FaRegDotCircle, FaCreditCard, FaRegTrashAlt} from 'react-icons/fa'
 import Header from '../components/shared/Header'
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { getCart, updateCart } from "../features/cart/cartSlice";
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react'
-import { ProductCart } from '../types/products'
 
 
 const ShoppingCart = () => {
 
-    const [ products, setProducts ] = useState<ProductCart[]>([])
-    const [ totalProducts, setTotalProducts ] = useState(0)
+    const cart = useAppSelector((state) => state.cart.cart)
+    const dispatch = useAppDispatch()
+    
     const router = useRouter();
 
     useEffect(() => {
-        const cartRaw = localStorage.getItem('cart')
-        const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
-        setProducts(cart)
-        setTotalProducts(cart.length)
-    }, [])
+        dispatch(getCart(''))
+    }, [dispatch])
 
     const clearCart = () => {
-        const cartDeleted = products.filter(product => !product.selected)
-        localStorage.setItem('cart', JSON.stringify(cartDeleted))
-        setProducts(cartDeleted)
-        setTotalProducts(cartDeleted.length)
+        const cartDeleted = cart.filter(product => !product.selected)
+        dispatch(updateCart(cartDeleted))
     }
 
     const changeSelected = (id: string) => {
-        const newProducts = products.map(prod => prod._id === id ? {...prod, selected: !prod.selected} : prod)
-        setProducts(newProducts)
-        localStorage.setItem('cart', JSON.stringify(newProducts))
+        const newProducts = cart.map(prod => prod._id === id ? {...prod, selected: !prod.selected} : prod)
+        dispatch(updateCart(newProducts))
     }
 
     return(
         <div className={Style.container_cart}>
-            <Header totalProducts={totalProducts} />
+            <Header />
             <div className={Style.back_cart}>
                 <FaArrowLeft className={Style.icon_back} onClick={() => router.back()} />
                 <p>Carrito</p>
             </div>
-            {products.length ? products.map(product => (
+            {cart.length ? cart.map(product => (
                 <div key={product._id} className={Style.products_added}>
                     <div className={Style.product}>
                         <div className={Style.flex_icon_image}>
@@ -67,7 +63,7 @@ const ShoppingCart = () => {
                 <p className='text-center mt-6 mb-8'>Agrega Productos y podrás encontrarlos aquí</p>
             )}
             <div className={Style.container_buttons}>
-                {products.length > 0 && (
+                {cart.length > 0 && (
                     <>
                         <Link href='/PaymentMethod' >
                             <button className={Style.button_pay}>

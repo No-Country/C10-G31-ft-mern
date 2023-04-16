@@ -11,10 +11,10 @@ import 'swiper/swiper-bundle.css';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from "react";
 import clienteAxios from "../../config/clienteAxios";
-import { useAppDispatch } from '../../app/hooks'
-import { addFavorite } from "../../features/favorites/favoritesSlice"
-import { addCart } from "../../features/favorites/cartSlice";
-import { Product, ProductCart } from '../../types/products'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { addFavorite, getFavorites } from "../../features/favorites/favoritesSlice"
+import { addCart, getCart } from "../../features/cart/cartSlice";
+import { Product } from '../../types/products'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,28 +22,28 @@ const ProductDetail = () => {
 
   const [ cantidad, setCantidad ] = useState(1)
   const [ product, setProduct ] = useState<Product | null>(null)
-  const [ favorites, setFavorites ] = useState<Product[]>([])
   const [ imageSelected, setImageSelected ] = useState('')
-  const [ totalProducts, setTotalProducts ] = useState(0)
+
+  const favorites = useAppSelector((state) => state.favorites.favs)
+  const cart = useAppSelector((state) => state.cart.cart)
 
   const router = useRouter()
   const { id } = router.query
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    dispatch(getFavorites(''))
+    dispatch(getCart(''))
+  }, [dispatch])
+
+  useEffect(() => {
     if(id) {
       const getProduct = async () => {
-        const { data } = await clienteAxios(`/products/${id}`)
+        const { data } = await clienteAxios(`/product/${id}`)
         setProduct(data)
         setImageSelected(data.image[0])
       }
       getProduct()
-      const favsRaw = localStorage.getItem('favs')
-      const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-      setFavorites(favoritesStorage)
-      const cartRaw = localStorage.getItem('cart')
-      const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
-      setTotalProducts(cart.length)
     }
   }, [id])
 
@@ -71,16 +71,10 @@ const ProductDetail = () => {
       pauseOnHover: false,
       progressStyle: {background: "#3681F0"}
     })
-    const cartRaw = localStorage.getItem('cart')
-    const cart: ProductCart[] = cartRaw && cartRaw.length > 0 ? JSON.parse(cartRaw) : []
-    setTotalProducts(cart.length)
   }
 
   const addFav = (product: Product) => {
     dispatch(addFavorite(product))
-    const favsRaw = localStorage.getItem('favs')
-    const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-    setFavorites(favoritesStorage)
   }
 
   const share = (id: string) => {
@@ -102,7 +96,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Header totalProducts={totalProducts} />
+      <Header />
       {product?._id && (
         <>
           <ToastContainer />

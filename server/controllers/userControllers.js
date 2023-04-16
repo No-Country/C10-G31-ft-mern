@@ -14,7 +14,6 @@ const login = async (req, res) => {
  
     // Verificar si el usuario existe
     const user = await User.findOne({ email: req.body.email });
-    const {name, email, role} = user
     if (!user) {
       return res
         .status(401)

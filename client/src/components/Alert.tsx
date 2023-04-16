@@ -1,14 +1,14 @@
 
 interface AlertProp {
-    alert: {
-        msg: string,
-        error: boolean
-    }
+  alert: {
+    msg: string,
+    error: boolean
+  }
 }
 
 const Alert = ({alert}: AlertProp) => {
   return (
-    <div className='text-[#F0604D] text-center' >
+    <div className={`${alert.error ? 'text-[#F0604D]' : 'text-[#3681F0]'} text-center`} >
         {alert.msg}
     </div>
   )

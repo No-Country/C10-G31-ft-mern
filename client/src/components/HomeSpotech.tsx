@@ -31,7 +31,7 @@ const HomeSpotech = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const { data } = await clienteAxios('/products')
+      const { data } = await clienteAxios('/product')
       const populares = [ data[0], data[1], data[2], data[3], data[4], data[5] ]
       setProducts(populares)
     }

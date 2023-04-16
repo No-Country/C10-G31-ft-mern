@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Product } from '../../types/products'
-import type { RootState } from '../../app/store'
 
-const initialState: Product[] = []
+interface Favorites {
+  favs: Product[]
+}
+
+const initialState: Favorites = {
+  favs: []
+}
 
 export const favoritesSlice = createSlice({
     name: 'favorites',
@@ -10,25 +15,27 @@ export const favoritesSlice = createSlice({
     reducers: {
       addFavorite: (state, action) => {
         const favsRaw = localStorage.getItem('favs')
-        const favorites = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-        state = favorites
-        const existe = state.filter(fav => fav._id === action.payload._id)
-        if(existe[0]?._id === action.payload._id) {
-          const filterFavs = state.filter(fav => fav._id !== action.payload._id)
-          state = filterFavs
-          localStorage.setItem('favs', JSON.stringify(filterFavs))
+        const favorites: Product[] = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+        const index = favorites.findIndex(fav => fav._id === action.payload._id)
+        if(index !== -1) {
+          favorites.splice(index, 1)
+          localStorage.setItem('favs', JSON.stringify(favorites))
+          state.favs.splice(index, 1)
         } else {
-          const newFavs = [...state, action.payload]
-          state = [...state, action.payload]
+          const newFavs = [...favorites, action.payload]
           localStorage.setItem('favs', JSON.stringify(newFavs))
+          state.favs.push(action.payload)
         }
+      },
+      getFavorites: (state, action) => {
+        const favsRaw = localStorage.getItem('favs')
+        const favorites: Product[] = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
+        state.favs = favorites
       }
     },
   })
   
   // Action creators are generated for each case reducer function
-  export const { addFavorite } = favoritesSlice.actions
-
-  // export const selectFavorites = (state: RootState) => state.favorites
+  export const { addFavorite, getFavorites } = favoritesSlice.actions
   
   export default favoritesSlice.reducer

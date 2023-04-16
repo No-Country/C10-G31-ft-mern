@@ -2,28 +2,25 @@ import Header from "@/components/shared/Headerspotech"
 import { FaArrowLeft, FaHeart } from 'react-icons/fa'
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useRouter } from 'next/router'
-import { useAppDispatch } from '../app/hooks'
-import { addFavorite } from "../features/favorites/favoritesSlice"
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { addFavorite, getFavorites } from "../features/favorites/favoritesSlice"
 import { Product } from '../types/products'
 
 
 const Favorites = () => {
 
-    const [ favorites, setFavorites ] = useState<Product[]>([])
+    const favorites = useAppSelector((state) => state.favorites.favs)
     const dispatch = useAppDispatch()
     const router = useRouter();
 
     useEffect(() => {
-        const favsRaw = localStorage.getItem('favs')
-        const favoritesStorage = favsRaw && favsRaw.length > 0 ? JSON.parse(favsRaw) : []
-        setFavorites(favoritesStorage)
-    }, [])
+        dispatch(getFavorites(''))
+    }, [dispatch])
 
     const addFav = (product: Product) => {
         dispatch(addFavorite(product))
-        setFavorites(favorites.filter(fav => fav._id !== product._id))
     }
 
     return(
