@@ -13,7 +13,7 @@ exports.createCategory = async (req, res, next) => {
   } catch (err) {
    return res
       .status(500)
-      .json({ error: 'Error creating category', message: err.message });
+      .json({ error: 'Error creando categoria', message: err.message });
   }
 };
 
@@ -25,7 +25,7 @@ exports.getCategories = async (req, res, next) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ error: 'Error getting categories', message: err.message });
+      .json({ error: 'Error obteniendo categories', message: err.message });
   }
 };
 
@@ -35,11 +35,13 @@ exports.getCategoryById = async (req, res, next) => {
     const { id } = req.params;
     const category = await Category.findById(id).populate('subcategories');
     if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: 'Category no encontrada' });
     }
     res.status(200).json(category);
   } catch (err) {
-    next(err);
+    return res
+      .status(500)
+      .json({ error: 'Error obteniendo category', message: err.message });
   }
 };
 
@@ -49,7 +51,9 @@ exports.getCategoriesByName = async (req, res, next) => {
     const categories = await Category.find({ name: { $regex: name, $options: 'i' } }).populate('subcategories');
     res.status(200).json(categories);
   } catch (err) {
-    next(err);
+    return res
+      .status(500)
+      .json({ error: 'Error obteniendo categories', message: err.message });
   }
 };
 
@@ -65,11 +69,13 @@ exports.updateCategory = async (req, res, next) => {
       { new: true }
     );
     if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: 'Category no encontrada' });
     }
     res.status(200).json(category);
   } catch (err) {
-    next(err);
+    return res
+      .status(500)
+      .json({ error: 'Error actualizando category', message: err.message });
   }
 };
 
@@ -79,10 +85,12 @@ exports.deleteCategory = async (req, res, next) => {
     const { id } = req.params;
     const category = await Category.findByIdAndDelete(id);
     if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: 'Category no encontrada' });
     }
     res.status(200).json(category);
   } catch (err) {
-    next(err);
+    return res
+      .status(500)
+      .json({ error: 'Error eliminando category', message: err.message });
   }
 };

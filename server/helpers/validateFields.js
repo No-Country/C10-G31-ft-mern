@@ -5,21 +5,21 @@ const validateLogin = (req, res, next) => {
   const errors = [];
 
   if (!email) {
-    errors.push({ message: "Email is required." });
+    errors.push({ message: "Email es requerido." });
   } else if (email.length > 100) {
-    errors.push({ message: "Email should be at most 100 characters." });
+    errors.push({ message: "Email debería ser menor a 100 caracteres." });
   }
 
   if (!password) {
-    errors.push({ message: "Password is required." });
+    errors.push({ message: "Password es requerida." });
   } else if (password.length < 8) {
-    errors.push({ message: "Password should be at least 8 characters." });
+    errors.push({ message: "Password debería tener al menos 8 caracteres." });
   } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
-    errors.push({ message: "Password should have at least one uppercase letter, one lowercase letter, one digit, and one special character: @, $, !, %, *, ?, or &." });
+    errors.push({ message: "La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial: @, $, !, %, *, ? o &." });
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ errors, message:"error en loginValidte" });
+    return res.status(400).json({ errors, message:"error validando el Login" });
   }
 
   next();
@@ -33,42 +33,42 @@ const validateProductData = (req, res, next) => {
   const errors = [];
 
   if (!name) {
-    errors.push({ message: "Name is required." });
+    errors.push({ message: "Nombre es requerido." });
   } else if (name.length > 100) {
-    errors.push({ message: "Name should be at most 100 characters." });
+    errors.push({ message: "Debería tener menos de 100 caracteres" });
   }
 
   if (!description) {
     errors.push({ message: "Description is required." });
   } else if (description.length > 1000) {
-    errors.push({ message: "Description should be at most 1000 characters." });
+    errors.push({ message: "Debería tener menos de 1000 caracteres" });
   }
 
   if (!image || image.length === 0) {
-    errors.push({ message: "At least one image is required." });
+    errors.push({ message: "Al menos una imagen es requerida" });
   }
 
   if (typeof myavailable !== "boolean") {
-    errors.push({ message: "Available should be a boolean value." });
+    errors.push({ message: "Available debería ser un boolean" });
   }
 
   if (!category || category.length === 0) {
-    errors.push({ message: "At least one category is required." });
+    errors.push({ message: "Al menos una categoría  es requerida" });
   }
   
   if (variations){
     if (variations.length === 0) {
-      errors.push({ message: "At least one variation is required." });
+      errors.push({ message: "Al menos una categoría  es requerida" });
     } else {
       variations.forEach((variation, index) => {
         if (!variation.name) {
-          errors.push({ message: `Variation name is required in variation ${index + 1}.` });
+          errors.push({ message: `Es requerido el nombre de la variacion ${index + 1}.` });
         } else if (variation.name.length > 100) {
-          errors.push({ message: `Variation name should be at most 100 characters in variation ${index + 1}.` });
+          errors.push({ message: `El nombre de la varación debe ser menor a 100 caracteres ${index + 1}.` });
         }
   
         if (!variation.price || variation.price < 0) {
-          errors.push({ message: `Variation price should be a positive number in variation ${index + 1}.` });
+          errors.push({ message: `El precio debe ser positivo ${index + 1}.` });
         }
       });
     }
@@ -76,30 +76,30 @@ const validateProductData = (req, res, next) => {
 
   if(attributes) {
     if (attributes.length === 0) {
-      errors.push({ message: "At least one attribute is required." });
+      errors.push({ message: "Al menos un atributo es requeirdo" });
     } else {
       attributes.forEach((attribute, index) => {
         if (!attribute.name) {
-          errors.push({ message: `Attribute name is required in attribute ${index + 1}.` });
+          errors.push({ message: `Requerido el nombre del atributo para ${index + 1}.` });
         } else if (attribute.name.length > 100) {
-          errors.push({ message: `Attribute name should be at most 100 characters in attribute ${index + 1}.` });
+          errors.push({ message: `El nombre del atributo debería ser menor a 100 caracteres ${index + 1}.` });
         }
   
         if (!attribute.value) {
-          errors.push({ message: `Attribute value is required in attribute ${index + 1}.` });
+          errors.push({ message: `los valores de atributo ${index + 1} son requeridos` });
         } else if (attribute.value.length > 100) {
-          errors.push({ message: `Attribute value should be at most 100 characters in attribute ${index + 1}.` });
+          errors.push({ message: `Los valores de atributos ebería tener menos de 100 caracteres ${index + 1}.` });
         }
       });
     }
   }
 
   if (!price || price < 0) {
-    errors.push({ message: "Price should be a positive number." });
+    errors.push({ message: "Precio debería ser positivo" });
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ errors, message: "error en validate product"});
+    return res.status(400).json({ errors, message: "Error validando el producto"});
   }
 
   next();
@@ -110,39 +110,39 @@ const validateCreateandUdpateUser = (req, res, next)=> {
   const errors = [];
 
   if (!name) {
-    errors.push({ message: "Name is required." });
+    errors.push({ message: "Nombre es requerido" });
   } else if (name.length > 100) {
-    errors.push({ message: "Name should be at most 100 characters." });
+    errors.push({ message: "Nombre debería tener menos de 100 caracteres" });
   }
 
   if (!lastName) {
-    errors.push({ message: "Last name is required." });
+    errors.push({ message: "Apellido es requerido" });
   } else if (lastName.length > 100) {
-    errors.push({ message: "Last name should be at most 100 characters." });
+    errors.push({ message: "Apellido debe ser menos a 100 caracteres" });
   }
 
   if (!email) {
-    errors.push({ message: "Email is required." });
+    errors.push({ message: "Email es requerido." });
   } else if (email.length > 100) {
-    errors.push({ message: "Email should be at most 100 characters." });
+    errors.push({ message: "Email debería ser menor a 100 caracteres" });
   }
 
   if (!password) {
-    errors.push({ message: "Password is required." });
+    errors.push({ message: "Password es requerido." });
   } else if (password.length < 8) {
-    errors.push({ message: "Password should be at least 8 characters." });
+    errors.push({ message: "Password debería ser menor a 8 caracteres" });
   } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
-    errors.push({ message: "Password should have at least one uppercase letter, one lowercase letter, one digit, and one special character: @, $, !, %, *, ?, or &." });
+    errors.push({ message: "La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial: @, $, !, %, *, ? o &." });
   }
 
   if (!phone) {
-    errors.push({ message: "Phone is required." });
+    errors.push({ message: "Telefono es requerido." });
   } else if (!/^\+(?:[0-9] ?){6,14}[0-9]$/.test(phone)) {
-    errors.push({ message: "Phone must be a valid international phone number, must be the character '+' and must be 1 to 14 numbers" });
+    errors.push({ message: "El teléfono debe ser un número de teléfono internacional válido, debe tener el carácter '+' y debe tener de 1 a 14 números" });
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ errors, message: "error en validate and create user"});
+    return res.status(400).json({ errors, message: "error validando crear el usuario"});
   }
 
   next();

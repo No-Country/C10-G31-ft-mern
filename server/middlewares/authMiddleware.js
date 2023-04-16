@@ -31,7 +31,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     if (user.role !== "admin"){
-     return res.status(401).json({ message: 'Usuario no autorizado. tu rol no te da pa esto, estudie primero' })
+     return res.status(401).json({ message: 'Usuario no autorizado.' })
     }
     // Agregar el usuario a la solicitud
     req.user = user;

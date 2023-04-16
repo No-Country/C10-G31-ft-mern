@@ -103,7 +103,7 @@ const createUser = async (req, res, next) => {
     console.log(error)
     return res
       .status(500)
-      .json({ message: "Algo paso creando el nuevo usuario llame al 123" });
+      .json({ message: "Error creando el nuevo usuario", mess: error.message });
   }
 };
 
@@ -116,7 +116,8 @@ const getAllUsers = async (req, res, next) => {
     return res
       .status(500)
       .json({
-        message: "alguna vaina mala pasó buscando los usuarios llamae al 123",
+        message: "Error buscando los usuarios",
+        mess: error.message
       });
   }
 };
@@ -138,7 +139,8 @@ const getUserById = async (req, res, next) => {
       .json({
         error,
         message:
-          "alguna vaina mala pasó buscando los usuarios por ID llamae al 123",
+          "Error buscando los usuarios por ID ",
+        mess: error.message
       });
   }
 };
@@ -203,7 +205,8 @@ const updateUserById = async (req, res, next) => {
       .json({
         error,
         message:
-          "alguna vaina mala pasó actualizando el usuario por ID llamae al 123",
+          "error actualizando el usuario por ID",
+        mess: error.message
       });
   }
 };
@@ -230,7 +233,8 @@ const deleteUserById = async (req, res, next) => {
       .json({
         error,
         message:
-          "alguna vaina mala pasó eliminando el usuario por ID llamae al 123",
+          "Error eliminando el usuario por ID",
+        mess: error.message
       });
   }
 };
