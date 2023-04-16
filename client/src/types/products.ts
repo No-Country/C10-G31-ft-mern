@@ -5,9 +5,11 @@ export interface Product {
     category: string[]
     image: string[]
     name: string
+    description: string
     price: number
     seller: string[]
-    apdatedAt: string
+    createdAt: string
+    updatedAt: string
 }
 
 export interface ProductCart extends Product {

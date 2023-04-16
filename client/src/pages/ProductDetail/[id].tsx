@@ -195,8 +195,7 @@ const ProductDetail = () => {
             </div>
             <div className='mx-4 border-t mt-9'>
               <h2 className='font-extrabold text-md mt-4 mb-3'>Descripción</h2>
-              {/* TODO agregar descripción dinámica */}
-              <p className='text-xs'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sed voluptatum praesentium ipsum quidem aspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque. Laspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sed voluptatum praesentium ipsum quidem aspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque. Laspernatur obcaecati minima molestiae omnis, harum corrupti blanditiis iusto nulla aperiam quas unde voluptatem nisi doloremque.</p>
+              <p className='text-xs'>{product.description}</p>
             </div>
             <div className='border-t mx-4 mt-10 mb-20'>
               <h2 className='font-extrabold text-md mt-4'>Productos relacionados</h2>
