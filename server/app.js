@@ -8,10 +8,12 @@ const connectDatabase = require("./config/database");
 
 
 /* Importing the users router. */
-const uploadsRouter = require('./v1/routes/uploads');
+//const uploadsRouter = require('./v1/routes/uploads');
 const productstRouter = require('./v1/routes/products');
-const adminRouter = require('./v1/routes/admin');
-const authMiddleware = require("./middlewares/authMiddleware");
+const userRouter = require('./v1/routes/user');
+const categoryRouter = require('./v1/routes/category');
+const orderRouter = require('./v1/routes/order')
+//const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
 
@@ -46,10 +48,13 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use('/api/v1/login', adminRouter)
-app.use('/api/v1/products', productstRouter);
-app.use('/api/v1/uploads', uploadsRouter);
-app.use('/api/v1/admin', adminRouter);
+
+app.use('/api/v1/product', productstRouter);
+app.use('/api/v1/user', userRouter);
+app.use('/api/v1/category', categoryRouter);
+app.use('/api/v1/order', orderRouter);
+
+
 
 
 /* Listening on port 3000. */

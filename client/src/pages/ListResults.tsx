@@ -12,7 +12,7 @@ const ListProducts = () => {
 
     useEffect(() => {
       const getProducts = async () => {
-        const { data } = await clienteAxios('/products')
+        const { data } = await clienteAxios('/product')
         setProducts(data)
       }
       getProducts()

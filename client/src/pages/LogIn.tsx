@@ -4,28 +4,38 @@ import Alert from '../components/Alert'
 import Image from "next/image"
 import Logo from '../../public/Logo Login.png'
 import { FaArrowLeft } from 'react-icons/fa'
+import { useRouter } from 'next/router';
+import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { authUser } from "../features/auth/authSlice"
+import { setAlert } from "../features/alert/alertSlice"
 
 const LogIn = () => {
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
-    const [ alert, setAlert ] = useState({msg: '', error: false})
+    const alert = useAppSelector((state) => state.alert)
+
+    const dispatch = useAppDispatch()
+    const router = useRouter();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if([email, password].includes('')) {
-            setAlert({
+            dispatch(setAlert({
               msg: 'Todos los campos son requeridos',
               error: true
-            })
+            }))
             setTimeout(() => {
-              setAlert({msg: '', error: false})
+              dispatch(setAlert({msg: '', error: false}))
             }, 3000);
             return
         }
-
-        // TODO enviar los datos al backend
-        console.log(email, password)
+        dispatch(authUser(email, password))
+        if(!alert.error) {
+          setEmail('')
+          setPassword('')
+          router.push('/')
+        }
     }
 
     const { msg } = alert
@@ -33,7 +43,7 @@ const LogIn = () => {
   return (
     <div className="px-4 w-full md:w-3/4 md:m-auto h-full md:mt-14">
       <div className="pt-7 pl-3">
-        <FaArrowLeft />
+        <FaArrowLeft className="cursor-pointer" onClick={() => router.back()} />
       </div>      
       <div className="flex justify-center items-center mt-28">
           <Image src={Logo} alt="Logo" />

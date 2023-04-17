@@ -25,7 +25,7 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                 <div id='menuBurguer' className="flex flex-col gap-6 py-3">
                     <div className={`${categoriesActive ? 'bg-gray-200' : ''} flex flex-col gap-6 pb-3 transition duration-500 ease-in-out`}> {/* Inicio Categorias */}
                         <div className='flex items-center gap-2 cursor-pointer px-4 mt-3 -mb-3 pb-3' onClick={() => setCategoriesActive(!categoriesActive)}>
-                            <BsGrid className='text-[#F0604D] border border-[#F0604D] rounded-sm w-6 h-6' />
+                            <BsGrid className='text-[#3681F0] border border-[#3681F0] rounded-sm w-6 h-6' />
                             <p className='text-[#3681F0]'>Categorías</p>
                         </div>
                         <div className={`${categoriesActive ? 'flex flex-col' : 'hidden'} gap-6`}>
@@ -107,7 +107,7 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                             <p className='text-[#3681F0]' >Ofertas</p>
                         </Link>
                     </div>
-                    <div className='flex items-center gap-2 px-4 cursor-pointer'>
+                    {/* <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
                             <AiOutlineHistory className='text-[#F0604D] w-6 h-6 transform -scale-x-100' />
                             <p className='text-[#3681F0]' >Historial</p>
@@ -118,7 +118,7 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                             <BiPackage className='text-[#F0604D] w-6 h-6' />
                             <p className='text-[#3681F0]' >Compras</p>
                         </Link>
-                    </div>
+                    </div> */}
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
                             <MdSupportAgent className='text-[#F0604D] w-6 h-6' />
@@ -131,15 +131,15 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                             <p className='text-[#3681F0]' >Ayuda</p>
                         </Link>
                     </div>
-                    <div className='flex items-center gap-2 px-4 cursor-pointer'>
+                    {/* <div className='flex items-center gap-2 px-4 cursor-pointer'>
                         <Link href='' className='flex items-center gap-2 cursor-pointer' >
                             <MdLogout className='text-[#F0604D] w-6 h-6' />
                             <p className='text-[#3681F0]' >Salir</p>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
-            <div className={`flex-1 opacity-50 transition duration-100 ${menuActive ? 'bg-gray-400' : ''}`} onClick={() => setMenuActive(!menuActive)}></div>
+            <div className={`flex-1 opacity-0`} onClick={() => setMenuActive(!menuActive)}></div>
         </div>
     </div>
   )

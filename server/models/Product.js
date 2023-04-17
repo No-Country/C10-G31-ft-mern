@@ -1,10 +1,53 @@
 const mongoose = require("mongoose");
+const ProductCategory = require("./ProductCategory")
+
+const variationSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    maxlength: 50,
+    trim: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+});
+
+const attributeSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    maxlength: 50,
+    trim: true,
+  },
+  value: {
+    type: String,
+    required: true,
+    maxlength: 50,
+    trim: true,
+  },
+});
 
 const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
+      maxlength: 100,
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: true,
+      maxlength: 1000,
+      trim: true,
     },
     image: [
       {
@@ -13,25 +56,24 @@ const productSchema = new mongoose.Schema(
       },
     ],
     available: {
-      type: String,
+      type: Boolean,
       required: true,
+      default: true,
     },
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "ProductCategory",
+        required: true,
       },
     ],
     price: {
       type: Number,
-      default: false,
+      required: true,
+      min: 0,
     },
-    seller: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Seller",
-      },
-    ],
+    variations: [variationSchema],
+    attributes: [attributeSchema],
   },
   {
     timestamps: true,

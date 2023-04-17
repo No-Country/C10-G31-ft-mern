@@ -1,13 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const Subcategory = require("./ProductSubcategory")
 
-const productCategorySchema = new mongoose.Schema({
+const categorySchema = new mongoose.Schema({
   name: {
-    type: String
-  }
-}, {
-  timestamps: true 
+    type: String,
+    required: [true, 'Category name is required'],
+    minlength: [3, 'Category name must be at least 3 characters long'],
+    maxlength: [50, 'Category name cannot be more than 50 characters long'],
+  },
+  description: {
+    type: String,
+    required: [true, 'Category description is required'],
+    minlength: [10, 'Category description must be at least 10 characters long'],
+    maxlength: [500, 'Category description cannot be more than 500 characters long'],
+  },
+  subcategories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subcategory' }],
 });
 
-const ProductCategory = mongoose.model('ProductCategory', productCategorySchema);
+const Category = mongoose.model("Category", categorySchema);
 
-module.exports = ProductCategory;
+module.exports = Category;
+

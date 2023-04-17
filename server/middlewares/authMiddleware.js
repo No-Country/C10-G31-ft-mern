@@ -1,8 +1,9 @@
-const Admin = require('../models/Admin')
+const User = require('../models/User')
 const jwt = require('jsonwebtoken');
 // Middleware de autenticación
 const authMiddleware = async (req, res, next) => {
   try {
+    console.log(req)
     // Verificar si existe el token de autorización en la cabecera
     const authHeader = req.headers.authorization;
     console.log("myauthHeader: ", authHeader)
@@ -22,15 +23,18 @@ const authMiddleware = async (req, res, next) => {
     }
     
     // Buscar al usuario en la base de datos
-    const admin = await Admin.findById(decodedToken.userId);
+    const user = await User.findById(decodedToken.userId);
     
     // Verificar si el usuario está activo
-    if (!admin.isActive) {
+    if (!user.isActive) {
       return res.status(401).json({ message: 'Usuario no activo.' });
     }
-    
+
+    if (user.role !== "admin"){
+     return res.status(401).json({ message: 'Usuario no autorizado.' })
+    }
     // Agregar el usuario a la solicitud
-    req.admin = admin;
+    req.user = user;
     next();
   } catch (error) {
     console.log(error)
