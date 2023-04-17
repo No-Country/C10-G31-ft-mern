@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import BurgerMenu from '../BurgerMenu'
 import Search from '../Search'
 import { ProductCart } from '../../types/products'
+import FiltersUser from '../FiltersUser'
 
 interface HeaderProps {
     totalProducts?: number;
@@ -17,6 +18,7 @@ const Header = ({totalProducts}: HeaderProps) => {
     const [ menuActive, setMenuActive ] = useState(false)
     const [ searchActive, setSearchActive ] = useState(false)
     const [ totalProductsStorage, setTotalProductsStorage ] = useState(0)
+    const [ FilterUser, setFilterUser ] = useState(false)
 
     useEffect(() => {
         const cartRaw = localStorage.getItem('cart')
@@ -28,8 +30,13 @@ const Header = ({totalProducts}: HeaderProps) => {
         }
     }, [totalProducts])
 
+    function ActiveOptionsUser() {
+        setFilterUser(!FilterUser)
+    }
+
     return(
         <>
+            <FiltersUser FilterUser={FilterUser} />
             {searchActive && (
                 <Search searchActive={searchActive} setSearchActive={setSearchActive} />
             )}
@@ -46,9 +53,9 @@ const Header = ({totalProducts}: HeaderProps) => {
                         <input type='text' onClick={() => setSearchActive(!searchActive)} className={Style.seeker} />
                     </div>
                     <div className={Style.container_icons}>
-                        <Link href='/LogIn'>
+                        <button onClick={ActiveOptionsUser}>
                             <FaRegUserCircle className={Style.icon_head_cart} />
-                        </Link>
+                        </button>
                         <Link href='/FavoritesProduct'>
                             <FaRegHeart className={Style.icon_head_cart} />
                         </Link>
