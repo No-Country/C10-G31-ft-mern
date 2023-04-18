@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../../controllers/userControllers');
-const { validateCreateandUdpateUser, validateLogin } = require('../../helpers/validateFields');
+const { timeoutMiddleware, validateCreateandUdpateUser, validateLogin } = require('../../helpers/validateFields');
 const authMiddleware = require('../../middlewares/authMiddleware');
 
 /**
@@ -9,14 +9,14 @@ const authMiddleware = require('../../middlewares/authMiddleware');
  */
 
 //Endpoint de Login y obtención de Token
-router.post('/auth', validateLogin, userController.login )
+router.post('/login', timeoutMiddleware, validateLogin, userController.login )
 
 /**
- * Private Endpoints Categories. Only admin role user
+ * Private Endpoints Categories. Only user
  */
 
 // Endpoint para crear un user
-router.post('/', validateCreateandUdpateUser,  userController.createUser);
+router.post('/register', timeoutMiddleware, validateCreateandUdpateUser,  userController.createUser);
 
 // Endpoint para obtener todos los users
 router.get('/', authMiddleware,  userController.getAllUsers);
@@ -24,10 +24,10 @@ router.get('/', authMiddleware,  userController.getAllUsers);
 // Endpoint para obtener un user por su ID
 router.get('/:userId', authMiddleware, userController.getUserById);
 
-// Endpoint para actualizar un admin
-router.patch('/:userId', authMiddleware, validateCreateandUdpateUser, userController.updateUserById);
+// Endpoint para actualizar un user
+router.patch('/:userId', timeoutMiddleware, authMiddleware, userController.updateUserById);
 
-// Endpoint para eliminar un admin
+// Endpoint para eliminar un user
 router.delete('/:userId', authMiddleware, userController.deleteUserById);
 
 module.exports = router;

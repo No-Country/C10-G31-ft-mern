@@ -32,8 +32,12 @@ exports.getCategories = async (req, res, next) => {
 // Controlador para obtener una categoría por su id
 exports.getCategoryById = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const category = await Category.findById(id).populate('subcategories');
+    const { categoryId } = req.params;
+    if(!categoryId || categoryId === null){
+      return res.status(404).json({ error: 'Category no encontrada' });
+    }
+    const category = await Category.findById(categoryId).populate('subcategories');
+    console.log(category)
     if (!category) {
       return res.status(404).json({ error: 'Category no encontrada' });
     }

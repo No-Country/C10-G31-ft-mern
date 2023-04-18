@@ -2,7 +2,11 @@ const router = require('express').Router();
 
 const producControllers = require('../../controllers/productControllers')
 const authMiddleware = require('../../middlewares/authMiddleware')
-const {validateProductData} = require('../../helpers/validateFields')
+const {validateProductData, validateQuery} = require('../../helpers/validateFields');
+//const authRoleAdmin = require('../../middlewares/authRole');
+//const authRoleClient = require('../../middlewares/authRole');
+
+
 
 router.route('/')
   .get(producControllers.getAllProducts)
@@ -13,7 +17,7 @@ router.route('/:id')
   .patch(authMiddleware, validateProductData, producControllers.editProduct)
   .delete( authMiddleware, producControllers.deleteProduct);
 
-router.route('/name?')
-  .get(producControllers.searchByName)
+router.route('/query/name?')
+  .get(validateQuery, producControllers.searchByName)
 
 module.exports = router;

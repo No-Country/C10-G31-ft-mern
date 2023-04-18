@@ -1,13 +1,32 @@
 const { body, validationResult } = require('express-validator');
 
+const validator = require('validator');
+
+const timeoutMiddleware = (req, res, next) => {
+  const timeoutId = setTimeout(() => {
+    res.status(408).json({ message: "Tiempo de espera agotado" });
+  }, 5000); // Establecemos el tiempo límite de 5 segundos (5000 milisegundos)
+
+  res.on("finish", () => {
+    clearTimeout(timeoutId);
+  });
+
+  next();
+};
+
 const validateLogin = (req, res, next) => {
   const { email, password } = req.body;
   const errors = [];
+  console.log(typeof(email))
 
   if (!email) {
     errors.push({ message: "Email es requerido." });
+  } else if (!validator.isEmail(email)) {
+    errors.push({ message: "Email no tiene un formato válido." });
   } else if (email.length > 100) {
     errors.push({ message: "Email debería ser menor a 100 caracteres." });
+  }else if (typeof email !== "string"){
+    errors.push({ message: "Email debe ser una cadena de texto." });
   }
 
   if (!password) {
@@ -19,11 +38,12 @@ const validateLogin = (req, res, next) => {
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ errors, message:"error validando el Login" });
+    return res.status(400).json({ errors, message:"Error validando el inicio de sesión." });
   }
 
   next();
 }
+
 
 const validateProductData = (req, res, next) => {
  
@@ -105,48 +125,37 @@ const validateProductData = (req, res, next) => {
   next();
 };
 
-const validateCreateandUdpateUser = (req, res, next)=> { 
+const validateCreateandUdpateUser = (req, res, next)=> {
   const { name, lastName, email, password, phone } = req.body;
   const errors = [];
 
-  if (!name) {
-    errors.push({ message: "Nombre es requerido" });
-  } else if (name.length > 100) {
-    errors.push({ message: "Nombre debería tener menos de 100 caracteres" });
+  if (!name || name.length > 100) {
+    errors.push({ message: "Nombre es requerido y debe tener menos de 100 caracteres" });
   }
 
-  if (!lastName) {
-    errors.push({ message: "Apellido es requerido" });
-  } else if (lastName.length > 100) {
-    errors.push({ message: "Apellido debe ser menos a 100 caracteres" });
+  if (!lastName || lastName.length > 100) {
+    errors.push({ message: "Apellido es requerido y debe ser menos a 100 caracteres" });
   }
 
-  if (!email) {
-    errors.push({ message: "Email es requerido." });
-  } else if (email.length > 100) {
-    errors.push({ message: "Email debería ser menor a 100 caracteres" });
+  if (!email || email.length > 100) {
+    errors.push({ message: "Email es requerido y debería ser menor a 100 caracteres" });
   }
 
-  if (!password) {
-    errors.push({ message: "Password es requerido." });
-  } else if (password.length < 8) {
-    errors.push({ message: "Password debería ser menor a 8 caracteres" });
-  } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
-    errors.push({ message: "La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial: @, $, !, %, *, ? o &." });
+  if (!password || password.length < 8 || !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
+    errors.push({ message: "La contraseña debe tener al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial: @, $, !, %, *, ? o & y debe tener más de 8 caracteres." });
   }
 
-  if (!phone) {
-    errors.push({ message: "Telefono es requerido." });
-  } else if (!/^\+(?:[0-9] ?){6,14}[0-9]$/.test(phone)) {
-    errors.push({ message: "El teléfono debe ser un número de teléfono internacional válido, debe tener el carácter '+' y debe tener de 1 a 14 números" });
+  if (!phone || !/^\+(?:[0-9] ?){6,14}[0-9]$/.test(phone)) {
+    errors.push({ message: "El teléfono es requerido y debe ser un número de teléfono internacional válido, debe tener el carácter '+' y debe tener de 1 a 14 números." });
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ errors, message: "error validando crear el usuario"});
+    return res.status(400).json({ errors, message: "Error validando crear el usuario."});
   }
 
   next();
 }
+
 
 // Función validadora para la creación de una nueva orden
  const validateOrder = async (req, res, next) => {
@@ -185,6 +194,32 @@ const validateCreateandUdpateUser = (req, res, next)=> {
   }
 };
 
+const validateQuery = async (req, res, next) =>{
+  console.log(req.query)
+  const { name } = req.query;
+  console.log(name.length)
+  const errors = [];
+
+  if (!name || name.length === 0) {
+    errors.push({ message: "La consulta es requerida" });
+  }
+
+  if(!name > 50){
+    errors.push({ message: "La consulta debe tener menos de 50 caracteres" });
+  }
+  const regex = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+  if(name === regex){
+    errors.push({ message: "La consulta no puede contener caracteres especiales" });
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({ errors, message: "Error validando la consulta"});
+  }
+
+  next();
+}
+
 
 const validateFields = (method) => {
   switch (method) {
@@ -221,4 +256,4 @@ const validateFields = (method) => {
   }
 };
 
-module.exports = { validateFields , validateOrder, validateCreateandUdpateUser,validateLogin, validateProductData};
+module.exports = { timeoutMiddleware, validateFields , validateOrder,validateQuery,  validateCreateandUdpateUser,validateLogin, validateProductData};

@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
 const categoriesControllers = require('../../controllers/categoryControllers');
-const { validateFields } = require('../../helpers/validateFields');
+const { validateFields, validateQuery } = require('../../helpers/validateFields');
 const authMiddleware = require('../../middlewares/authMiddleware');
+//const authRole = require('../../middlewares/authRole')
 
 
 /**
@@ -13,7 +14,7 @@ const authMiddleware = require('../../middlewares/authMiddleware');
 // Endpoint para obtener todos 
 router.get('/', categoriesControllers.getCategories );
 
-router.get('/name', categoriesControllers.getCategoriesByName  )
+router.get('/name', validateQuery, categoriesControllers.getCategoriesByName  )
 
 // Endpoint para obtener  por su ID
 router.get('/:categoryId', categoriesControllers.getCategoryById);
@@ -23,10 +24,10 @@ router.get('/:categoryId', categoriesControllers.getCategoryById);
  */
 
 // Endpoint para crear
-router.post('/',  authMiddleware,  categoriesControllers.createCategory);
+router.post('/',  authMiddleware, categoriesControllers.createCategory);
 
 // Endpoint para actualizar 
-router.patch('/:categoryId', authMiddleware, categoriesControllers.updateCategory);
+router.patch('/:categoryId', authMiddleware,categoriesControllers.updateCategory);
 
 // Endpoint para eliminar 
 

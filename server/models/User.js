@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
     unique: true,
     match: /^\+(?:[0-9] ?){6,14}[0-9]$/
   },

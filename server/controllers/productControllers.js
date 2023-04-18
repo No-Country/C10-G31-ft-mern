@@ -11,7 +11,7 @@ cloudinary.config({
 
 const getAllProducts = async (req, res) => {
   try {
-    const searchOnDB = await Product.find({});
+    const searchOnDB = await Product.find({}).populate("category");
     searchOnDB
       ? res.status(200).json(searchOnDB)
       : res.status(404).json({ message: "No hay productos" });
@@ -23,10 +23,8 @@ const getAllProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const id = req.params.id;
-    id
-      ? console.log(id)
-      : res.status(404).json({ message: "No hay id de busqueda" });
-    const productById = await Product.findById(id);
+    if (!id) res.status(404).json({ message: "No hay id de busqueda" });
+    const productById = await Product.findById(id).populate("category");
     productById
       ? res.status(200).json(productById)
       : res.status(404).json({ message: "No hay producto con ese id" });
@@ -37,10 +35,16 @@ const getProductById = async (req, res) => {
 
 
 const searchByName = async (req, res) => {
+  console.log(req.query)
   const { name } = req.query;
+
 
   try {
     const products = await Product.find({ name: { $regex: name, $options: "i" } }).populate("category");
+    if(!products || products.length === 0){
+      return res.status(404).json({message: "No hay productos con ese nombre"})
+    }
+
 
     res.status(200).json(products);
   } catch (error) {
@@ -52,7 +56,7 @@ const searchByName = async (req, res) => {
 const postProduct = async (req, res, next) => {
 
   try {
-    console.log(req.body)
+  
     // Obtener los datos del producto de la solicitud
     const { name, description, available, category, variations,attributes, price, seller } = req.body;
     
@@ -92,22 +96,23 @@ const postProduct = async (req, res, next) => {
 
     // Guardar el producto en la base de datos
     const savedProduct = await product.save();
-    console.log(savedProduct.images);
+  
     // Responder con el producto guardado
-    res.status(201).json(savedProduct);
+    return res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(500).json({error, mess: error.message ,  message:"error creando un producto"});
+    return res.status(500).json({error, mess: error.message ,  message:"error creando un producto"});
   }
 };
 
 const editProduct = async (req, res) => {
+
   const id = req.params.id;
   const body = req.body;
-  const file = req.files?.image;
-  console.log(req.body, req.files)
+  const file = req.files.image;
 
   try {
     const product = await Product.findById(id);
+    console.log("product.image",product.image)
 
     if (!product) {
       return res.status(404).json({
@@ -116,15 +121,26 @@ const editProduct = async (req, res) => {
     }
 
     // Eliminar la imagen anterior en Cloudinary
+
+
     if (file && product.image) {
-      const public_id = product.image.split("/").pop().split(".")[0];
-      await cloudinary.uploader.destroy(public_id);
+  
+      for (let i = 0; i < product.image.length; i++) {
+        const public_id = product.image[i].split("/").pop().split(".")[0];
+        console.log(public_id)
+        await cloudinary.uploader.destroy(public_id);
+        
+      };
     }
 
     // Subir la nueva imagen a Cloudinary y obtener la URL
-    if (file) {
-      const result = await cloudinary.uploader.upload(file.tempFilePath);
-      body.image = result.secure_url;
+    if (file && file.length > 0) {
+      const images = [];
+      for (let i = 0; i < file.length; i++) {
+        const result = await cloudinary.uploader.upload(file[i].tempFilePath);
+        images.push(result.secure_url);
+      }
+      body.image = images;
     }
 
     // Actualizar los campos del producto
@@ -158,6 +174,7 @@ const deleteProduct = async (req, res) => {
 
     if (!product) {
       return res.status(404).json({
+        mss:error.message,
         message: "Product no encontrado",
       });
     }
@@ -165,6 +182,7 @@ const deleteProduct = async (req, res) => {
     // get image URLs from the product object
     const imageUrls =
       product.image instanceof Array ? product.image : [product.image];
+  
 
     // delete images from Cloudinary
     for (const url of imageUrls) {
@@ -181,6 +199,7 @@ const deleteProduct = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
+      mss:error.message,
       message: "Error eliminando el producto",
     });
   }
