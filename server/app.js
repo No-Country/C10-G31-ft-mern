@@ -8,13 +8,11 @@ const connectDatabase = require("./config/database");
 
 
 /* Importing the users router. */
-//const uploadsRouter = require('./v1/routes/uploads');
 const productstRouter = require('./v1/routes/products');
 const userRouter = require('./v1/routes/user');
 const categoryRouter = require('./v1/routes/category');
 const orderRouter = require('./v1/routes/order')
-const directionRoute = require('./v1/routes/Directions')
-//const authMiddleware = require("./middlewares/authMiddleware");
+
 
 const app = express();
 
@@ -54,7 +52,7 @@ app.use('/api/v1/product', productstRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/order', orderRouter);
-app.use('/api/v1/direction', directionRoute);
+
 
 
 

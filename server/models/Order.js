@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema({
 	},
 	direction: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Direction',
+		ref: 'User.directions',
 		required: true
 	},
 	status: {

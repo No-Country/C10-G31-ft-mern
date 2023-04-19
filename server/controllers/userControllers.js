@@ -32,7 +32,6 @@ const login = async (req, res) => {
 
     return res.status(200).json({ token, email: user.email, id: user._id });
   } catch (error) {
-    console.error(error);
     return res
       .status(500)
       .json({ message: "Error interno del servidor.", error });
@@ -42,10 +41,6 @@ const login = async (req, res) => {
 // Crear un user
 const createUser = async (req, res, next) => {
   // Validación de errores
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
 
   // Extracción de datos del cuerpo de la solicitud
   const {
@@ -91,13 +86,13 @@ const createUser = async (req, res, next) => {
       interests,
       orders,
     });
+
     await newUser.save();
 
     return res
       .status(201)
       .json({ message: "User creado exitosamente", user: newUser });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "Error creando el nuevo usuario", mess: error.message });
@@ -122,7 +117,7 @@ const getUserById = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const user = await User.findById(userId).populate("directions")
+    const user = await User.findById(userId).populate("directions");
     if (!user) {
       return res.status(404).json({ message: "user no encontrado" });
     }
@@ -178,6 +173,14 @@ const updateUserById = async (req, res) => {
         });
       }
 
+      // Verificar que la contraseña actual sea correcta
+      const isValidPassword = await bcrypt.compare(password, user.password);
+      if (!isValidPassword) {
+        return res
+          .status(401)
+          .json({ message: "La contraseña actual es incorrecta" });
+      }
+
       // Actualizar la contraseña en la base de datos
       user.password = newPassword;
     }
@@ -186,8 +189,8 @@ const updateUserById = async (req, res) => {
     user.name = name;
     user.lastName = lastName;
     user.email = email;
-    (user.password = password),
-      (user.phone = phone),
+    //(user.password = password),
+    (user.phone = phone),
       (user.profileImage = profileImage),
       (user.isActive = isActive),
       (user.role = role),
@@ -227,7 +230,6 @@ const deleteUserById = async (req, res, next) => {
 
     return res.status(200).json({ message: "User eliminado exitosamente" });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       error,
       message: "Error eliminando el usuario por ID",

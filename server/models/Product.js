@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ProductCategory = require("./ProductCategory")
 
 const variationSchema = new mongoose.Schema({
   name: {
@@ -16,6 +15,7 @@ const variationSchema = new mongoose.Schema({
   quantity: {
     type: Number,
     required: true,
+    default: 1,
     min: 0,
   },
 });
@@ -66,6 +66,12 @@ const productSchema = new mongoose.Schema(
         ref: "ProductCategory",
         required: true,
       },
+    ],
+    subcategories:[
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Subcategory",
+      }
     ],
     price: {
       type: Number,

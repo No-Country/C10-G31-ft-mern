@@ -1,10 +1,13 @@
-const route = require('express').Router()
+/*const route = require('express').Router()
 
-const { createDirection, getDirectionsByUser, updateDirectionById, deleteDirectionById} = require('../../controllers/directionControllers')
+const {authMiddleware} = require('../../middlewares/authMiddleware')
+const { createDirection,  getDirectionsById, getAllDirections, getDirectionsByUser, updateDirectionById, deleteDirectionById} = require('../../controllers/directionControllers')
 
-route.post('/', createDirection)
+route.post('/:userId', createDirection)
+route.get('/', getDirectionsById)
+route.get('/diruser/:userId/direction/:directionId', getDirectionsById)
 route.get('/:userId', getDirectionsByUser)
 route.patch('/:directionId', updateDirectionById)
 route.delete('/:directionId', deleteDirectionById)
 
-module.exports = route
+*/

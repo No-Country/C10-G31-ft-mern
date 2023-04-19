@@ -1,7 +1,33 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Direction = require('./Direction');
 const Order = require('./Order');
+
+const directionSchema = new mongoose.Schema({
+  street: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
+  
+  zip: {
+    type: String,
+  },
+
+  reference: {
+    type: String
+  },
+});
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -22,7 +48,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 8,
-    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    exclude: true,
   },
   phone: {
     type: String,
@@ -42,10 +68,8 @@ const userSchema = new mongoose.Schema({
     enum: ['admin', 'seller', 'client'],
     default: 'client'
   },
-  directions: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Direction'
-  }],
+  directions: [directionSchema],
+
   dateOfBirth: {
     type: Date
   },

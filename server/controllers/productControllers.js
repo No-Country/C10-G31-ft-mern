@@ -1,5 +1,7 @@
 const cloudinary = require("cloudinary").v2;
 const Product = require("../models/Product");
+const Category = require("../models/ProductCategory");
+const Subcategory = require('../models/ProductSubcategory')
 const fs = require("fs-extra");
 
 cloudinary.config({
@@ -11,12 +13,14 @@ cloudinary.config({
 
 const getAllProducts = async (req, res) => {
   try {
-    const searchOnDB = await Product.find({}).populate("category");
+    const searchOnDB = await Product.find({}).populate("category", "name").populate("subcategories", "name");
     searchOnDB
       ? res.status(200).json(searchOnDB)
       : res.status(404).json({ message: "No hay productos" });
   } catch (error) {
-    return res.status(404).json({ message: "Error al obtener los productos", mess: error.message });
+    return res
+      .status(404)
+      .json({ message: "Error al obtener los productos", mess: error.message });
   }
 };
 
@@ -24,27 +28,37 @@ const getProductById = async (req, res) => {
   try {
     const id = req.params.id;
     if (!id) res.status(404).json({ message: "No hay id de busqueda" });
-    const productById = await Product.findById(id).populate("category");
+    const productById = await Product.findById(id).populate("category", "name").populate("subcategories", "name");
     productById
       ? res.status(200).json(productById)
       : res.status(404).json({ message: "No hay producto con ese id" });
+
+    const categoryIds = productById.category.map((cat) => cat._id);
+    const categories = await Category.find({ _id: { $in: categoryIds } });
+
+    productById.category = categories;
   } catch (error) {
-    res.status(404).json({ message: "Error al obtener un producto por ID", mess: error.message });
+    res
+      .status(404)
+      .json({
+        message: "Error al obtener un producto por ID",
+        mess: error.message,
+      });
   }
 };
 
-
 const searchByName = async (req, res) => {
-  console.log(req.query)
   const { name } = req.query;
 
-
   try {
-    const products = await Product.find({ name: { $regex: name, $options: "i" } }).populate("category");
-    if(!products || products.length === 0){
-      return res.status(404).json({message: "No hay productos con ese nombre"})
+    const products = await Product.find({
+      name: { $regex: name, $options: "i" },
+    }).populate("category", "name").populate("subcategories", "name");
+    if (!products || products.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No hay productos con ese nombre" });
     }
-
 
     res.status(200).json(products);
   } catch (error) {
@@ -52,20 +66,37 @@ const searchByName = async (req, res) => {
   }
 };
 
-
 const postProduct = async (req, res, next) => {
-
   try {
-  
     // Obtener los datos del producto de la solicitud
-    const { name, description, available, category, variations,attributes, price, seller } = req.body;
-    
+    const {
+      name,
+      description,
+      available,
+      category,
+      subcategory,
+      variations,
+      attributes,
+      price,
+      seller,
+    } = req.body;
+
+    //buscamos la categoría
+    const newCategory = await Category.findById(category);
+    if (!newCategory) {
+      return res.status(404).json({ message: "No hay categoría con ese id" });
+    }
+
+    const newSubcategory = await Subcategory.findById(subcategory)
+    if (!newSubcategory) {
+      return res.status(404).json({ message: "No hay subcategoría con ese id" });
+    }
+
     // Crear un array para almacenar las URLs de las imágenes
     let imageUrls = [];
 
     // Si se envió al menos una imagen, procesarlas con Cloudinary
     if (req.files && req.files.image) {
-      
       // Si hay más de una imagen, convertir a un array
       const images = Array.isArray(req.files.image)
         ? req.files.image
@@ -87,7 +118,8 @@ const postProduct = async (req, res, next) => {
       description,
       image: imageUrls,
       available,
-      category,
+      category: newCategory._id,
+      subcategories: newSubcategory._id,
       variations,
       attributes,
       price,
@@ -96,23 +128,33 @@ const postProduct = async (req, res, next) => {
 
     // Guardar el producto en la base de datos
     const savedProduct = await product.save();
-  
+    // Guardar el producto en la categoría
+    newCategory.products.push(savedProduct);
+    await newCategory.save();
+    newSubcategory.products.push(savedProduct)
+    await newSubcategory.save()
+
     // Responder con el producto guardado
     return res.status(201).json(savedProduct);
   } catch (error) {
-    return res.status(500).json({error, mess: error.message ,  message:"error creando un producto"});
+    return res
+      .status(500)
+      .json({
+        error,
+        mess: error.message,
+        message: "error creando un producto",
+      });
   }
 };
 
 const editProduct = async (req, res) => {
-
   const id = req.params.id;
   const body = req.body;
   const file = req.files.image;
 
   try {
     const product = await Product.findById(id);
-    console.log("product.image",product.image)
+    console.log("product.image", product.image);
 
     if (!product) {
       return res.status(404).json({
@@ -122,15 +164,12 @@ const editProduct = async (req, res) => {
 
     // Eliminar la imagen anterior en Cloudinary
 
-
     if (file && product.image) {
-  
       for (let i = 0; i < product.image.length; i++) {
         const public_id = product.image[i].split("/").pop().split(".")[0];
-        console.log(public_id)
+        console.log(public_id);
         await cloudinary.uploader.destroy(public_id);
-        
-      };
+      }
     }
 
     // Subir la nueva imagen a Cloudinary y obtener la URL
@@ -148,6 +187,7 @@ const editProduct = async (req, res) => {
     product.image = body.image || product.image;
     product.available = body.available || product.available;
     product.category = body.category || product.category;
+    product.subcategories = body.subcategories || product.subcategories;
     product.variations = body.variations || product.variations;
     product.attributes = body.attributes || product.attributes;
     product.price = body.price || product.price;
@@ -160,7 +200,7 @@ const editProduct = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      mess: error.message ,
+      mess: error.message,
       message: "Error actualizando el product",
     });
   }
@@ -174,7 +214,7 @@ const deleteProduct = async (req, res) => {
 
     if (!product) {
       return res.status(404).json({
-        mss:error.message,
+        mss: error.message,
         message: "Product no encontrado",
       });
     }
@@ -182,7 +222,6 @@ const deleteProduct = async (req, res) => {
     // get image URLs from the product object
     const imageUrls =
       product.image instanceof Array ? product.image : [product.image];
-  
 
     // delete images from Cloudinary
     for (const url of imageUrls) {
@@ -199,7 +238,7 @@ const deleteProduct = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      mss:error.message,
+      mss: error.message,
       message: "Error eliminando el producto",
     });
   }
@@ -211,5 +250,5 @@ module.exports = {
   getProductById,
   editProduct,
   deleteProduct,
-  searchByName
+  searchByName,
 };

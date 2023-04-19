@@ -195,9 +195,8 @@ const validateCreateandUdpateUser = (req, res, next)=> {
 };
 
 const validateQuery = async (req, res, next) =>{
-  console.log(req.query)
+ 
   const { name } = req.query;
-  console.log(name.length)
   const errors = [];
 
   if (!name || name.length === 0) {
@@ -216,6 +215,7 @@ const validateQuery = async (req, res, next) =>{
   if (errors.length > 0) {
     return res.status(400).json({ errors, message: "Error validando la consulta"});
   }
+
 
   next();
 }

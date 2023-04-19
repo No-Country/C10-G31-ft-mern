@@ -9,6 +9,11 @@ const directionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  state: {
+    type: String,
+    required: true
+  },
+  
   country: {
     type: String,
     required: true
@@ -22,8 +27,7 @@ const directionSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: 'User'
   }
 }, {
   timestamps: true
@@ -31,4 +35,4 @@ const directionSchema = new mongoose.Schema({
 
 const Direction = mongoose.model('Direction', directionSchema);
 
-module.exports = Direction;
+

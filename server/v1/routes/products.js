@@ -7,17 +7,20 @@ const {validateProductData, validateQuery} = require('../../helpers/validateFiel
 //const authRoleClient = require('../../middlewares/authRole');
 
 
+router.route('/search')
+  .get(validateQuery, producControllers.searchByName);
+
+router.route('/:id')
+  .get(producControllers.getProductById)
+  .patch(authMiddleware, validateProductData, producControllers.editProduct)
+  .delete(authMiddleware, producControllers.deleteProduct);
 
 router.route('/')
   .get(producControllers.getAllProducts)
   .post(authMiddleware, validateProductData, producControllers.postProduct);
 
-router.route('/:id')
-  .get(producControllers.getProductById)
-  .patch(authMiddleware, validateProductData, producControllers.editProduct)
-  .delete( authMiddleware, producControllers.deleteProduct);
 
-router.route('/query/name?')
-  .get(validateQuery, producControllers.searchByName)
+  
+
 
 module.exports = router;

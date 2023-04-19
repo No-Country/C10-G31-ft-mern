@@ -14,10 +14,18 @@ const categorySchema = new mongoose.Schema({
     minlength: [10, 'Category description must be at least 10 characters long'],
     maxlength: [500, 'Category description cannot be more than 500 characters long'],
   },
-  subcategories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subcategory' }],
+  subcategories: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subcategory'
+  }],
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }]
 });
 
-const Category = mongoose.model("ProductCategory", categorySchema);
+const Category = mongoose.model('ProductCategory', categorySchema);
 
 module.exports = Category;
+
 
