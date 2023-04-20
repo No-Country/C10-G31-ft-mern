@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Style from '../styles/Shopping_cart.module.css'
 import { FaArrowLeft, FaRegCircle, FaRegDotCircle, FaCreditCard, FaRegTrashAlt} from 'react-icons/fa'
+import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai';
 import Header from '../components/shared/Header'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { getCart, updateCart } from "../features/cart/cartSlice";
@@ -30,6 +31,16 @@ const ShoppingCart = () => {
         dispatch(updateCart(newProducts))
     }
 
+    const substract = (id: string) => {
+        const newProducts = cart.map(prod => prod._id === id ? prod.amount > 1 ? {...prod, amount: prod.amount - 1} : prod : prod)
+        dispatch(updateCart(newProducts))
+    }
+    
+    const sum = (id: string) => {
+        const newProducts = cart.map(prod => prod._id === id ? prod.amount < 5 ? {...prod, amount: prod.amount + 1} : prod : prod)
+        dispatch(updateCart(newProducts))
+    }
+
     return(
         <div className={Style.container_cart}>
             <Header />
@@ -51,11 +62,18 @@ const ShoppingCart = () => {
                             </div>
                         </div>
                         <div className={Style.descripcion_product}>
-                            <Link href={`/ProductDetail/${product._id}`} >
+                            <Link href={`/ProductDetail/${product._id}`} className='inline-block' >
                                 <p>{product.name}</p>
                             </Link>
-                            <p>${product.price}</p>
-                            <p>Cantidad: {product.amount}</p>
+                            <p className='text-[#50C21F]'>${product.price}</p>
+                            <div className='flex justify-between'>
+                                <p>Cantidad</p>
+                                <div className='flex justify-between md:gap-3'>
+                                    <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => substract(product._id)} />
+                                    <p className="font-extrabold text-[#50C21F]">{product.amount}</p>
+                                    <AiOutlinePlusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => sum(product._id)} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

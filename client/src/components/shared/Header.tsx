@@ -6,20 +6,20 @@ import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { useEffect, useState } from 'react'
 import BurgerMenu from '../BurgerMenu'
 import Search from '../Search'
-import { ProductCart } from '../../types/products'
 import FiltersUser from '../FiltersUser'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { getCart } from "../../features/cart/cartSlice";
 import { getUser } from "../../features/auth/authSlice"
+import { useRouter } from 'next/router'
 
 const Header = () => {
 
     const [ menuActive, setMenuActive ] = useState(false)
     const [ searchActive, setSearchActive ] = useState(false)
-    const [ totalProductsStorage, setTotalProductsStorage ] = useState(0)
+    // const [ totalProductsStorage, setTotalProductsStorage ] = useState(0)
     const [ FilterUser, setFilterUser ] = useState(false)
     const [ totalProducts, setTotalProducts ] = useState(0)
-    // TODO si el usuario está autenticado cambiar los iconos del header y en el menu de hamburguesa mostrar el boton de salir
+    const router = useRouter();
     const userAuth = useAppSelector((state) => state.auth.userAuth)
     const cart = useAppSelector((state) => state.cart.cart)
 
@@ -33,6 +33,9 @@ const Header = () => {
 
 
     function ActiveOptionsUser() {
+        if(!userAuth.auth) {
+            return router.push('/Splash');
+        }
         setFilterUser(!FilterUser)
     }
 

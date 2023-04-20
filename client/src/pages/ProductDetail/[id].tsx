@@ -104,11 +104,7 @@ const ProductDetail = () => {
             <div className='flex items-center gap-1 text-xs font-bold'>
               <Link href='/' >HOME</Link>
               <FiChevronRight />
-              <Link href=''>Categoría</Link>
-              <FiChevronRight />
-              <Link href=''>Sub 1</Link>
-              <FiChevronRight />
-              <Link href=''>Sub 2</Link>
+              <Link href=''>{product.category[0].name}</Link>
             </div>
             <p className='text-md mt-2 font-bold md:hidden'>{product.name}</p>
           </div>

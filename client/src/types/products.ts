@@ -1,8 +1,13 @@
 
+interface Category {
+    _id: string
+    name: string
+}
+
 export interface Product {
     _id: string
     available: string
-    category: string[]
+    category: Category[]
     image: string[]
     name: string
     description: string

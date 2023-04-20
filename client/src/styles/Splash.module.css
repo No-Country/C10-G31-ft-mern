@@ -15,11 +15,11 @@
 }
 
 .ButtonInit {
-    @apply w-full mb-3 p-3 md:p-5 block rounded border-2 border-blue-500 text-lg bg-[#3681F0] text-white md:text-3xl;
+    @apply w-full text-center mb-3 p-3 md:p-5 block rounded border-2 border-blue-500 text-lg bg-[#3681F0] text-white md:text-3xl;
 }
 
 .ButtonRegistrer {
-    @apply w-full mb-3 p-3 md:p-5 block rounded text-lg border-2 border-[#50C21F] text-black md:text-3xl;
+    @apply w-full text-center mb-3 p-3 md:p-5 block rounded text-lg border-2 border-[#50C21F] text-black md:text-3xl;
 }
 
 .ContainerbuttonGogle {

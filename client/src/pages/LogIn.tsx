@@ -19,23 +19,27 @@ const LogIn = () => {
     const router = useRouter();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        if([email, password].includes('')) {
-            dispatch(setAlert({
-              msg: 'Todos los campos son requeridos',
-              error: true
-            }))
-            setTimeout(() => {
-              dispatch(setAlert({msg: '', error: false}))
-            }, 3000);
-            return
-        }
-        dispatch(authUser(email, password))
-        if(!alert.error) {
-          setEmail('')
-          setPassword('')
-          router.push('/')
-        }
+      e.preventDefault()
+      if([email, password].includes('')) {
+        dispatch(setAlert({
+          msg: 'Todos los campos son requeridos',
+          error: true
+        }))
+        setTimeout(() => {
+          dispatch(setAlert({msg: '', error: false}))
+        }, 3000);
+        return
+      }
+
+      // TODO arreglar bug
+      dispatch(authUser(email, password))
+      if(alert.error) {
+        return
+      } else {
+        setEmail('')
+        setPassword('')
+        router.push('/')
+      }
     }
 
     const { msg } = alert

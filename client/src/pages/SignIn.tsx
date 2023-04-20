@@ -1,8 +1,10 @@
 import Alert from '../components/Alert'
 import { useState } from "react"
+import Link from 'next/link'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { registerUser } from "../features/auth/authSlice"
 import { setAlert } from "../features/alert/alertSlice"
+import { useRouter } from 'next/router'
 
 const SignIn = () => {
 
@@ -13,6 +15,7 @@ const SignIn = () => {
     const [ password, setPassword ] = useState('')
     const [ repeatPassword, setRepeatPassword ] = useState('')
     const alert = useAppSelector((state) => state.alert)
+    const router = useRouter();
 
     const dispatch = useAppDispatch()
 
@@ -29,24 +32,27 @@ const SignIn = () => {
             return
         }
         if( password !== repeatPassword) {
-            setAlert({
+            dispatch(setAlert({
                 msg: 'Los Password no coinciden',
                 error: true
-              })
-              setTimeout(() => {
-                setAlert({msg: '', error: false})
-              }, 3000);
-              return
+            }))
+            setTimeout(() => {
+            setAlert({msg: '', error: false})
+            }, 3000);
+            return
         }
 
         dispatch(registerUser(name, lastName, phone, email, password))
-        if(!alert.error) {
+        if(alert.error) {
+            return
+        } else {
             setName('')
             setLastName('')
             setPhone('')
             setEmail('')
             setPassword('')
             setRepeatPassword('')
+            router.push('/LogIn')
         }
     }
 
@@ -129,6 +135,14 @@ const SignIn = () => {
             />
         </div>
       </form>
+      <div className="w-full text-center mb-10">
+        <p>
+          ¿Ya tienes una cuenta? 
+          <Link href={'/LogIn'}>
+            <span className="text-[#3681F0]"> Ingresa</span>
+          </Link>
+        </p>
+      </div>
     </div>
   )
 }
