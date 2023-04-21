@@ -31,7 +31,7 @@ const PurchaseSummary = () => {
   return (
     <>
       <Header />
-      <div className="flex px-4 mt-3 items-center gap-2 text-md font-bold">
+      <div className="flex px-4 mt-3 items-center gap-2 text-md font-bold mt-28 md:mt-20">
         <Link href='/MethodDelivery'><FaArrowLeft /></Link>
         <p>Resumen de compra</p>
       </div>

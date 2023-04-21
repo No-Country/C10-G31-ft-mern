@@ -3,7 +3,7 @@
 }
 
 .Methods_pay {
-    @apply w-full p-3;
+    @apply w-full p-3 mt-28 md:mt-20;
 }
 
 .back_payment {

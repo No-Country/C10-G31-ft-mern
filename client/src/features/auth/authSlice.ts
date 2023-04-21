@@ -22,39 +22,19 @@ export const authSlice = createSlice({
     reducers: {
       login: (state, action) => {
         localStorage.setItem('spotechToken', action.payload.token)
+        localStorage.setItem('spotechId', action.payload.id)
         state.userAuth.token = action.payload.token
         state.userAuth.id = action.payload.id
         state.userAuth.auth = true
       },
       verifyUser: (state, action) => {
-        state.userAuth = action.payload
+        state.userAuth.auth = action.payload.isActive
       }
     },
   })
   
   // Action creators are generated for each case reducer function
   export const { login, verifyUser } = authSlice.actions
-
-
-  export const authUser = (email: string, password: string) => async (dispatch: any) => {
-    try {
-      const response = await clienteAxios.post('/user/login', { email, password })
-      const data = response.data
-      dispatch(login({ token: data.token, id: data.id }))
-      setTimeout(() => {
-        dispatch(setAlert({msg: '', error: false}))
-      }, 3000);
-    } catch (error: any) {
-      if(error.response.data.errors) {
-        dispatch(setAlert({msg: error.response.data.errors[0].message, error: true}))
-        return
-      }
-      if(error.response.data.message) {
-        dispatch(setAlert({msg: error.response.data.message, error: true}))
-        return
-      }
-    }
-  }
 
   export const registerUser = (name: string, lastName: string, phone: string, email: string, password: string) => async (dispatch: any) => {
     try {
@@ -79,6 +59,7 @@ export const authSlice = createSlice({
 
   export const getUser = () => async (dispatch: any) => {
     const token = localStorage.getItem('spotechToken')
+    const id = localStorage.getItem('spotechId')
     
     if(!token) {
       return
@@ -92,10 +73,11 @@ export const authSlice = createSlice({
     }
 
     try {
-      // TODO Agregar el endpoint correcto para obtener el perfil del usuario
-      // const response = await clienteAxios('/user', config)
-      // const data = response.data
-      // dispatch(verifyUser({data}))
+      if(token) {
+        const response = await clienteAxios(`/user/${id}`, config)
+        const data = response.data
+        dispatch(verifyUser(data.user))
+      }
 
     } catch (error: any) {
       console.log(error)

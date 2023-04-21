@@ -14,7 +14,7 @@ import clienteAxios from "../../config/clienteAxios";
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { addFavorite, getFavorites } from "../../features/favorites/favoritesSlice"
 import { addCart, getCart } from "../../features/cart/cartSlice";
-import { Product } from '../../types/products'
+import { Product, Category } from '../../types/products'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,6 +22,8 @@ const ProductDetail = () => {
 
   const [ cantidad, setCantidad ] = useState(1)
   const [ product, setProduct ] = useState<Product | null>(null)
+  const [ products, setProducts ] = useState<Product[]>([])
+  const [ category, setCategory ] = useState<Category | null>(null)
   const [ imageSelected, setImageSelected ] = useState('')
 
   const favorites = useAppSelector((state) => state.favorites.favs)
@@ -39,13 +41,23 @@ const ProductDetail = () => {
   useEffect(() => {
     if(id) {
       const getProduct = async () => {
-        const { data } = await clienteAxios(`/product/${id}`)
-        setProduct(data)
-        setImageSelected(data.image[0])
+        const { data: dataProduct } = await clienteAxios(`/product/${id}`)
+        setProduct(dataProduct)
+        setImageSelected(dataProduct.image[0])
+        const { data: dataCategory } = await clienteAxios(`/category/${dataProduct.category[0]._id}`)
+        setCategory(dataCategory)
+
+        let productsFromCategory = []
+        for(let i = 0; i < dataCategory.products.length; i++) {
+          if(dataCategory.products[i]._id === product?._id) return
+          const { data: productCategory } = await clienteAxios(`/product/${dataCategory.products[i]._id}`)
+          productsFromCategory.push(productCategory)
+        }
+        setProducts(productsFromCategory)
       }
       getProduct()
     }
-  }, [id])
+  }, [id, product?._id])
 
   const substract = () => {
     if(cantidad > 1) {
@@ -104,7 +116,7 @@ const ProductDetail = () => {
             <div className='flex items-center gap-1 text-xs font-bold'>
               <Link href='/' >HOME</Link>
               <FiChevronRight />
-              <Link href=''>{product.category[0].name}</Link>
+              <Link href='/ListResults'>{product.category[0].name}</Link>
             </div>
             <p className='text-md mt-2 font-bold md:hidden'>{product.name}</p>
           </div>
@@ -116,7 +128,7 @@ const ProductDetail = () => {
                 ))}
               </div>
               <div className="hidden md:block">
-                <Image className="mx-auto h-[386px] w-[356px]" src={imageSelected} width={356} height={386} alt={`Imagen producto ${product.name}`} />
+                <Image className="mx-auto" src={imageSelected} width={356} height={386} alt={`Imagen producto ${product.name}`} />
               </div>
               <div className="md:hidden">
                 <Swiper
@@ -149,7 +161,13 @@ const ProductDetail = () => {
                   </div>
                   <div className='hidden md:block mt-4'>
                     <p className='font-extrabold text-[18px]'>Capacidad:</p>
-                    <input type='number' className='border rounded-lg mt-1 py-2 px-3 w-96 md:w-[213px]' />
+                    <select name="select" className='border rounded-lg mt-3 py-2 px-3 w-96 md:w-[213px]'>
+                      {product.variations.length > 0 ? product.variations.map(variation => (
+                        <option key={variation} value={variation}>{variation}</option>
+                      )) : (
+                        <option value="" disabled>No hay variantes para este producto</option>
+                      )}
+                    </select>
                   </div>
                   <div className="md:flex md:items-center md:gap-7 md:mt-5">
                     <p className='font-bold md:mt-1 text-[14px]'>Cantidad</p>
@@ -162,7 +180,13 @@ const ProductDetail = () => {
                 </div>
                 <div className='md:hidden mt-4'>
                   <p className='font-bold'>Capacidad:</p>
-                  <input type='number' className='border rounded-lg mt-2 py-2 px-3 w-96' />
+                  <select name="select" className='border rounded-lg mt-3 py-2 px-3 w-96'>
+                    {product.variations.length > 0 ? product.variations.map(variation => (
+                      <option key={variation} value={variation}>{variation}</option>
+                    )) : (
+                      <option value="" disabled>No hay variantes para este producto</option>
+                    )}
+                  </select>
                 </div>
                 <div className='flex gap-4 md:flex-col md:gap-2 items-center justify-between sm:justify-evenly text-xs mt-8 md:mt-5'>
                   <div 
@@ -198,30 +222,19 @@ const ProductDetail = () => {
               <div className="mt-4">
                 <Swiper
                   centeredSlides={false}
-                  slidesPerView={2.7}
+                  slidesPerView={5}
                   spaceBetween={10}
                   pagination={{ clickable: true }}
                 >
-                  <SwiperSlide>
-                    <Link href={`/ProductDetail/${product._id}`}>
-                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <Link href={`/ProductDetail/${product._id}`}>
-                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <Link href={`/ProductDetail/${product._id}`}>
-                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <Link href={`/ProductDetail/${product._id}`}>
-                      <Image className="w-[163px] h-[240px]" src={product.image[0]} width={163} height={240} alt='producto' />
-                    </Link>
-                  </SwiperSlide>
+                  {products.length > 0 ? products.map(product => (
+                    <SwiperSlide key={product._id}>
+                      <Link href={`/ProductDetail/${product._id}`}>
+                        <Image src={product.image[0]} width={163} height={240} alt='producto' />
+                      </Link>
+                    </SwiperSlide>
+                  )) : (
+                    <p>No hay más productos en esta categoría</p>
+                  )}
                 </Swiper>
               </div>
             </div>

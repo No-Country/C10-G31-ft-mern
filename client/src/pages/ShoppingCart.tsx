@@ -66,13 +66,11 @@ const ShoppingCart = () => {
                                 <p>{product.name}</p>
                             </Link>
                             <p className='text-[#50C21F]'>${product.price}</p>
-                            <div className='flex justify-between'>
-                                <p>Cantidad</p>
-                                <div className='flex justify-between md:gap-3'>
-                                    <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => substract(product._id)} />
-                                    <p className="font-extrabold text-[#50C21F]">{product.amount}</p>
-                                    <AiOutlinePlusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => sum(product._id)} />
-                                </div>
+                            <p>Cantidad</p>
+                            <div className='flex gap-3'>
+                                <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => substract(product._id)} />
+                                <p className="font-extrabold text-[#50C21F]">{product.amount}</p>
+                                <AiOutlinePlusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => sum(product._id)} />
                             </div>
                         </div>
                     </div>

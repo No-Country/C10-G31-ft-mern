@@ -1,5 +1,5 @@
 .containerResults {
-    @apply w-full mb-4;
+    @apply w-full mb-4 mt-28 md:mt-20;
 }
 
 .Category {
@@ -15,7 +15,7 @@
 }
 
 .results {
-    @apply w-full px-3 md:py-6 md:grid md:grid-cols-3 md:gap-5;
+    @apply w-full px-3 md:py-6;
 }
 
 .result {
@@ -35,7 +35,7 @@
 }
 
 .imageResult {
-    @apply w-28 h-28 rounded-xl bg-[#CECECE] md:w-full md:rounded-none md:h-48;
+    @apply w-28 rounded-xl bg-[#CECECE] md:rounded-none md:w-48 md:mx-auto;
 }
 
 .infoResult {

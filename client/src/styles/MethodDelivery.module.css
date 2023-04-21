@@ -3,7 +3,7 @@
 }
 
 .MethodsDeliverys {
-    @apply w-full p-3;
+    @apply w-full p-3 mt-28 md:mt-20;
 }
 
 .BackMethods {

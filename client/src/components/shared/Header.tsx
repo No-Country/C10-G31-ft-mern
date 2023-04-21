@@ -28,6 +28,7 @@ const Header = () => {
     useEffect(() => {
         dispatch(getUser())
         dispatch(getCart(''))
+        dispatch(getUser())
         setTotalProducts(cart.length)
     }, [dispatch, cart.length])
 
@@ -43,7 +44,9 @@ const Header = () => {
         <>
             <FiltersUser FilterUser={FilterUser} />
             {searchActive && (
-                <Search searchActive={searchActive} setSearchActive={setSearchActive} />
+                <div className='bg-white fixed top-0 left-0 z-50 w-full min-h-screen'>
+                    <Search searchActive={searchActive} setSearchActive={setSearchActive} />
+                </div>
             )}
             <div className={Style.head_cart}>
                 <div className={Style.container_1}>

@@ -23,14 +23,15 @@ const ListProducts = () => {
         <div>
             <Header />
             <div className={Style.containerResults}>
-                <p className={Style.Category}>Home &gt; Smartphones &gt; Android &gt; Motorola</p>
                 <div className={Style.cantResult}>
                     <p>{products.length} resultados</p>
                     <span></span>
                 </div>
-                {products.length && products.map((product: Product) => (
-                    <ProductCard product={product} key={product._id} />
-                ))}
+                <div className="md:grid md:grid-cols-3 md:items-center">
+                    {products.length && products.map((product: Product) => (
+                        <ProductCard product={product} key={product._id} />
+                    ))}
+                </div>
             </div>
         </div>
     )

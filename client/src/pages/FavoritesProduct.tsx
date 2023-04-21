@@ -27,7 +27,7 @@ const Favorites = () => {
 
         <div>
             <Header />
-            <div className="p-3">
+            <div className="p-3 mt-28 md:mt-20">
                 <div className="w-full flex gap-4 items-center">
                     <FaArrowLeft className="cursor-pointer" onClick={() => router.back()} />
                     <p className="font-bold">Favoritos</p>

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Alert from '../components/Alert'
 import Image from "next/image"
@@ -6,8 +6,9 @@ import Logo from '../../public/Logo Login.png'
 import { FaArrowLeft } from 'react-icons/fa'
 import { useRouter } from 'next/router';
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { authUser } from "../features/auth/authSlice"
+import { login } from "../features/auth/authSlice"
 import { setAlert } from "../features/alert/alertSlice"
+import clienteAxios from "@/config/clienteAxiosspotech"
 
 const LogIn = () => {
 
@@ -18,7 +19,7 @@ const LogIn = () => {
     const dispatch = useAppDispatch()
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       if([email, password].includes('')) {
         dispatch(setAlert({
@@ -31,14 +32,25 @@ const LogIn = () => {
         return
       }
 
-      // TODO arreglar bug
-      dispatch(authUser(email, password))
-      if(alert.error) {
-        return
-      } else {
+      try {
+        const response = await clienteAxios.post('/user/login', { email, password })
+        const data = response.data
+        dispatch(login({ token: data.token, id: data.id }))
+        setTimeout(() => {
+          dispatch(setAlert({msg: '', error: false}))
+        }, 3000);
         setEmail('')
         setPassword('')
         router.push('/')
+      } catch (error: any) {
+        if(error.response.data.errors) {
+          dispatch(setAlert({msg: error.response.data.errors[0].message, error: true}))
+          return
+        }
+        if(error.response.data.message) {
+          dispatch(setAlert({msg: error.response.data.message, error: true}))
+          return
+        }
       }
     }
 

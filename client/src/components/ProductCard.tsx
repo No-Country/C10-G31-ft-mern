@@ -49,9 +49,11 @@ const ProductCard = ({product}: ProductCardProps) => {
     <div className={Style.results}>
         <ToastContainer />
         <div className={Style.result}>
-            <Image className={Style.imageResult} width={400} height={400} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
+            <div className="md:flex md:items-center md:justify-between md:h-52">
+                <Image className={Style.imageResult} width={400} height={300} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
+            </div>
             <div className={Style.infoResult}>
-                <p className={Style.brandResult}>Marca producto</p>
+                {/* <p className={Style.brandResult}>Marca producto</p> */}
                 <Link href={`/ProductDetail/${product._id}`} ><p className={Style.nameResult}>{product.name}</p></Link>
                 <p className={Style.priceResult}>${product.price}</p>
                 <p className={Style.shippingcostResult}>Envio gratis</p>
