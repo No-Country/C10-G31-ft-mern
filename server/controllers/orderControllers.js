@@ -1,37 +1,55 @@
-const Order = require('../models/Order');
-const User = require('../models/User')
+const Order = require("../models/Order");
+const Product = require("../models/Product");
+const User = require("../models/User");
+const Direction = require("../models/User");
 
 // Función para crear una nueva orden
 exports.createOrder = async (req, res) => {
   try {
-    //obtener user.id del token
-    const { _id } = req.user;
-    //buscar user por id
-    const user = User.findById(_id)
-    console.log(user)
-    //si no existe user
-    if (!user) {
-      return res.status(404).json({ message: 'No se encontró el usuario.' });
+    // Obtener el cliente desde el token
+    const clientId = req.user._id;
+
+    // Obtener los productos de la solicitud
+    const { productos, direction, total } = req.body;
+    console.log(productos.length);
+    // Verificar si el cliente existe
+    const clientExists = await User.findById(clientId);
+    if (!clientExists) {
+      return res.status(404).json({ message: "No se encontró el cliente." });
     }
-    //crear nueva orden
-    const order = new Order({
-      products: req.body.products,
-      client: user._id,
-      direction: req.body.direction,
-      total: req.body.total
+    
+    // Crear una nueva orden
+    const newOrder = await Order.create({
+      client: clientId,
+      direction:direction,
+      total,
     });
-    console.log(order)
-    //guardar orden
-    const savedOrder = await order.save();
-    //agregar orden al usuario
-    user.orders.push(savedOrder)
-    //guardar usuario
-    await user.save()
-    //devolver orden
-    res.status(201).json(savedOrder);
+   
+    await productos.forEach(element => {
+      
+      const pro = {
+        product: element.id,
+        quantity: element.quantity,
+        price: element.price
+      }
+      console.log(pro)
+     newOrder.products.push(pro)
+
+    });
+    console.log(newOrder)
+
+    // Guardar la orden en la base de datos
+    const ordersaved = await newOrder.save();
+    // Agregar la orden al cliente
+    clientExists.orders.push(ordersaved._id)
+    // Guardar el cliente en la base de datos
+    await clientExists.save()
+
+    
+    return res.status(201).json(newOrder);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al crear la orden.' });
+
+    return res.status(500).json({ message: "Internal server error", mss:error.message});
   }
 };
 
@@ -42,21 +60,22 @@ exports.getOrders = async (req, res) => {
     res.json(orders);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al obtener las ordenes.' });
+    res.status(500).json({ message: "Error al obtener las ordenes." });
   }
 };
 
 // Función para obtener una orden por su ID
 exports.getOrderById = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.orderId);
+    const order = await Order.findById(req.params.orderId).populate("client", "name").populate("products");
     if (!order) {
-      return res.status(404).json({ message: 'No se encontró la orden.' });
+      return res.status(404).json({ message: "No se encontró la orden." });
     }
-    res.json(order);
+    console.log(order)
+    return res.json(order);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al obtener la orden.' });
+   
+    return res.status(500).json({ message: "Error al obtener la orden.", mss: error.message });
   }
 };
 
@@ -65,15 +84,15 @@ exports.updateOrderById = async (req, res) => {
   try {
     const order = await Order.findByIdAndUpdate(req.params.orderId, req.body, {
       new: true,
-      runValidators: true
+      runValidators: true,
     });
     if (!order) {
-      return res.status(404).json({ message: 'No se encontró la orden.' });
+      return res.status(404).json({ message: "No se encontró la orden." });
     }
     res.json(order);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al actualizar la orden.' });
+    res.status(500).json({ message: "Error al actualizar la orden." });
   }
 };
 
@@ -82,11 +101,11 @@ exports.deleteOrderById = async (req, res) => {
   try {
     const order = await Order.findByIdAndDelete(req.params.orderId);
     if (!order) {
-      return res.status(404).json({ message: 'No se encontró la orden.' });
+      return res.status(404).json({ message: "No se encontró la orden." });
     }
-    res.json({ message: 'Orden eliminada exitosamente.' });
+    res.json({ message: "Orden eliminada exitosamente." });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al eliminar la orden.' });
+    res.status(500).json({ message: "Error al eliminar la orden." });
   }
 };

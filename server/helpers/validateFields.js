@@ -158,7 +158,7 @@ const validateCreateandUdpateUser = (req, res, next)=> {
 
 
 // Función validadora para la creación de una nueva orden
- const validateOrder = async (req, res, next) => {
+/* const validateOrder = async (req, res, next) => {
   try {
     // Verificar que se haya proporcionado una lista de productos
     if (!req.body.products || req.body.products.length === 0) {
@@ -192,7 +192,7 @@ const validateCreateandUdpateUser = (req, res, next)=> {
     console.error(error);
     res.status(500).json({ message: 'Error al validar la orden.' });
   }
-};
+};*/
 
 const validateQuery = async (req, res, next) =>{
  
@@ -256,4 +256,4 @@ const validateFields = (method) => {
   }
 };
 
-module.exports = { timeoutMiddleware, validateFields , validateOrder,validateQuery,  validateCreateandUdpateUser,validateLogin, validateProductData};
+module.exports = { timeoutMiddleware, validateFields , validateQuery,  validateCreateandUdpateUser,validateLogin, validateProductData};

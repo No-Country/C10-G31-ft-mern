@@ -43,7 +43,7 @@ const getProfile = async (req, res) => {
   console.log(req.user._id)
   try {
     const { _id } = req.user;
-    const user = await User.findById(_id).populate("directions");
+    const user = await User.findById(_id).populate("directions").populate("orders");
     console.log(user)
     if (!user) {
       return res.status(404).json({ message: "user no encontrado" });
@@ -56,23 +56,6 @@ const getProfile = async (req, res) => {
   }
 }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Crear un user
 const createUser = async (req, res, next) => {
@@ -153,7 +136,7 @@ const getUserById = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const user = await User.findById(userId).populate("directions");
+    const user = await User.findById(userId).populate("directions").populate("orders");
     if (!user) {
       return res.status(404).json({ message: "user no encontrado" });
     }
