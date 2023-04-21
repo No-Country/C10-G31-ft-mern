@@ -27,18 +27,20 @@ const getAllProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const id = req.params.id;
-    if (!id) res.status(404).json({ message: "No hay id de busqueda" });
+    if (!id) return res.status(404).json({ message: "No hay id de busqueda" });
     const productById = await Product.findById(id).populate("category", "name").populate("subcategories", "name");
-    productById
-      ? res.status(200).json(productById)
-      : res.status(404).json({ message: "No hay producto con ese id" });
-
+    if(!productById){
+      return res.status(404).json({ message: "No hay producto con ese id" });
+    } 
+    
+    return res.status(200).json(productById)
+    /*
     const categoryIds = productById.category.map((cat) => cat._id);
     const categories = await Category.find({ _id: { $in: categoryIds } });
 
-    productById.category = categories;
+    productById.category = categories;*/
   } catch (error) {
-    res
+    return res
       .status(404)
       .json({
         message: "Error al obtener un producto por ID",
@@ -60,7 +62,7 @@ const searchByName = async (req, res) => {
         .json({ message: "No hay productos con ese nombre" });
     }
 
-    res.status(200).json(products);
+    return res.status(200).json(products);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

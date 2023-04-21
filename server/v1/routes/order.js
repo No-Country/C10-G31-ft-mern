@@ -5,10 +5,10 @@ const authMiddleware = require('../../middlewares/authMiddleware');
 const { validateOrder } = require('../../helpers/validateFields');
 
 
-router.post('/orders', validateOrder, orderController.createOrder);
-router.get('/orders', orderController.getOrders);
-router.get('/orders/:orderId', orderController.getOrderById);
-router.patch('/orders/:orderId', validateOrder, authMiddleware, orderController.updateOrderById);
-router.delete('/orders/:orderId', authMiddleware, orderController.deleteOrderById);
+router.post('/', validateOrder, authMiddleware, orderController.createOrder);
+router.get('/', orderController.getOrders);
+router.get('/:orderId', orderController.getOrderById);
+router.patch('/:orderId', validateOrder, authMiddleware, orderController.updateOrderById);
+router.delete('/:orderId', authMiddleware, orderController.deleteOrderById);
 
 module.exports = router;

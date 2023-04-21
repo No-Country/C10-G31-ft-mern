@@ -1,15 +1,33 @@
 const Order = require('../models/Order');
+const User = require('../models/User')
 
 // Función para crear una nueva orden
 exports.createOrder = async (req, res) => {
   try {
+    //obtener user.id del token
+    const { _id } = req.user;
+    //buscar user por id
+    const user = User.findById(_id)
+    console.log(user)
+    //si no existe user
+    if (!user) {
+      return res.status(404).json({ message: 'No se encontró el usuario.' });
+    }
+    //crear nueva orden
     const order = new Order({
       products: req.body.products,
-      client: req.body.client,
+      client: user._id,
       direction: req.body.direction,
       total: req.body.total
     });
+    console.log(order)
+    //guardar orden
     const savedOrder = await order.save();
+    //agregar orden al usuario
+    user.orders.push(savedOrder)
+    //guardar usuario
+    await user.save()
+    //devolver orden
     res.status(201).json(savedOrder);
   } catch (error) {
     console.error(error);

@@ -11,3 +11,5 @@ route.get('/:subcategoryId', getSubcategoryById)
 route.post('/:parentcategoryId/subcategory', authMiddleware, createSubcategory)
 route.patch('/:subcategoryId', authMiddleware, updateSubcategory)
 route.delete('/:subcategoryId', authMiddleware, deleteSubcategory)
+
+

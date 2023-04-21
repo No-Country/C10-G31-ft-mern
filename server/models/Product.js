@@ -78,8 +78,8 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
-    variations: [variationSchema],
-    attributes: [attributeSchema],
+    variations: [],
+    attributes: [],
   },
   {
     timestamps: true,

@@ -16,11 +16,15 @@ router.post('/login', timeoutMiddleware, userController.login )
  * Private Endpoints Categories. Only user
  */
 
+//ruta para el perfil por token
+router.post('/profile', authMiddleware, userController.getProfile)
+
 // Endpoint para crear un user
 router.post('/register', timeoutMiddleware, validateCreateandUdpateUser,  userController.createUser);
 
 // Endpoint para obtener todos los users
 router.get('/', authMiddleware, userController.getAllUsers);
+
 
 // Endpoint para obtener un user por su ID
 router.get('/:userId', authMiddleware, userController.getUserById);

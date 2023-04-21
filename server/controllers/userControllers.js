@@ -38,6 +38,42 @@ const login = async (req, res) => {
   }
 };
 
+//obtener el perfil del usuario por el id recibido del token
+const getProfile = async (req, res) => {
+  console.log(req.user._id)
+  try {
+    const { _id } = req.user;
+    const user = await User.findById(_id).populate("directions");
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({ message: "user no encontrado" });
+    }
+    return res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error buscando los usuarios por ID ",
+    });
+  }
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Crear un user
 const createUser = async (req, res, next) => {
   // Validación de errores
@@ -240,6 +276,7 @@ const deleteUserById = async (req, res, next) => {
 
 module.exports = {
   login,
+  getProfile,
   createUser,
   getAllUsers,
   getUserById,
