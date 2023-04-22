@@ -56,7 +56,7 @@ router.delete(
 
 
 //rutas de subcategorias
-router.post(
+/*router.post(
   "/:categoryId/subcategory",
   authMiddleware,
   createSubcategory
@@ -88,5 +88,5 @@ router.delete(
   deleteSubcategory
 )
 
-
+*/
 module.exports = router;

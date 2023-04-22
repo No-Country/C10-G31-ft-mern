@@ -11,6 +11,7 @@ const connectDatabase = require("./config/database");
 const productstRouter = require('./v1/routes/products');
 const userRouter = require('./v1/routes/user');
 const categoryRouter = require('./v1/routes/category');
+const subcategoryRouter = require('./v1/routes/subcategory');
 const orderRouter = require('./v1/routes/order')
 
 
@@ -52,6 +53,7 @@ app.use('/api/v1/product', productstRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/order', orderRouter);
+app.use('/api/v1/subcategory', subcategoryRouter);
 
 
 
