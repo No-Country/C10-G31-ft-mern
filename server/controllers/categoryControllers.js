@@ -4,10 +4,12 @@ const Category = require('../models/ProductCategory');
 // Controlador para crear una nueva categoría
 exports.createCategory = async (req, res, next) => {
   try {
-    const { name, description } = req.body;
+    const { name, description, products } = req.body;
+    console.log(req.body)
     const category = new Category({
       name,
       description,
+      products
     });
     await category.save();
     res.status(201).json(category);
