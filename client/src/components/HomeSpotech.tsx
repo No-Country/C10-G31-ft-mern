@@ -68,7 +68,7 @@ const HomeSpotech = () => {
         <div className='mt-2'>
           <Swiper
             centeredSlides={false}
-            slidesPerView={'auto'}
+            slidesPerView={4}
             spaceBetween={10}
             pagination={{ clickable: true }}
           >
@@ -100,6 +100,18 @@ const HomeSpotech = () => {
           </Link>
           <Link href={`/ListResults`}>
             <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares6.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares1.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares2.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares3.png' width={234} height={168} alt='Oferta del día' />
+          </Link>
+          <Link href={`/ListResults`}>
+            <Image className='mx-auto rounded-lg cursor-pointer' src='/Populares4.png' width={234} height={168} alt='Oferta del día' />
           </Link>
         </div>
       </div>

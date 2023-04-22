@@ -14,8 +14,8 @@ const Oferta = ({offer}: OfferProp) => {
           <Image src={offer.image[0]} width={60} height={60} alt='Producto Oferta' />
         </div>
         <div>
-          <p className="text-[#3681F0] text-xs">Motorola G9 Plus</p>
-          <p className="text-[#50C21F] text-xs">$194.000</p>
+          <p className="text-[#3681F0] text-xs">{offer.name}</p>
+          <p className="text-[#50C21F] text-xs">${offer.price}</p>
         </div>
       </div>
     </Link>

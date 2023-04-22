@@ -36,19 +36,19 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                                 </div>
                                 <div className={`${smartphonesActive ? 'flex flex-col -mt-3' : 'hidden'} gap-6`}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                        <Link href='/CategoryResults/64437619a02cdc8258a64a8d' className='flex items-center gap-2 cursor-pointer' >
                                             <MdAndroid className='text-[#50C21F] w-5 h-5' />
                                             <p className='text-[#3681F0]' >Android</p>
                                         </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                        <Link href='/CategoryResults/64437619a02cdc8258a64a8d' className='flex items-center gap-2 cursor-pointer' >
                                             <FaApple className='text-[#50C21F] w-6 h-6' />
                                             <p className='text-[#3681F0]' >iOS</p>
                                         </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                        <Link href='/CategoryResults/64437619a02cdc8258a64a8d' className='flex items-center gap-2 cursor-pointer' >
                                             <BsGrid className='text-[#50C21F] border border-[#50C21F] rounded-sm w-6 h-6' />
                                             <p className='text-[#3681F0]' >Otros</p>
                                         </Link>

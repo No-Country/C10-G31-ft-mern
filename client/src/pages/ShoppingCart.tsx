@@ -48,36 +48,38 @@ const ShoppingCart = () => {
                 <FaArrowLeft className={Style.icon_back} onClick={() => router.back()} />
                 <p>Carrito</p>
             </div>
-            {cart.length ? cart.map(product => (
-                <div key={product._id} className={Style.products_added}>
-                    <div className={Style.product}>
-                        <div className={Style.flex_icon_image}>
-                            {product.selected ? (
-                                <FaRegDotCircle className='text-[#F0604D] cursor-pointer' onClick={() => changeSelected(product._id)} />
-                            ) : (
-                                <FaRegCircle className='text-[#3681F0] cursor-pointer' onClick={() => changeSelected(product._id)} />
-                            )}
-                            <div>
-                                <Image className={Style.product_image} width={400} height={400} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
+            <div className='lg:w-2/3 mx-auto'>
+                {cart.length ? cart.map(product => (
+                    <div key={product._id} className={Style.products_added}>
+                        <div className={Style.product}>
+                            <div className={Style.flex_icon_image}>
+                                {product.selected ? (
+                                    <FaRegDotCircle className='text-[#F0604D] cursor-pointer' onClick={() => changeSelected(product._id)} />
+                                ) : (
+                                    <FaRegCircle className='text-[#3681F0] cursor-pointer' onClick={() => changeSelected(product._id)} />
+                                )}
+                                <div>
+                                    <Image className={Style.product_image} width={400} height={400} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
+                                </div>
                             </div>
-                        </div>
-                        <div className={Style.descripcion_product}>
-                            <Link href={`/ProductDetail/${product._id}`} className='inline-block' >
-                                <p>{product.name}</p>
-                            </Link>
-                            <p className='text-[#50C21F]'>${product.price}</p>
-                            <p>Cantidad</p>
-                            <div className='flex gap-3'>
-                                <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => substract(product._id)} />
-                                <p className="font-extrabold text-[#50C21F]">{product.amount}</p>
-                                <AiOutlinePlusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => sum(product._id)} />
+                            <div className={Style.descripcion_product}>
+                                <Link href={`/ProductDetail/${product._id}`} className='inline-block' >
+                                    <p>{product.name}</p>
+                                </Link>
+                                <p className='text-[#50C21F]'>${product.price}</p>
+                                <p>Cantidad</p>
+                                <div className='flex gap-3'>
+                                    <AiOutlineMinusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => substract(product._id)} />
+                                    <p className="font-extrabold text-[#50C21F]">{product.amount}</p>
+                                    <AiOutlinePlusSquare className='w-6 h-6 rounded-xl cursor-pointer text-[#3681F0]' onClick={() => sum(product._id)} />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )): (
-                <p className='text-center mt-6 mb-8'>Agrega Productos y podrás encontrarlos aquí</p>
-            )}
+                )): (
+                    <p className='text-center mt-6 mb-8'>Agrega Productos y podrás encontrarlos aquí</p>
+                )}
+            </div>
             <div className={Style.container_buttons}>
                 {cart.length > 0 && (
                     <>

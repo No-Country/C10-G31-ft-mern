@@ -7,11 +7,11 @@
 }
 
 .BackMethods {
-    @apply w-full flex items-center gap-3;
+    @apply w-full flex items-center gap-3 lg:pl-24;
 }
 
 .ContainerLocation {
-    @apply w-full mt-10 flex items-center gap-8 justify-between;
+    @apply w-full mt-10 flex items-center gap-8 justify-between lg:w-2/3 mx-auto;
 }
 
 .Location1 {
@@ -35,7 +35,7 @@
 }
 
 .SectionReceive {
-    @apply w-full mt-6;
+    @apply w-full mt-6 lg:w-2/3 mx-auto;
 }
 
 .OptionReceive {
@@ -47,7 +47,7 @@
 }
 
 .SectionWithdraw {
-    @apply mt-5;
+    @apply mt-5 lg:w-2/3 mx-auto;
 }
 
 .OptionsWithdraw {

@@ -33,7 +33,7 @@ const PurchaseCompleted = () => {
   return (
     <>
       <Header />
-      <div className="flex px-4 py-2 items-center gap-2 text-md font-bold mt-28 md:mt-20">
+      <div className="flex px-4 lg:pl-24 py-2 items-center gap-2 text-md font-bold mt-28 md:mt-20">
         <Link href='/'><FaArrowLeft /></Link>
         <p>¡Compra Exitosa!</p>
       </div>

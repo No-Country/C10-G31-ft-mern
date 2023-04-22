@@ -31,11 +31,11 @@ const PurchaseSummary = () => {
   return (
     <>
       <Header />
-      <div className="flex px-4 mt-3 items-center gap-2 text-md font-bold mt-28 md:mt-20">
+      <div className="flex px-4 items-center gap-2 text-md font-bold mt-28 md:mt-20 lg:pl-24">
         <Link href='/MethodDelivery'><FaArrowLeft /></Link>
         <p>Resumen de compra</p>
       </div>
-      <div>
+      <div className="lg:w-2/5 mx-auto">
         {products.length > 0 ? (
           <>
             <div className="mt-11 text-center space-y-8">

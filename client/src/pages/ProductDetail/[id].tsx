@@ -113,14 +113,14 @@ const ProductDetail = () => {
         <>
           <ToastContainer />
           <div className='px-5 mb-4 mt-28 md:mt-20'>
-            <div className='flex items-center gap-1 text-xs font-bold'>
+            <div className='flex items-center gap-1 text-xs font-bold lg:pl-24'>
               <Link href='/' >HOME</Link>
               <FiChevronRight />
               <Link href='/ListResults'>{product.category[0].name}</Link>
             </div>
             <p className='text-md mt-2 font-bold md:hidden'>{product.name}</p>
           </div>
-          <div>
+          <div className="lg:w-2/3 lg:mx-auto">
             <div className="md:flex md:flex-row md:gap-8 md:p-9"> {/* Información Producto */}
               <div className="hidden md:flex md:flex-col md:gap-3">
                 {product.image.length && product.image.map(image => (
@@ -160,7 +160,7 @@ const ProductDetail = () => {
                     <Link className="mt-1 text-[#3681F0] md:hidden" href='/PaymentMethod'>Ver medios de pago</Link>
                   </div>
                   <div className='hidden md:block mt-4'>
-                    <p className='font-extrabold text-[18px]'>Capacidad:</p>
+                    <p className='font-extrabold text-[18px]'>Variaciones:</p>
                     <select name="select" className='border rounded-lg mt-3 py-2 px-3 w-96 md:w-[213px]'>
                       {product.variations.length > 0 ? product.variations.map(variation => (
                         <option key={variation} value={variation}>{variation}</option>
@@ -179,7 +179,7 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 <div className='md:hidden mt-4'>
-                  <p className='font-bold'>Capacidad:</p>
+                  <p className='font-bold'>Variaciones:</p>
                   <select name="select" className='border rounded-lg mt-3 py-2 px-3 w-96'>
                     {product.variations.length > 0 ? product.variations.map(variation => (
                       <option key={variation} value={variation}>{variation}</option>
@@ -228,7 +228,7 @@ const ProductDetail = () => {
                 >
                   {products.length > 0 ? products.map(product => (
                     <SwiperSlide key={product._id}>
-                      <Link href={`/ProductDetail/${product._id}`}>
+                      <Link className="inline-block" href={`/ProductDetail/${product._id}`}>
                         <Image src={product.image[0]} width={163} height={240} alt='producto' />
                       </Link>
                     </SwiperSlide>

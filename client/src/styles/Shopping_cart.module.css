@@ -3,7 +3,7 @@
 }
 
 .back_cart {
-    @apply w-full pl-3 my-3 gap-2 flex items-center mt-28 md:mt-20;
+    @apply w-full pl-3 my-3 gap-2 flex items-center mt-28 md:mt-20 lg:pl-24;
 }
 
 .back_cart p {

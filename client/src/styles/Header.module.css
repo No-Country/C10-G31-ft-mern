@@ -1,5 +1,5 @@
 .container_1 {
-    @apply w-full flex justify-between gap-5 items-center mb-3 md:mb-0;
+    @apply w-full flex justify-between gap-5 items-center mb-3 md:mb-0 lg:w-11/12 lg:mx-auto;
 }
 
 .SearchHeaderTablet {

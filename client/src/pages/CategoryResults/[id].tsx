@@ -35,7 +35,7 @@ const CategoryResults = () => {
 
 
     return(
-        <div>
+        <div className='container mx-auto' >
             <Header />
             <div className={Style.containerResults}>
                 <div className={Style.cantResult}>
