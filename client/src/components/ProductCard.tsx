@@ -49,7 +49,7 @@ const ProductCard = ({product}: ProductCardProps) => {
     <div className={Style.results}>
         <ToastContainer />
         <div className={Style.result}>
-            <div className="md:flex md:items-center md:justify-between md:h-52">
+            <div className="md:flex md:items-center md:justify-between md:h-60">
                 <Image className={Style.imageResult} width={400} height={300} src={product.image[0]} alt={`Imagen del producto ${product.name}`}  />
             </div>
             <div className={Style.infoResult}>

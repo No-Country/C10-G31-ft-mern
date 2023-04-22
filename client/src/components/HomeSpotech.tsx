@@ -65,7 +65,7 @@ const HomeSpotech = () => {
             <FaArrowRight className='w-3' />
           </Link>
         </div>
-        <div className='mt-2'>
+        <div className='my-2'>
           <Swiper
             centeredSlides={false}
             slidesPerView={4}

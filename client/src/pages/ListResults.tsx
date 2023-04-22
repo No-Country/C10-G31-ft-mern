@@ -27,7 +27,7 @@ const ListProducts = () => {
                     <p>{products.length} resultados</p>
                     <span></span>
                 </div>
-                <div className="md:grid md:grid-cols-3 md:items-center">
+                <div className="md:grid md:grid-cols-3 md:items-center lg:w-5/6 lg:mx-auto">
                     {products.length && products.map((product: Product) => (
                         <ProductCard product={product} key={product._id} />
                     ))}

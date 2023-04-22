@@ -222,7 +222,7 @@ const ProductDetail = () => {
               <div className="mt-4">
                 <Swiper
                   centeredSlides={false}
-                  slidesPerView={'auto'}
+                  slidesPerView={4}
                   spaceBetween={10}
                   pagination={{ clickable: true }}
                 >
