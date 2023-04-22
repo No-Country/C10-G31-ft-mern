@@ -11,9 +11,9 @@ const subCategoryControllers = require('../../controllers/subCategoryControllers
 route.get('/', subCategoryControllers.getSubcategories)
 route.get('/name', validateQuery, subCategoryControllers.getSubcategoriesByName)
 route.get('/:subcategoryId', subCategoryControllers.getSubcategoryById)
-route.post('/:parentcategoryId/subcategory', authMiddleware, subCategoryControllers.createSubcategory)
+/*route.post('/:parentcategoryId/subcategory', authMiddleware, subCategoryControllers.createSubcategory)
 route.patch('/:subcategoryId', authMiddleware, subCategoryControllers.updateSubcategory)
-route.delete('/:subcategoryId', authMiddleware, subCategoryControllers.deleteSubcategory)
+route.delete('/:subcategoryId', authMiddleware, subCategoryControllers.deleteSubcategory)*/
 
 
 module.exports = route

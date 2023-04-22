@@ -96,8 +96,9 @@ exports.updateCategory = async (req, res, next) => {
 // Controlador para eliminar una categoría
 exports.deleteCategory = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const category = await Category.findByIdAndDelete(id);
+    console.log(req.params)
+    const { categoryId } = req.params;
+    const category = await Category.findByIdAndDelete(categoryId);
     if (!category) {
       return res.status(404).json({ error: 'Category no encontrada' });
     }
@@ -111,7 +112,8 @@ exports.deleteCategory = async (req, res, next) => {
 
 
 // Crear una subcategoría
-exports.createSubcategory = async (req, res) => {
+/*exports.createSubcategory = async (req, res) => {
+  console.log("first")
   const { name, description, categoryId } = req.body;
   try {
     // Busca la categoría padre
@@ -128,4 +130,4 @@ exports.createSubcategory = async (req, res) => {
     console.error(error);
     res.status(500).send({ message: 'Error al crear la subcategoría' });
   }
-};
+};*/

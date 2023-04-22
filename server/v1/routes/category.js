@@ -3,7 +3,6 @@ const router = express.Router();
 const { body } = require("express-validator");
 const categoriesControllers = require("../../controllers/categoryControllers");
 
-
 const {
   validateFields,
   validateQuery,
@@ -15,8 +14,7 @@ const {
   getSubcategoryById,
   updateSubcategory,
   deleteSubcategory,
-  getSubcategoriesByName
-
+  getSubcategoriesByName,
 } = require("../../controllers/subCategoryControllers");
 //const authRole = require('../../middlewares/authRole')
 
@@ -54,39 +52,26 @@ router.delete(
   categoriesControllers.deleteCategory
 );
 
-
 //rutas de subcategorias
-/*router.post(
-  "/:categoryId/subcategory",
-  authMiddleware,
-  createSubcategory
-);
-router.get(
-  "/:categoryId/subcategory",
-  getSubcategories
-)
-//obtener subcategorias por nombre
-router.get(
-  "/:categoryId/subcategory/name",
-  getSubcategoriesByName
-)
-//obtener subcategorias por id
-router.get(
-  "/:categoryId/subcategory/:subcategoryId",
-  getSubcategoryById
-)
+router.post("/:categoryId/subcategory", authMiddleware, createSubcategory  );
 //editar subcategorias
 router.patch(
   "/:categoryId/subcategory/:subcategoryId",
   authMiddleware,
   updateSubcategory
-)
+);
 //eliminar subcategorias
 router.delete(
   "/:categoryId/subcategory/:subcategoryId",
   authMiddleware,
   deleteSubcategory
-)
+);
+/*
+//obtener subcategorias por nombre
+router.get("/:categoryId/subcategory/name", getSubcategoriesByName);
+//obtener subcategorias por id
+router.get("/:categoryId/subcategory/:subcategoryId", getSubcategoryById);
 
+router.get("/:categoryId/subcategory", getSubcategories);
 */
 module.exports = router;

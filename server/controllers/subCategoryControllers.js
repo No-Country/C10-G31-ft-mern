@@ -47,11 +47,12 @@ exports.getSubcategories = async (req, res, next) => {
 // Controlador para obtener una subcategoría por su id
 exports.getSubcategoryById = async (req, res, next) => {
   try {
+    console.log(req.params)
     const { subcategoryId } = req.params;
     if(!subcategoryId || subcategoryId === null){
       return res.status(404).json({ error: 'Subcategory no encontrada' });
     }
-    const subcategory = await Subcategory.findById(subcategoryId).populate("Parentcategory", "name");
+    const subcategory = await Subcategory.findById(subcategoryId).populate("Parentcategory", "name").populate("products");
     if (!subcategory) {
       return res.status(404).json({ error: 'Subcategory no encontrada' });
     }
@@ -85,9 +86,11 @@ exports.getSubcategoriesByName = async (req, res, next) => {
 // Controlador para actualizar una subcategoría
 exports.updateSubcategory = async (req, res, next) => {
   try {
+    console.log(req.params)
     const { subcategoryId } = req.params;
-    const { name, description, ParentcategoryId } = req.body;
-    const Parentcategory = await Category.findById(ParentcategoryId);
+    const {categoryId} =req.params;
+    const { name, description} = req.body;
+    const Parentcategory = await Category.findById(categoryId);
     if (!Parentcategory) {
       return res.status(404).json({ error: 'Categoria no encontrada' });
     }
