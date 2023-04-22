@@ -19,9 +19,9 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
     const [ tabletsActive, setTabletsActive ] = useState(false)
 
   return (
-    <div className={`fixed top-0 left-0 -z-10 w-full opacity-0 transition duration-500 ${menuActive ? 'opacity-100 z-50' : ''}`} >
+    <div className={`fixed top-0 left-0 mt-[92px] md:mt-16 lg:left-28 -z-10 w-full opacity-0 transition duration-500 ${menuActive ? 'opacity-100 z-40' : ''}`} >
         <div className='flex min-h-screen'>
-            <div className='min-w-[240px] bg-white pt-36 min-h-screen h-full overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-400'>
+            <div className='min-w-[240px] lg:border lg:border-sky-400 bg-white min-h-screen h-full overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-400'>
                 <div id='menuBurguer' className="flex flex-col gap-6 py-3">
                     <div className={`${categoriesActive ? 'bg-gray-200' : ''} flex flex-col gap-6 pb-3 transition duration-500 ease-in-out`}> {/* Inicio Categorias */}
                         <div className='flex items-center gap-2 cursor-pointer px-4 mt-3 -mb-3 pb-3' onClick={() => setCategoriesActive(!categoriesActive)}>
@@ -62,13 +62,13 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                                 </div>
                                 <div className={`${tabletsActive ? 'flex flex-col' : 'hidden'} gap-6`}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                        <Link href='/CategoryResults/6441011d2e7ea62245a07479' className='flex items-center gap-2 cursor-pointer' >
                                             <FaApple className='text-[#50C21F] w-6 h-6' />
                                             <p className='text-[#3681F0]' >iPad</p>
                                         </Link>
                                     </div>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                        <Link href='/CategoryResults/6441011d2e7ea62245a07479' className='flex items-center gap-2 cursor-pointer' >
                                             <MdAndroid className='text-[#50C21F] w-5 h-5' />
                                             <p className='text-[#3681F0]' >Android</p>
                                         </Link>
@@ -76,7 +76,7 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                                 </div>
                             </div> {/* Fin Categoria Tablets */}
                             <div className='flex items-center gap-2 px-4 -mt-3 cursor-pointer'>
-                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                <Link href='/CategoryResults/644114a825df51d7880290d6' className='flex items-center gap-2 cursor-pointer' >
                                     <MdComputer className='text-[#F0604D] w-5 h-5' />
                                     <p className='text-[#3681F0]' >Notebooks</p>
                                 </Link>
@@ -88,13 +88,13 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                                 </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                <Link href='/CategoryResults/643f3edf649847f404c307fa' className='flex items-center gap-2 cursor-pointer' >
                                     <MdOutlineDesktopWindows className='text-[#F0604D] w-5 h-5' />
                                     <p className='text-[#3681F0]' >Monitores</p>
                                 </Link>
                             </div>
                             <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                                <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                                <Link href='/CategoryResults/643627bc659dec8e2f6ba9dd' className='flex items-center gap-2 cursor-pointer' >
                                     <MdOutlineTv className='text-[#F0604D] w-5 h-5' />
                                     <p className='text-[#3681F0]' >Tv</p>
                                 </Link>
@@ -102,7 +102,7 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                         </div>
                     </div> {/* Fin Categorias */}
                     <div className='flex items-center gap-2 px-4 -mt-3 cursor-pointer'>
-                        <Link href='/ListResults' className='flex items-center gap-2 cursor-pointer' >
+                        <Link href='/CategoryResults/64434cea0fe12d9933f622df' className='flex items-center gap-2 cursor-pointer' >
                             <AiOutlineTag className='text-[#F0604D] -rotate-90 w-6 h-6' />
                             <p className='text-[#3681F0]' >Ofertas</p>
                         </Link>
@@ -120,13 +120,13 @@ const BurgerMenu = ({menuActive, setMenuActive}: BurgerMenuProps) => {
                         </Link>
                     </div> */}
                     <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                        <Link href='/' className='flex items-center gap-2 cursor-pointer' >
                             <MdSupportAgent className='text-[#F0604D] w-6 h-6' />
                             <p className='text-[#3681F0]' >Contacto</p>
                         </Link>
                     </div>
-                    <div className='flex items-center gap-2 px-4 cursor-pointer'>
-                        <Link href='' className='flex items-center gap-2 cursor-pointer' >
+                    <div className='flex items-center gap-2 px-4 cursor-pointer mb-20'>
+                        <Link href='/' className='flex items-center gap-2 cursor-pointer' >
                             <AiOutlineQuestionCircle className='text-[#F0604D] w-6 h-6' />
                             <p className='text-[#3681F0]' >Ayuda</p>
                         </Link>

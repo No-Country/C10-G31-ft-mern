@@ -56,7 +56,7 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className={Style.SearchHeaderTablet}>
-                        <FaBars className={Style.iconMenu} onClick={() => setMenuActive(!menuActive)} />
+                        <FaBars className={`${menuActive ? 'text-[#3681F0] bg-white' : 'text-white'} h-8 text-3xl cursor-pointer py-1 rounded-lg`} onClick={() => setMenuActive(!menuActive)} />
                         <input type='text' onClick={() => setSearchActive(!searchActive)} className={Style.seeker} />
                     </div>
                     <div className={Style.container_icons}>
@@ -77,7 +77,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div className={Style.container_2}>
-                    <FaBars className={Style.iconMenu} onClick={() => setMenuActive(!menuActive)} />
+                    <FaBars className={`${menuActive ? 'text-[#3681F0] bg-white' : 'text-white'} h-8 text-3xl cursor-pointer py-1 rounded-lg`} onClick={() => setMenuActive(!menuActive)} />
                     <input type='text' onClick={() => setSearchActive(!searchActive)} className={Style.seeker} />
                 </div>
             </div>
