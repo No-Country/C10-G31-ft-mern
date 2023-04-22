@@ -14,7 +14,7 @@ const Splash = () => {
             </div>
             <div className="w-full flex flex-col items-center">
                 <div className={Style.ContainerButtons}>
-                    <Link href='/LogIn' className={Style.ButtonInit}>Inicar seccion</Link>
+                    <Link href='/LogIn' className={Style.ButtonInit}>Inicar Sesión</Link>
                     <Link href='/SignIn' className={Style.ButtonRegistrer}>Registrarse</Link>
                 </div>
                 <div className="flex items-center w-11/12 md:w-full">
