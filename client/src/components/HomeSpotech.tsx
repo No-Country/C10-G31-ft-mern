@@ -68,7 +68,7 @@ const HomeSpotech = () => {
         <div className='my-2'>
           <Swiper
             centeredSlides={false}
-            slidesPerView={4}
+            slidesPerView={5}
             spaceBetween={10}
             pagination={{ clickable: true }}
           >
