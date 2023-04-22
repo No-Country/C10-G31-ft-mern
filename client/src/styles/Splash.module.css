@@ -1,5 +1,5 @@
 .ContainerSplash {
-    @apply w-full h-screen p-3 md:w-1/7 md:m-auto md:mb-10;
+    @apply w-full h-screen p-3 md:w-1/7 md:m-auto md:mb-10 lg:flex lg:flex-row lg:items-center lg:w-full lg:container;
 }
 
 .ContainerLogo {
@@ -15,11 +15,11 @@
 }
 
 .ButtonInit {
-    @apply w-full text-center mb-3 p-3 md:p-5 block rounded border-2 border-blue-500 text-lg bg-[#3681F0] text-white md:text-3xl;
+    @apply w-full text-center mb-3 p-3 md:p-5 block rounded-lg border-2 border-blue-500 text-lg bg-[#3681F0] text-white md:text-3xl;
 }
 
 .ButtonRegistrer {
-    @apply w-full text-center mb-3 p-3 md:p-5 block rounded text-lg border-2 border-[#50C21F] text-black md:text-3xl;
+    @apply w-full text-center mb-3 p-3 md:p-5 block rounded-lg text-lg border-2 border-[#50C21F] text-black md:text-3xl;
 }
 
 .ContainerbuttonGogle {
@@ -27,7 +27,7 @@
 }
 
 .ButtonGoogle {
-    @apply w-full p-3 md:p-5 rounded block text-gray-600 text-center text-lg border-2 border-blue-400 md:text-3xl; 
+    @apply w-full p-3 md:p-5 rounded-lg block text-gray-600 text-center text-lg border-2 border-blue-400 md:text-3xl; 
 }
 
 .LogoGoogle {
