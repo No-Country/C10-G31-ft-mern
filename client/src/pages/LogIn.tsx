@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Alert from '../components/Alert'
 import Image from "next/image"
@@ -63,12 +63,14 @@ const LogIn = () => {
         </div>
         <div className="lg:flex lg:flex-row lg:gap-16 lg:items-center lg:justify-evenly lg:mx-auto lg:container lg:mb-20">
             <div className="mt-28 lg:mt-20 lg:space-y-10">
-                <Image src={Logo} alt="Logo" />
+                <Link href='/'>
+                  <Image className="mx-auto" src={Logo} alt="Logo" />
+                </Link>
                 <div className="w-full hidden text-center mb-10 lg:inline-block">
                     <p>
                         ¿No tienes una cuenta? 
                         <Link href={'/SignIn'}>
-                        <span className="text-[#3681F0]"> Registrate</span>
+                          <span className="text-[#3681F0]"> Registrate</span>
                         </Link>
                     </p>
                 </div>

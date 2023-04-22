@@ -29,12 +29,17 @@ export const authSlice = createSlice({
       },
       verifyUser: (state, action) => {
         state.userAuth.auth = action.payload.isActive
+      },
+      logOutUser: (state, action) => {
+        state.userAuth.token = ''
+        state.userAuth.id = ''
+        state.userAuth.auth = false
       }
     },
   })
   
   // Action creators are generated for each case reducer function
-  export const { login, verifyUser } = authSlice.actions
+  export const { login, verifyUser, logOutUser } = authSlice.actions
 
   export const registerUser = (name: string, lastName: string, phone: string, email: string, password: string) => async (dispatch: any) => {
     try {
