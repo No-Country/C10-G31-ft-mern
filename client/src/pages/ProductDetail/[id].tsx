@@ -112,7 +112,7 @@ const ProductDetail = () => {
       {product?._id && (
         <>
           <ToastContainer />
-          <div className='px-5 my-4'>
+          <div className='px-5 mb-4 mt-28 md:mt-20'>
             <div className='flex items-center gap-1 text-xs font-bold'>
               <Link href='/' >HOME</Link>
               <FiChevronRight />
@@ -222,7 +222,7 @@ const ProductDetail = () => {
               <div className="mt-4">
                 <Swiper
                   centeredSlides={false}
-                  slidesPerView={5}
+                  slidesPerView={'auto'}
                   spaceBetween={10}
                   pagination={{ clickable: true }}
                 >

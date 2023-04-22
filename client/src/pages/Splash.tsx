@@ -8,14 +8,16 @@ const Splash = () => {
     return (
         <div className={Style.ContainerSplash}>
             <div className={Style.ContainerLogo}>
-                <Image className={Style.Logo} src={Logo} alt={'Logo empresa'} />
+                <Link href='/'>
+                    <Image className={Style.Logo} src={Logo} alt={'Logo empresa'} />
+                </Link>
             </div>
-            <div className="w-full mx-8">
+            <div className="w-full flex flex-col items-center">
                 <div className={Style.ContainerButtons}>
                     <Link href='/LogIn' className={Style.ButtonInit}>Inicar seccion</Link>
                     <Link href='/SignIn' className={Style.ButtonRegistrer}>Registrarse</Link>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center w-11/12 md:w-full">
                     <div className="border-t-2 border-gray-400 mx-2 w-1/2"></div>
                     <p>o</p>
                     <div className="border-t-2 border-gray-400 mx-2 w-1/2"></div>

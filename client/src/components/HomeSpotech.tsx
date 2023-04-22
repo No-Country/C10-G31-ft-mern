@@ -7,33 +7,25 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useState, useEffect } from 'react'
 import clienteAxios from '@/config/clienteAxiosspotech';
+import Oferta from './Oferta';
+import { Product } from '@/types/productsspotech';
 
-interface Product {
-    _id: string
-    available: string
-    category: string[]
-    image: string[]
-    name: string
-    price: number
-    seller: string[]
-    apdatedAt: string
-}
-
-interface ListProducts {
-    products: Product[]
-}
 
 const HomeSpotech = () => {
 
   SwiperCore.use([Autoplay]);
 
-  const [ products, setProducts ] = useState<ListProducts['products']>([])
+  const [ offers, setOffers ] = useState<Product[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
-      const { data } = await clienteAxios('/product')
-      const populares = [ data[0], data[1], data[2], data[3], data[4], data[5] ]
-      setProducts(populares)
+      const { data: offers } = await clienteAxios('/category/64434cea0fe12d9933f622df')
+      let offersCategory: Product[] = []
+      for(let i = 0; i < offers.products.length; i++) {
+          const { data: product } = await clienteAxios(`/product/${offers.products[i]?._id}`)
+          offersCategory.push(product)
+      }
+      setOffers(offersCategory)
     }
     getProducts()
   }, [])
@@ -41,7 +33,7 @@ const HomeSpotech = () => {
   return (
     <>
       <Header />
-      <div className='mt-28 md:mt-20 px-4'>
+      <div className='z-0 mt-28 md:mt-20 px-4'>
         <Swiper
           pagination={{ clickable: true }}
           loop={true}
@@ -68,7 +60,7 @@ const HomeSpotech = () => {
       <div className='mt-4 px-4'>
         <div className='flex items-center justify-between'>
           <h2 className='font-bold'>Ofertas del Día</h2>
-          <Link href='/ListResults' className='flex items-center gap-2 text-sky-400'>
+          <Link href='/CategoryResults/64434cea0fe12d9933f622df' className='flex items-center gap-2 text-sky-400'>
             <p className='text-xs'>Ver todo</p>
             <FaArrowRight className='w-3' />
           </Link>
@@ -76,35 +68,15 @@ const HomeSpotech = () => {
         <div className='mt-2'>
           <Swiper
             centeredSlides={false}
-            slidesPerView={4.5}
+            slidesPerView={'auto'}
             spaceBetween={10}
             pagination={{ clickable: true }}
           >
-            <SwiperSlide>
-              <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas1.png' width={170} height={86} alt='Oferta del día' />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas2.png' width={170} height={86} alt='Oferta del día' />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas3.png' width={170} height={86} alt='Oferta del día' />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas1.png' width={170} height={86} alt='Oferta del día' />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link href='/ListResults'>
-                <Image className='mx-auto rounded-lg cursor-pointer' src='/Ofertas2.png' width={170} height={86} alt='Oferta del día' />
-              </Link>
-            </SwiperSlide>
+            {offers.length && offers.map((offer: Product) => (
+              <SwiperSlide key={offer._id}>
+                <Oferta offer={offer}  />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>

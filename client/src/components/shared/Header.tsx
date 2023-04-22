@@ -42,7 +42,6 @@ const Header = () => {
 
     return(
         <>
-            <FiltersUser FilterUser={FilterUser} />
             {searchActive && (
                 <div className='bg-white fixed top-0 left-0 z-50 w-full min-h-screen'>
                     <Search searchActive={searchActive} setSearchActive={setSearchActive} />
@@ -63,6 +62,7 @@ const Header = () => {
                         <button onClick={ActiveOptionsUser}>
                             <FaRegUserCircle className={Style.icon_head_cart} />
                         </button>
+                        <FiltersUser FilterUser={FilterUser} setFilterUser={setFilterUser} />
                         <Link href='/FavoritesProduct'>
                             <FaRegHeart className={Style.icon_head_cart} />
                         </Link>

@@ -63,7 +63,9 @@ const SignIn = () => {
   return (
     <>
         <div className='bg-[#3681F0] p-4 hidden lg:block'>
-            <Image src={Logo} width={104} height={24} alt={'Logo'} />
+            <Link href='/'>
+                <Image src={Logo} width={104} height={24} alt={'Logo'} />
+            </Link>
         </div>
         <div className="px-4 mt-10 md:my-32 md:w-3/4 md:block md:m-auto lg:max-w-3xl">
             <h2 className="text-center md:text-xl">¡Bienvenido a Spotech!</h2>
