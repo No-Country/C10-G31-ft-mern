@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { FaHistory, FaAddressCard } from 'react-icons/fa'
+import { FaHistory, FaAddressCard, FaCreditCard } from 'react-icons/fa'
 import { RiLogoutBoxLine, RiArchiveLine } from 'react-icons/ri'
 import { useAppDispatch } from '../app/hooks'
 import { logOutUser } from "../features/auth/authSlice"
@@ -29,7 +29,8 @@ const FiltersUser = ({ FilterUser, setFilterUser }: FilterUserProps) => {
                     <RiArchiveLine className="text-xl" />
                     <p>Compras</p>
                 </Link>
-                <Link className="block" href={'/'}>
+                <Link className="w-full z-100 flex gap-3 items-center block" href={'/'}>
+                    <FaCreditCard className="text-xl" />
                     <p>Metodos de pago</p>
                 </Link>
                 <Link className="w-full flex gap-3 items-center" href={'/'}>
