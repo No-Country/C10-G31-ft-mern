@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { addFavorite, getFavorites } from "../features/favorites/favoritesSlice"
 import { Product } from '../types/products'
+import HeartBroken from '../../public/heart_broken.png'
 
 
 const Favorites = () => {
@@ -52,7 +53,10 @@ const Favorites = () => {
                         </div>
                     </div>
                 )) : (
-                    <p className="text-center mt-10">Agrega productos a tus favoritos y los encontrarás aquí</p>
+                    <div className="w-full text-center">
+                        <p className="text-center mt-10 text-xl text-[red]">No has añadido ningun favorito</p>
+                        <Image className="block m-auto mt-6" src={HeartBroken} alt="heart broken" />
+                    </div>
                 )}
             </div>
         </div>
